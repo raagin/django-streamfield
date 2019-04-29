@@ -93,6 +93,11 @@ INSTALLED_APPS = [
     ...
 ```
 
+**Add streamfield.urls to main urls.py**
+urlpatterns += [
+    path('streamfield/', include('streamfield.urls'))
+]
+
 **Add StreamField to your model in your application**
 
 And add the models that you want to use in this stream as model_list
