@@ -1,3 +1,5 @@
 *.pyc
 .DS_Store
 dist/*
+build/*
+django_streamfield.egg-info/*
