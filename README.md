@@ -4,7 +4,7 @@ This is a simple realisation of StreamField's idea
 from [Wagtail CMS](https://wagtail.io) for plain Django admin 
 or with Grappelli skin. 
 
-Does not work with sqlLite DB yet.
+Does not work with sqlite DB yet.
 
 For editing content we use native popup mechanism in Django admin interface.
 This allow us to use other field's widgets inside the blocks as is.
