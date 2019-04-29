@@ -57,11 +57,9 @@ STREAMBLOCKS = [
 
 And use `block_content` as context.
 
-```
-Note: block_content will be single object 
+> Note: block_content will be single object 
 if no 'as_list' property in your model, 
 and will be a list of objects if there is.
-```
 
 ```html
 <!--richtext.html-->
