@@ -11,6 +11,9 @@ For example, if you want to use in your blocks FileBrowseField
 from django-filebrowser, it will perfectly working 
 without any additional settings.
 
+## Installation
+`pip install django-streamfield`
+
 ## How to use
 
 **Create new app called `streamblocks`**
