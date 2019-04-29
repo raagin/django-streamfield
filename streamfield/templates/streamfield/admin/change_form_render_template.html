@@ -1,0 +1,11 @@
+{% load streamfield_tags %}
+<div class="block-fields">
+    {% for f in form %}
+        {% if f.value %}
+        <div class="block-fields__field-{{ f.name }}">
+        <span class="block-fields__label">{{ f.label }}:</span>
+        {% format_field f %}
+        </div>
+        {% endif %}
+    {% endfor %}
+</div>

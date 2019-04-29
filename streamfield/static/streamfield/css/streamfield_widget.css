@@ -1,0 +1,199 @@
+.streamfield_app {
+    width: 758px;
+}
+
+.streamfield_app textarea {
+    position: absolute;
+    left: 10000px;
+}
+
+.streamfield_app p {
+    margin-bottom: 0.5em;
+}
+
+.streamfield_app a.grp-change-related {
+    background-image: none;
+}
+.streamfield_app a.grp-add-another {
+    background-image: none;
+}
+
+.streamfield_app .stream-model-block {
+    position: relative;
+    background: white;
+    margin-bottom: 20px;
+    box-shadow: 0 0 5px 2px rgba(0,0,0,0.1);
+}
+.streamfield_app .stream-model-block .streamblock__block__title {
+    position: relative;
+}
+.streamfield_app .stream-block__options {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+
+/* Block content */
+.streamfield_app .stream-model-block .stream-model-block__content {
+    padding: 20px;
+}
+
+.streamfield_app .block-fields__label {
+    font-style: italic;
+    color: #999;
+    display: block;
+} 
+
+.streamfield_app .block-fields > div {
+    margin-bottom: 0.4em;
+}
+
+.streamfield_app .block-fields h2 {
+    padding: 0;
+    text-shadow: none;
+    border: none;
+    background-image: none;
+    font-size: 1.3em;
+} 
+
+.streamfield_app .block-fields h3 {
+    padding: 0;
+    text-shadow: none;
+    border: none;
+    background-image: none;
+    font-size: 1.1em;
+    margin-bottom: 0.5em;
+} 
+
+.streamfield_app .block-fields h4 {
+    font-weight: bold;
+} 
+
+.streamfield_app .block-fields blockquote {
+    font-size: 1.1em;
+    font-style: italic;
+    font-weight: bold;
+    margin-bottom: 0.4em;
+} 
+
+.streamfield_app .block-fields table td,
+.streamfield_app .block-fields table th {
+    border-bottom: 1px solid #CCC;
+} 
+
+.streamfield_app .block-fields b {
+    font-weight: bold;
+} 
+
+.streamfield_app .stream-model-subblock {
+    background: #EFEFEF;
+    padding: 10px;
+    display: block;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    position: relative;
+}
+.streamfield_app .stream-model-block__content.no-subblocks {
+    padding: 20px 28px;
+}
+
+.streamfield_app .stream-btn {
+    background: #78adbf;
+    color: white;
+    padding: 3px 7px;
+    display: inline-block;
+    border-radius: 2px;
+    margin-top: 5px;
+    user-select: none;
+}
+
+.streamfield_app .stream-btn:hover {
+    background: #309bbf;
+}
+
+.streamfield_app .add-another {
+    margin-left: 10px;
+}
+
+/* add new block */
+.streamfield_app .stream-insert-new-block {
+    text-align: right;
+}
+.streamfield_app .add-new-block-button {
+    padding: 5px;
+    font-weight: bold;
+    text-decoration: underline;
+    cursor: pointer;
+    color: #309bbf;
+    user-select: none;
+}
+
+/* Help text */
+.stream-help-text {
+    margin-bottom: 10px;
+}
+.stream-help-text .stream-help-text__title {
+    padding: 5px;
+    text-align: right;
+    font-weight: bold;
+    text-decoration: underline;
+    cursor: pointer;
+}
+.stream-help-text .stream-help-text__content {
+    padding: 10px;
+    background: #d4e6d7;
+    font-size: 15px;
+    line-height: 1.2em;
+    border-radius: 5px;
+}
+
+.stream-help-text .stream-help-text__content ul li {
+    list-style: disc;
+    margin: .5em 20px;
+}
+
+.stream-insert-new-block .stream-btn {
+    font-weight: bold;
+}
+
+/* Handle */
+.streamblock__block-handle,
+.stream-model-subblock-handle {
+    position: absolute;
+    right: 2px;
+    top: 1px;
+}
+.streamblock__block-handle .block-move,
+.stream-model-subblock .subblock-move,
+.streamblock__block-handle .block-delete,
+.stream-model-subblock .subblock-delete {
+    position: relative;
+    width: 24px;
+    height: 24px;
+    background-image: url(/static/grappelli/images/icons-s79f97b581c.png);
+    background-repeat: no-repeat;
+    display: block;
+    margin-left: 0;
+    float: left;
+    cursor: pointer;
+}
+.streamblock__block-handle .block-move,
+.stream-model-subblock .subblock-move {
+    background-position: 0 -2595px;
+}
+.streamblock__block-handle .block-move:hover,
+.stream-model-subblock .subblock-move:hover {
+    background-position: 0 -2639px;
+}
+.streamblock__block-handle .block-delete,
+.stream-model-subblock .subblock-delete {
+    background-position: 0 -2507px;
+}
+.streamblock__block-handle .block-delete:hover,
+.stream-model-subblock .subblock-delete:hover {
+    background-position: 0 -2551px;
+}
+
+[v-cloak] {
+    display: none;
+}

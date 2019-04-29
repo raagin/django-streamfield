@@ -1,0 +1,29 @@
+{% load i18n fb_versions %}
+{% with field.value as value %}
+
+{% if value.filetype == "Image" and value.exists %}
+{% version value.path 'admin_thumbnail' as thumbnail_version %}
+{% if thumbnail_version %}
+<p class="preview" id="preview_{{ final_attrs.id }}">
+    <a href="{{ value.url }}" target="_blank" id="previewlink_{{ final_attrs.id }}">
+        <img id="previewimage_{{ final_attrs.id }}" src="{{ thumbnail_version.url }}" class="preview" />
+    </a>
+</p>
+{% else %}
+<p class="preview" id="preview_{{ final_attrs.id }}" style="display: none;">
+    <span id="previewlink_{{ final_attrs.id }}">
+        <img id="previewimage_{{ final_attrs.id }}" class="preview" src="" />
+    </span>
+</p>
+{% endif %}
+{% else %}
+<p class="preview" id="preview_{{ final_attrs.id }}" style="display: none;">
+    <span id="previewlink_{{ final_attrs.id }}">
+        <img id="previewimage_{{ final_attrs.id }}" class="preview" src="" />
+    </span>
+</p>
+{% endif %}
+{% if value and not value.exists %}
+<ul class="errorlist"><li>{% trans "File not found" %}</li></ul>
+{% endif %}
+{% endwith %}
