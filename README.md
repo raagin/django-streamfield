@@ -13,10 +13,11 @@ without any additional settings.
 
 ## How to use
 
-*Create new app called streamblocks/models.py*
+**Create new app called *streamblocks***
 
-*Put to streamblocks/models.py some models*
+**Put to streamblocks/models.py some models**
 that you want to use in your stream field.
+For example:
 
 ```python
 # streamblocks/models.py
@@ -41,9 +42,9 @@ STREAMBLOCKS = [
 ]
 ```
 
-*Create templates for models above, named as lowercase names of the models:*
-streamblocks/templates/streamblocks/richtext.html
-streamblocks/templates/streamblocks/imagewithtext.html
+**Create templates for each models above, named as lowercase names of the models:**
+1. streamblocks/templates/streamblocks/richtext.html
+2. streamblocks/templates/streamblocks/imagewithtext.html
 
 And use block_content as context. 
 Note: block_content will be single object 
@@ -66,7 +67,7 @@ and will be a list of objects if there is.
 </ul>
 ```
 
-## Settings
+**Add apps to settings.py**
 add to INSTALLED_APPS
 
 ```python
@@ -77,8 +78,8 @@ INSTALLED_APPS = [
     ...
 ```
 
-*Add StreamField to your model in your application*
-Add models that you want to use in this stream as model_list
+**Add StreamField to your model in your application**
+And add the models that you want to use in this stream as model_list
 ```python
 # models.py
 from streamfield.fields import StreamField
