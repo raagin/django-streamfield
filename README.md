@@ -16,6 +16,7 @@ without any additional settings.
 **Create new app called *streamblocks***
 
 **Put to streamblocks/models.py some models**
+
 that you want to use in your stream field.
 For example:
 
@@ -33,9 +34,16 @@ class ImageWithText(models.Model):
     
     # StreamField option for list of objects
     as_list = True
+```
 
-# In streamblocks/models.py register blocks 
-# for StreamField as list
+**In streamblocks/models.py register blocks**
+
+for StreamField as list of your block models
+```python
+# streamblocks/models.py
+
+...
+
 STREAMBLOCKS = [
     RichText,
     ImageWithText
@@ -43,13 +51,15 @@ STREAMBLOCKS = [
 ```
 
 **Create templates for each models above, named as lowercase names of the models:**
+
 1. streamblocks/templates/streamblocks/richtext.html
 2. streamblocks/templates/streamblocks/imagewithtext.html
 
-And use block_content as context. 
-Note: block_content will be single object 
+And use block_content as context.
+
+*Note: block_content will be single object 
 if no 'as_list' property in your model, 
-and will be a list of objects if there is.
+and will be a list of objects if there is.*
 ```html
 <!--richtext.html-->
 <div class="rich-text-block">
@@ -68,6 +78,7 @@ and will be a list of objects if there is.
 ```
 
 **Add apps to settings.py**
+
 add to INSTALLED_APPS
 
 ```python
@@ -79,6 +90,7 @@ INSTALLED_APPS = [
 ```
 
 **Add StreamField to your model in your application**
+
 And add the models that you want to use in this stream as model_list
 ```python
 # models.py
