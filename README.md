@@ -13,9 +13,9 @@ without any additional settings.
 
 ## How to use
 
-**Create new app called *streamblocks***
+**Create new app called `streamblocks`**
 
-**Put to streamblocks/models.py some models**
+**Put to `streamblocks/models.py` some models**
 
 that you want to use in your stream field.
 For example:
@@ -36,7 +36,7 @@ class ImageWithText(models.Model):
     as_list = True
 ```
 
-**In streamblocks/models.py register blocks**
+**In `streamblocks/models.py` register blocks**
 
 for StreamField as list of your block models
 ```python
@@ -55,11 +55,14 @@ STREAMBLOCKS = [
 1. streamblocks/templates/streamblocks/richtext.html
 2. streamblocks/templates/streamblocks/imagewithtext.html
 
-And use block_content as context.
+And use `block_content` as context.
 
-*Note: block_content will be single object 
+```
+Note: block_content will be single object 
 if no 'as_list' property in your model, 
-and will be a list of objects if there is.*
+and will be a list of objects if there is.
+```
+
 ```html
 <!--richtext.html-->
 <div class="rich-text-block">
@@ -120,7 +123,7 @@ you can get content by calling method page.stream.render()
 ## Admin
 Models will automaticaly register in admin
 If you want provide custom admin class, 
-first unregister models and register again, using StreamBlocksAdmin class.
+first unregister models and register again, using `StreamBlocksAdmin` class.
 
 ```python
 from django.contrib import admin
@@ -136,7 +139,7 @@ class RichTextBlockAdmin(StreamBlocksAdmin, admin.ModelAdmin):
 
 ## Complex Blocks
 You may use StreamField as part of blocks and create with that way complex structure
-and use {{ block_content.<field_name>.render }}
+and use `{{ block_content.<field_name>.render }}`
 
 ## Cache for reduce the number of database requests
 There is two ways of caching:
