@@ -92,7 +92,7 @@ and will be a list of objects if there is.
 
 **Add apps to settings.py**
 
-add to INSTALLED_APPS
+Add to INSTALLED_APPS
 
 ```python
 INSTALLED_APPS = [
@@ -137,12 +137,14 @@ you can get content by calling method page.stream.render()
 ```
 
 
-## Admin
+## Custom Admin for block's models
 Models will automaticaly register in admin
 If you want provide custom admin class, 
 first unregister models and register again, using `StreamBlocksAdmin` class.
 
 ```python
+# streamblocks/admin.py
+
 from django.contrib import admin
 from streamfield.admin import StreamBlocksAdmin
 
@@ -172,7 +174,8 @@ def save(self, *args, **kwargs):
 ...and use this field in your html
 
 ## Settings
-You may use `STREAMFIELD_BLOCK_OPTIONS` in settings.py to add some options to block
+You may use `STREAMFIELD_BLOCK_OPTIONS` in settings.py to add some options to block.
+
 For example:
 ```python
 STREAMFIELD_BLOCK_OPTIONS = {
