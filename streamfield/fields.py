@@ -4,14 +4,7 @@ from django.forms.widgets import Widget, MultiWidget
 from django.contrib.admin.options import FORMFIELD_FOR_DBFIELD_DEFAULTS
 from django.conf import settings
 from .base import StreamObject
-
-BLOCK_OPTIONS = getattr(settings, "STREAMFIELD_BLOCK_OPTIONS", {
-    "margins": {
-        "label": "Отступы",
-        "type": "checkbox",
-        "default": True
-    }
-})
+from .settings import BLOCK_OPTIONS
 
 
 class StreamFieldWidget(Widget):

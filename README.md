@@ -30,6 +30,10 @@ For example:
 class RichText(models.Model):
     text = models.TextField(blank=True, null=True)   
 
+    class Meta:
+        # This will use as name of block in admin
+        verbose_name="Text"
+
 # list of objects
 class ImageWithText(models.Model):
     image = models.ImageField(upload_to="folder/")
@@ -37,6 +41,9 @@ class ImageWithText(models.Model):
     
     # StreamField option for list of objects
     as_list = True
+
+    class Meta:
+        verbose_name="Images with text"
 ```
 
 **In `streamblocks/models.py` register blocks**
@@ -161,4 +168,18 @@ def save(self, *args, **kwargs):
     super().save(*args, **kwargs)
 ```
 ...and use this field in your html
+
+## Settings
+You may use `STREAMFIELD_BLOCK_OPTIONS` in settings.py to add some options to block
+For example:
+```python
+STREAMFIELD_BLOCK_OPTIONS = {
+    "margins": {
+        "label": "Margins",
+        "type": "checkbox",
+        "default": True
+    }
+}
+```
+> Note: Now only type "checkbox" is working, the other options in plan.
 

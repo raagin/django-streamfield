@@ -1,11 +1,10 @@
+{% load i18n %}
 <div class="streamfield_app" id="app_{{ widget.name }}" v-cloak>    
-    {% verbatim %}
+
     <div class="stream-help-text">
-        <div class="stream-help-text__title" @click="show_help=!show_help">Помощь?</div>
+        <div class="stream-help-text__title" @click="show_help=!show_help">{% trans "Help?" %}</div>
         <div v-if="show_help" class="stream-help-text__content">
-    {% endverbatim %}
         {% include "streamfield/streamfield_admin_help.html" %}
-    {% verbatim %}
         </div>
     </div>
     <div class="streamfield-models">
@@ -13,7 +12,7 @@
         <div v-for="block in stream" 
             class="stream-model-block" 
             :key="block.unique_id">
-            <h3 class="streamblock__block__title">{{ model_title(block) }} 
+            <h3 class="streamblock__block__title"><span v-text="model_title(block)"></span>
                 <span class="streamblock__block-handle">
                     <span class="block-move"></span>
                     <span class="block-delete" @click="deleteBlock(block.unique_id)"></span>
@@ -37,12 +36,12 @@
                         </span>
                         <a class="stream-btn" 
                             :id="'change_id_' + instance_unique_id(block, item_id)" 
-                            title="Изменить выбранный объект" 
+                            title="{% trans "Change" %}" 
                             :href="get_change_model_link(block, item_id)"
                             :data-block="block.unique_id"
                             :data-instance-id="item_id"
                             @click.prevent="openPopup"
-                            >Изменить</a>
+                            >{% trans "Change" %}</a>
                             &nbsp;
 
                     </span>
@@ -52,7 +51,7 @@
                         title="Добавить объект"
                         :href="get_add_model_link(block)"
                         @click.prevent="openPopup"
-                        >+ Добавить ещё</a>
+                        >+ {% trans "Add one more" %}</a>
                 </div>
                 <div v-else 
                     class="stream-model-block__content no-subblocks"
@@ -69,7 +68,7 @@
                         :data-block="block.unique_id"
                         :data-instance-id="block.id"
                         @click.prevent="openPopup"
-                        >Изменить</a>
+                        >{% trans "Change" %}</a>
                     </template>
                     <template v-else>
                         <a class="stream-btn" 
@@ -77,7 +76,7 @@
                         title="Добавить объект"
                         :href="get_add_model_link(block)"
                         @click.prevent="openPopup"
-                        >+ Добавить контент</a>
+                        >+ {% trans "Add content" %}</a>
                     </template>
                 </div>
             </div> <!-- /v-if="block.id" -->
@@ -89,13 +88,13 @@
             </div>
             <div class="stream-block__options" v-if="model_info[block.model_name]">
                 <div class="stream-block__option" v-for="(option, key) in model_info[block.model_name].options">
-                    {{ option.label }}: <input type="checkbox" v-model="block.options[key]">
+                    <span v-text="option.label"></span>: <input type="checkbox" v-model="block.options[key]">
                 </div>
             </div>
         </div>
         </draggable>
         <div class="stream-insert-new-block">
-            <div class="add-new-block-button" @click="show_add_block=!show_add_block">+ Добавить новый блок</div>
+            <div class="add-new-block-button" @click="show_add_block=!show_add_block">+ {% trans "Add new block" %}</div>
             <ul v-if="show_add_block">
                 <li v-for="(block, model_name) in model_info">
                     <a class="stream-btn" href="#" v-text="'+ ' + block.model_doc" @click.prevent="addNewBlock(block, model_name)"></a>
@@ -103,6 +102,6 @@
             </ul>
         </div>
     </div>
-    {% endverbatim %}
+    
     <textarea v-text="textarea" name="{{ widget.name }}"{% include "django/forms/widgets/attrs.html" %}>{% if widget.value %}{{ widget.value }}{% endif %}</textarea>
 </div>

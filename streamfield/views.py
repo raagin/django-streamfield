@@ -1,21 +1,7 @@
 # -*- coding: utf-8 -*-
-import copy
 
 from django.views.generic import DetailView, TemplateView
-
-from rest_framework import viewsets
-
-from .serializers import get_serializer_class
 from .forms import get_form_class
-
-def get_viewset_class(model, base=viewsets.ModelViewSet):
-    attrs = dict(
-        queryset = model.objects.all(),
-        serializer_class = get_serializer_class(model)
-        )
-
-    return type(str(model.__name__ + 'ViewSet'), (base, ), attrs )
-
 
 def admin_instance_class(model, base=DetailView):
     tmpl = 'streamfield/admin/change_form_render_template.html'
