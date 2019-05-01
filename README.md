@@ -182,12 +182,14 @@ def save(self, *args, **kwargs):
 # settings.py
 ```
 **STREAMFIELD_STREAMBLOCKS_APP_PATH**
+
 If your app `streamblocks` located not in project root directory, you need to reflect it in settings.py
 ```python
 STREAMFIELD_STREAMBLOCKS_APP_PATH = 'yourapps.streamblocks'
 ```
 
 **STREAMFIELD_BLOCK_OPTIONS**
+
 You may use `STREAMFIELD_BLOCK_OPTIONS` in settings.py to add some options to block.
 
 For example:
