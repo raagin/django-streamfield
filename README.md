@@ -3,8 +3,9 @@
 This is a simple realisation of StreamField's idea 
 from [Wagtail CMS](https://wagtail.io)  
 
-> Now is working only with Grappelli (In plans, to make it optional)
-Does not work with sqlite db yet.
+Restrictions:
+- Now is working only with [Grappelli Interface](https://github.com/sehmaschine/django-grappelli)  (In plans, to make it optional).
+- Does not work with sqlite db yet.
 
 For editing content we use native popup mechanism in Django admin interface.
 This allow us to use other field's widgets inside the blocks as is.
@@ -115,6 +116,7 @@ And add the models that you want to use in this stream as model_list
 ```python
 # models.py
 from streamfield.fields import StreamField
+from streamblocks.models import RichText, ImageWithText
 
 class Page(models.Model):
     stream = StreamField(
