@@ -2,7 +2,7 @@ import json
 from django.contrib import admin
 from django.contrib.admin.options import TO_FIELD_VAR
 from django.template.response import TemplateResponse
-from streamblocks.models import STREAMBLOCKS_MODELS
+from .settings import STREAMBLOCKS_MODELS
 
 class StreamBlocksAdmin(admin.ModelAdmin):
     change_form_template = 'streamfield/admin/change_form.html'

@@ -1,5 +1,6 @@
 .streamfield_app {
-    width: 758px;
+    max-width: 758px;
+    width: 98%;
 }
 
 .streamfield_app textarea {
@@ -27,6 +28,12 @@
 .streamfield_app .stream-model-block .streamblock__block__title {
     position: relative;
 }
+
+.streamfield_app .stream-model-block .streamblock__block__title span {
+    font-weight: bold;
+    margin-left: 0;
+}
+
 .streamfield_app .stream-block__options {
     position: absolute;
     bottom: 20px;
@@ -36,6 +43,7 @@
 /* Block content */
 .streamfield_app .stream-model-block .stream-model-block__content {
     padding: 20px;
+    background: #f5f5f5;
 }
 
 .streamfield_app .block-fields__label {
@@ -76,6 +84,10 @@
     margin-bottom: 0.4em;
 } 
 
+.streamfield_app .stream-model-block .stream-model-block__content img {
+    border: 1px solid #b6b6b6;
+}
+
 .streamfield_app .block-fields table td,
 .streamfield_app .block-fields table th {
     border-bottom: 1px solid #CCC;
@@ -83,10 +95,10 @@
 
 .streamfield_app .block-fields b {
     font-weight: bold;
-} 
+}
 
 .streamfield_app .stream-model-subblock {
-    background: #EFEFEF;
+    background: #e0e7eb;
     padding: 10px;
     display: block;
     border-radius: 5px;
@@ -104,6 +116,7 @@
     display: inline-block;
     border-radius: 2px;
     margin-top: 5px;
+    font-weight: bold;
     user-select: none;
 }
 
@@ -152,9 +165,6 @@
     margin: .5em 20px;
 }
 
-.stream-insert-new-block .stream-btn {
-    font-weight: bold;
-}
 
 /* Handle */
 .streamblock__block-handle,
@@ -170,30 +180,53 @@
     position: relative;
     width: 24px;
     height: 24px;
-    background-image: url(/static/grappelli/images/icons-s79f97b581c.png);
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAACvBAMAAAAVlgMGAAAAGFBMVEUAAABCQkIwnL+/MDBBQUFDQ0Mwm7+/MDC6BnJcAAAABXRSTlMAn5+foPEIPbMAAACVSURBVEjH7ZQxCgIxEEV/dhHbNPbBYuvtvIAH0MILbGEteH+QGUKegTRbZsmr8nnDn1SjA3KKUnjkEJ7SJcqxl+WiTBSFIDDWKKCapYO+Oa/S/Mlh/kq3VY69LBdloigEgbFGAdUsHXRIiDvPRs3dyeHlVH7v4QpRg16YkmDZhNiWhEgT6p+rk8PbUQMKqGZp/Z0j8gNoghnFfJszcgAAAABJRU5ErkJggg==');
     background-repeat: no-repeat;
     display: block;
     margin-left: 0;
     float: left;
     cursor: pointer;
 }
-.streamblock__block-handle .block-move,
-.stream-model-subblock .subblock-move {
-    background-position: 0 -2595px;
-}
-.streamblock__block-handle .block-move:hover,
-.stream-model-subblock .subblock-move:hover {
-    background-position: 0 -2639px;
-}
 .streamblock__block-handle .block-delete,
 .stream-model-subblock .subblock-delete {
-    background-position: 0 -2507px;
+    background-position: 0 -9px;
 }
 .streamblock__block-handle .block-delete:hover,
 .stream-model-subblock .subblock-delete:hover {
-    background-position: 0 -2551px;
+    background-position: 0 -53px;
+}
+.streamblock__block-handle .block-move,
+.stream-model-subblock .subblock-move {
+    background-position: 0 -97px;
+}
+.streamblock__block-handle .block-move:hover,
+.stream-model-subblock .subblock-move:hover {
+    background-position: 0 -141px;
 }
 
 [v-cloak] {
     display: none;
+}
+
+/* for django skin */
+#content-main .streamfield_app .stream-model-block .streamblock__block__title {
+    background: #a9c8d5;
+    color: black;
+    margin: 0;
+    padding: 0 10px;
+    line-height: 32px;
+    font-weight: normal;
+}
+#content-main .streamblock__block-handle,
+#content-main .stream-model-subblock-handle {
+    top: 4px;
+}
+#content-main .streamfield_app .stream-insert-new-block {
+    font-size: 15px;
+}
+#content-main .streamfield_app .stream-btn {
+    font-weight: normal;
+}
+#content-main .streamfield_app .stream-help-text ul {
+    margin-left: 0;
 }

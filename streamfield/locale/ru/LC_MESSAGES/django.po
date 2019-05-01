@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-30 23:11+0300\n"
+"POT-Creation-Date: 2019-05-01 23:26+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -62,25 +62,33 @@ msgstr ""
 "так же не сохранятся.</li>\n"
 "</ul>\n"
 
+#: templates/streamfield/streamfield_widget.html:4
+msgid "Are you shure, that you want to delete this block?"
+msgstr "Вы уверены, что хотите удалить этот блок?"
+
 #: templates/streamfield/streamfield_widget.html:5
+msgid "Are you shure, that you want to delete this subblock?"
+msgstr "Вы уверены, что хотите удалить этот подблок?"
+
+#: templates/streamfield/streamfield_widget.html:11
 msgid "Help?"
 msgstr "Помощь?"
 
-#: templates/streamfield/streamfield_widget.html:39
-#: templates/streamfield/streamfield_widget.html:44
-#: templates/streamfield/streamfield_widget.html:71
+#: templates/streamfield/streamfield_widget.html:45
+#: templates/streamfield/streamfield_widget.html:50
+#: templates/streamfield/streamfield_widget.html:77
 msgid "Change"
 msgstr "Изменить"
 
-#: templates/streamfield/streamfield_widget.html:54
+#: templates/streamfield/streamfield_widget.html:60
 msgid "Add one more"
 msgstr "Добавить ещё"
 
-#: templates/streamfield/streamfield_widget.html:79
+#: templates/streamfield/streamfield_widget.html:85
 msgid "Add content"
 msgstr "Добавить контент"
 
-#: templates/streamfield/streamfield_widget.html:97
+#: templates/streamfield/streamfield_widget.html:103
 msgid "Add new block"
 msgstr "Добавить новый блок"
 

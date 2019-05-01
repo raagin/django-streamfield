@@ -39,7 +39,7 @@ class StreamFieldWidget(Widget):
         js = (
             'streamfield/vendor/lodash.min.js',
             'streamfield/vendor/js.cookie.js',
-            'streamfield/vendor/vue.js',
+            'streamfield/vendor/vue.min.js',
             'streamfield/vendor/Sortable.min.js',
             'streamfield/vendor/vuedraggable.umd.min.js',
             'streamfield/vendor/axios.min.js',
@@ -57,12 +57,15 @@ class StreamField(models.TextField):
 
 
     def from_db_value(self, value, expression, connection):
-        return self.to_python(value)
+        return self.to_python(json.loads(value))
         
     def to_python(self, value):
         if not value or isinstance(value, StreamObject):
             return value
         return StreamObject(value, self.model_list)
+
+    def get_prep_value(self, value):
+        return json.dumps(str(value))
 
     def formfield(self, **kwargs):
         widget_class = kwargs.get('widget', StreamFieldWidget)

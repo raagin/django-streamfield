@@ -121,7 +121,7 @@
                     deleteBlock: function(block_unique_id) {
                         var block = _.find(this.stream, ['unique_id', block_unique_id]);
                         var index = this.stream.indexOf(block);
-                        if (confirm('"' + this.model_title(block) + '" - Вы уверены, что хотите удалить этот блок?')) {
+                        if (confirm('"' + this.model_title(block) + '" - ' + stream_texts['deleteBlock'])) {
                             if (index != -1) {
                                 this.stream.splice(index, 1);
                             }    
@@ -131,7 +131,7 @@
                     deleteInstance: function(block_unique_id, instance_id) {
                         var block = _.find(this.stream, ['unique_id', block_unique_id]);
                         var block_index = this.stream.indexOf(block);
-                        if (confirm('Вы уверены, что хотите удалить этот подблок?')) {
+                        if (confirm(stream_texts['deleteInstance'])) {
                             if (block_index != -1) {
                                 // remove from block id
                                 block.id.splice(block.id.indexOf(parseInt(instance_id)), 1);

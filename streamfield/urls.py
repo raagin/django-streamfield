@@ -1,7 +1,7 @@
 from django.urls import include, path
 
 from . import views
-from streamblocks.models import STREAMBLOCKS_MODELS
+from .settings import STREAMBLOCKS_MODELS
 
 admin_instance_urls = []
 

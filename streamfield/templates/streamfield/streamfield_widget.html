@@ -1,4 +1,10 @@
 {% load i18n %}
+<script type="text/javascript">
+    var stream_texts = {
+        'deleteBlock': '{% trans "Are you shure, that you want to delete this block?" %}',
+        'deleteInstance': '{% trans "Are you shure, that you want to delete this subblock?" %}'
+    }
+</script>
 <div class="streamfield_app" id="app_{{ widget.name }}" v-cloak>    
 
     <div class="stream-help-text">

@@ -3,16 +3,18 @@
 This is a simple realisation of StreamField's idea 
 from [Wagtail CMS](https://wagtail.io)  
 
-Restrictions:
-- Now is working only with [Grappelli Interface](https://github.com/sehmaschine/django-grappelli)  (In plans, to make it optional).
-- Does not work with sqlite db yet.
+## Highlights
+You can build your page with different kind of blocks. 
+Sort them and sort the lists inside the blocks.
 
-For editing content we use native popup mechanism in Django admin interface.
-This allow us to use other field's widgets inside the blocks as is.
-
-For example, if you want to use in your blocks FileBrowseField 
+For editing content inside the blocks, it use native popup mechanism in Django admin interface.
+This allow you to use other field's widgets inside the blocks as is.
+For example, if you want to use in your blocks FileBrowseField
 from django-filebrowser, it will perfectly working 
 without any additional settings.
+
+Module also working with [Grappelli Interface](https://github.com/sehmaschine/django-grappelli) (Optional)
+
 
 ## Installation
 `pip install django-streamfield`
@@ -176,6 +178,16 @@ def save(self, *args, **kwargs):
 ...and use this field in your html
 
 ## Settings
+```python
+# settings.py
+```
+**STREAMFIELD_STREAMBLOCKS_APP_PATH**
+If your app `streamblocks` located not in project root directory, you need to reflect it in settings.py
+```python
+STREAMFIELD_STREAMBLOCKS_APP_PATH = 'yourapps.streamblocks'
+```
+
+**STREAMFIELD_BLOCK_OPTIONS**
 You may use `STREAMFIELD_BLOCK_OPTIONS` in settings.py to add some options to block.
 
 For example:

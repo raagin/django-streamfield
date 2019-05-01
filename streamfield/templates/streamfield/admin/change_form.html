@@ -1,4 +1,4 @@
-{% extends "admin/change_form.html" %}{% load admin_static i18n admin_modify admin_urls grp_tags %}
+{% extends "admin/change_form.html" %}{% load admin_static i18n admin_modify admin_urls %}
 
 {% block content %}
     <form {% if has_file_field %}enctype="multipart/form-data" {% endif %}action="{{ form_url }}" method="post" id="{{ opts.model_name }}_form" novalidate>{% csrf_token %}{% block form_top %}{% endblock %}
@@ -47,3 +47,15 @@
         </div>
     </form>
 {% endblock %}
+
+
+<!-- Popup Hidden Field -->
+            {% if is_popup %}<input type="hidden" name="_popup" value="1" />{% endif %}
+
+            <!-- !!! START:StreamField Popup Hidden Field !!! -->
+            {% if request.GET.block_id and is_popup %}<input type="hidden" name="block_id" value="{{ request.GET.block_id }}" />{% endif %}
+            {% if request.GET.instance_id and is_popup %}<input type="hidden" name="instance_id" value="{{ request.GET.instance_id }}" />{% endif %}
+            {% if request.GET.app_id and is_popup %}<input type="hidden" name="app_id" value="{{ request.GET.app_id }}" />{% endif %}
+            <!-- !!! END:  StreamField Popup Hidden Field !!! -->
+
+
