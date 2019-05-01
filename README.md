@@ -1,10 +1,10 @@
 # Django StreamField
 
 This is a simple realisation of StreamField's idea 
-from [Wagtail CMS](https://wagtail.io) for plain Django admin 
-or with Grappelli skin. 
+from [Wagtail CMS](https://wagtail.io)  
 
-Does not work with sqlite DB yet.
+> Now is working only with Grappelli (In plans, to make it optional)
+Does not work with sqlite db yet.
 
 For editing content we use native popup mechanism in Django admin interface.
 This allow us to use other field's widgets inside the blocks as is.
