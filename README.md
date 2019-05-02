@@ -172,7 +172,7 @@ and render to this field html in save method
 
 ```python
 def save(self, *args, **kwargs):
-    self.stream_rendered = self.stream.render()
+    self.stream_rendered = self.stream.render
     super().save(*args, **kwargs)
 ```
 ...and use this field in your html
