@@ -81,7 +81,8 @@ and will be a list of objects if there is.
 <div class="rich-text-block">
     {{ block_content|safe }}
 </div>
-
+```
+```html
 <!--imagewithtext.html-->
 <ul class="image-with-text-block">
     {% for block in block_content %}
@@ -142,7 +143,7 @@ you can get content by field cached property page.stream.render
 
 
 ## Custom Admin for block's models
-Models will automaticaly register in admin
+Models will automaticaly register in admin.
 If you want provide custom admin class, 
 first unregister models and register again, using `StreamBlocksAdmin` class.
 
