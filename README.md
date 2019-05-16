@@ -21,9 +21,9 @@ Module also working with [Grappelli Interface](https://github.com/sehmaschine/dj
 
 ## How to use
 
-**Create new app called `streamblocks`**
+**1. Create new app called `streamblocks`**
 
-**Put to `streamblocks/models.py` some models**
+**2. Put to `streamblocks/models.py` some models**
 
 that you want to use in your stream field.
 For example:
@@ -51,7 +51,7 @@ class ImageWithText(models.Model):
         verbose_name="Images with text"
 ```
 
-**In `streamblocks/models.py` register blocks**
+**3. In `streamblocks/models.py` register blocks**
 
 for StreamField as list of your block models
 ```python
@@ -65,7 +65,7 @@ STREAMBLOCKS = [
 ]
 ```
 
-**Create templates for each models above, named as lowercase names of the models:**
+**4. Create templates for each models above, named as lowercase names of the models:**
 
 1. streamblocks/templates/streamblocks/richtext.html
 2. streamblocks/templates/streamblocks/imagewithtext.html
@@ -94,7 +94,7 @@ and will be a list of objects if there is.
 </ul>
 ```
 
-**Add apps to settings.py**
+**5. Add apps to settings.py**
 
 Add to INSTALLED_APPS
 
@@ -106,14 +106,14 @@ INSTALLED_APPS = [
     ...
 ```
 
-**Add streamfield.urls to main urls.py**
+**6. Add streamfield.urls to main urls.py**
 ```python
 urlpatterns += [
     path('streamfield/', include('streamfield.urls'))
 ]
 ```
 
-**Add StreamField to your model in your application**
+**7. Add StreamField to your model in your application**
 
 And add the models that you want to use in this stream as model_list
 ```python
