@@ -34,12 +34,16 @@ class StreamObject:
     # data in db
     value = [
         {
-            'model_name': 'RichText', 
-            'data': 1
-        }, 
+            "unique_id": "lsupu",
+            "model_name": "NumberInText",
+            "id": [1,2,3],
+            "options":{"margins":true}
+        },
         {
-            'model_name': 'NumberInText', 
-            'data': [1, 2]
+            "unique_id": "vlbh7j",
+            "model_name": "RichText",
+            "id": 1,
+            "options": {"margins":true}
         }
     ]
     """
@@ -82,7 +86,7 @@ class StreamObject:
                     as_list=as_list,
                     options=m['options']
                 )
-                res = callback(model_class, model_str, m, ctx)
+                res = callback(model_class, model_str, content, ctx)
                 data.append(res)
 
         return data
@@ -95,6 +99,10 @@ class StreamObject:
     def render(self):
         return self._render()
 
+    def render_admin(self):
+        data = self._iterate_over_models(_get_render_admin_data)
+        return mark_safe("".join(data))
+
     def from_json(self):
         return json.loads(self.value)
 
@@ -103,7 +111,7 @@ class StreamObject:
         return json.dumps(self.value)
 
 
-def _get_render_data(model_class, model_str, m, ctx):
+def _get_render_data(model_class, model_str, content, ctx):
     block_tmpl = 'streamblocks/%s.html' % model_str.lower()
     try:
         t = loader.get_template(block_tmpl)
@@ -114,5 +122,19 @@ def _get_render_data(model_class, model_str, m, ctx):
             ))
         t = loader.get_template('streamfield/default_block_tmpl.html')
     return t.render(ctx)
+
+def _get_render_admin_data(model_class, model_str, content, ctx):
+    tmpl = 'streamfield/admin/change_form_render_template.html'
+    t = loader.get_template(tmpl)
+    objs = content if isinstance(content, list) else [content]
+    return format_html_join(
+            '\n', "{}",
+            (
+                (t.render({
+                    'form': get_form_class(model_class)(instance=obj)
+                    }),
+            ) for obj in objs)
+        )
+
 
     
