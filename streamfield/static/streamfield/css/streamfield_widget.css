@@ -93,6 +93,16 @@
     border-bottom: 1px solid #CCC;
 } 
 
+.streamfield_app .block-fields ul li {
+    margin-left: 20px;
+    list-style: disc;
+}
+
+.streamfield_app .block-fields ol li {
+    margin-left: 20px;
+    list-style: decimal;
+}
+
 .streamfield_app .block-fields b {
     font-weight: bold;
 }

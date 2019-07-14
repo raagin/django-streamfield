@@ -59,7 +59,7 @@ for StreamField as list of your block models
 
 ...
 
-STREAMBLOCKS = [
+STREAMBLOCKS_MODELS = [
     RichText,
     ImageWithText
 ]
