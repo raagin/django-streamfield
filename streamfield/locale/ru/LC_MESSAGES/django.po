@@ -20,27 +20,12 @@ msgstr ""
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
 "%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: templates/streamfield/admin/change_form.html:19
-msgid "Please correct the error below."
-msgstr ""
-
-#: templates/streamfield/admin/change_form.html:19
-msgid "Please correct the errors below."
-msgstr ""
-
-#: templates/streamfield/admin/fields/file_browse_widget.html:27
-msgid "File not found"
-msgstr ""
-
-#: templates/streamfield/admin/streamfield_popup_response.html:3
-msgid "Popup closing..."
-msgstr ""
 
 #: templates/streamfield/streamfield_admin_help.html:2
 msgid ""
 "\n"
 "<ul> \n"
-"    <li>THe blocks are moving by drag-and-drop.</li>\n"
+"    <li>The blocks are moving by drag-and-drop.</li>\n"
 "    <li>After moving, adding or deleting blocks you need to save entire "
 "object.</li>\n"
 "    <li>if you had deleted, accidentally, some blocks.<br>You may get back "
