@@ -9,4 +9,4 @@ try:
     streamblocks_app = import_module("%s.models" % STREAMBLOCKS_APP_PATH)
     STREAMBLOCKS_MODELS = streamblocks_app.STREAMBLOCKS_MODELS
 except (AttributeError, ValueError) as e:
-    raise Exception("""Can't find STREAMBLOCKS: wrong "STREAMFIELD_STREAMBLOCKS_APP_PATH" or STREAMBLOCKS don't exist.""")
+    raise Exception("""Can't find STREAMBLOCKS_MODELS: wrong "STREAMFIELD_STREAMBLOCKS_APP_PATH" or STREAMBLOCKS_MODELS don't exist.""")
