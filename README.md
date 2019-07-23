@@ -51,7 +51,7 @@ class ImageWithText(models.Model):
         verbose_name="Images with text"
 ```
 
-**3. In `streamblocks/models.py` register blocks**
+In `streamblocks/models.py` register blocks
 
 for StreamField as list of your block models
 ```python
@@ -65,7 +65,7 @@ STREAMBLOCKS_MODELS = [
 ]
 ```
 
-**4. Create templates for each models above, named as lowercase names of the models:**
+**3. Create templates for each models above, named as lowercase names of the models:**
 
 1. streamblocks/templates/streamblocks/richtext.html
 2. streamblocks/templates/streamblocks/imagewithtext.html
@@ -79,7 +79,7 @@ and will be a list of objects if there is.
 ```html
 <!--richtext.html-->
 <div class="rich-text-block">
-    {{ block_content|safe }}
+    {{ block_content.text|safe }}
 </div>
 ```
 ```html
@@ -94,7 +94,7 @@ and will be a list of objects if there is.
 </ul>
 ```
 
-**5. Add apps to settings.py**
+**4. Add apps to settings.py**
 
 Add to INSTALLED_APPS
 
@@ -106,14 +106,14 @@ INSTALLED_APPS = [
     ...
 ```
 
-**6. Add streamfield.urls to main urls.py**
+**5. Add streamfield.urls to main urls.py**
 ```python
 urlpatterns += [
     path('streamfield/', include('streamfield.urls'))
 ]
 ```
 
-**7. Add StreamField to your model in your application**
+**6. Add StreamField to your model in your application**
 
 And add the models that you want to use in this stream as model_list
 ```python
@@ -160,10 +160,31 @@ admin.site.unregister(RichText)
 class RichTextBlockAdmin(StreamBlocksAdmin, admin.ModelAdmin):
     pass
 ```
+If you need to customize admin templates of the fields wich you are using, you need to put templates named as 
+described in section 3 (above). but put it inside "admin" folder.
+For example for RichText block it will be:
+
+streamblocks/templates/streamblocks/admin/richtext.html
+
+As context use "form":
+```html
+{{ form.text.value }}
+```
 
 ## Complex Blocks
 You may use StreamField as part of blocks and create with that way complex structure
 and use `{{ block_content.<field_name>.render }}`
+
+## Blocks without data in database. Only templates.
+You may use it for widgets or separators or for whatever you want...
+Just make the block model `abstract`.
+```python
+class EmptyBlock(models.Model):
+    class Meta:
+        abstract = True
+        verbose_name='Empty space'
+```
+and use `streamblocks/templates/streamblocks/emptyblock.html` for your content.
 
 ## Cache for reduce the number of database requests
 There is two ways of caching:
