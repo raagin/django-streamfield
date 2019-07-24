@@ -49,16 +49,8 @@ class ImageWithText(models.Model):
 
     class Meta:
         verbose_name="Images with text"
-```
 
-In `streamblocks/models.py` register blocks
-
-for StreamField as list of your block models
-```python
-# streamblocks/models.py
-
-...
-
+# Register blocks for StreamField as list of models
 STREAMBLOCKS_MODELS = [
     RichText,
     ImageWithText
