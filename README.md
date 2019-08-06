@@ -181,8 +181,8 @@ class PageAdmin(models.Admin):
         form = super().get_form(request, obj, **kwargs)
         if obj and obj.id == 1:
             form.base_fields['stream'].widget = StreamFieldWidget(attrs={
-                'model_list': [ RichText ]}
-                )
+                'model_list': [ RichText ]
+                })
         return form
 ```
 Be careful with already existing blocks in db. If you remove them from admin, it produce error.
