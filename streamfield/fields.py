@@ -1,6 +1,6 @@
 import json
 from django.db import models
-from django.forms.widgets import Widget, MultiWidget
+from django.forms.widgets import Widget
 from django.contrib.admin.options import FORMFIELD_FOR_DBFIELD_DEFAULTS
 from django.conf import settings
 from .base import StreamObject
@@ -17,8 +17,9 @@ class StreamFieldWidget(Widget):
         for block in self.model_list:
             as_list = hasattr(block, "as_list") and block.as_list
             options = block.options if hasattr(block, "options") else BLOCK_OPTIONS
+            model_doc = block._meta.verbose_name_plural if as_list else block._meta.verbose_name
             model_list_info[block.__name__] = {
-                'model_doc': block._meta.verbose_name,
+                'model_doc': str(model_doc),
                 'abstract': block._meta.abstract,
                 'as_list': 1 if as_list else 0,
                 'options': options

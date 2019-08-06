@@ -135,7 +135,7 @@ you can get content by field cached property page.stream.render
 ```
 
 
-## Custom Admin for block's models
+## Admin: Custom Admin for block's models
 Models will automaticaly register in admin.
 If you want provide custom admin class, 
 first unregister models and register again, using `StreamBlocksAdmin` class.
@@ -163,6 +163,29 @@ As context use "form":
 ```html
 {{ form.text.value }}
 ```
+
+## Admin: Set list of blocks for your StreamField in admin site.
+Typicaly you set the blocks in your models as `model_list` attribute of StreamField field.
+But if you want to change blocks, for example depending on object, you can do it in admin site
+of your model. Suppose you want to use only `RichText` on page with id=1.
+
+```python
+# admin.py
+from streamfield.fields import StreamFieldWidget
+from streamblocks.models import RichText
+from .models import Page
+
+class PageAdmin(models.Admin):
+
+    def get_form(self, request, obj=None, **kwargs):
+        form = super().get_form(request, obj, **kwargs)
+        if obj and obj.id == 1:
+            form.base_fields['stream'].widget = StreamFieldWidget(attrs={
+                'model_list': [ RichText ]}
+                )
+        return form
+```
+Be careful with already existing blocks in db. If you remove them from admin, it produce error.
 
 ## Complex Blocks
 You may use StreamField as part of blocks and create with that way complex structure
