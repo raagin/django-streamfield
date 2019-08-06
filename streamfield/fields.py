@@ -21,7 +21,7 @@ class StreamFieldWidget(Widget):
             model_list_info[block.__name__] = {
                 'model_doc': str(model_doc),
                 'abstract': block._meta.abstract,
-                'as_list': 1 if as_list else 0,
+                'as_list': as_list,
                 'options': options
             }
         attrs["model_list_info"] = json.dumps(model_list_info)
