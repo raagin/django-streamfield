@@ -25,7 +25,8 @@ Module also working with [Grappelli Interface](https://github.com/sehmaschine/dj
 
 **2. Put to `streamblocks/models.py` some models**
 
-that you want to use in your stream field.
+...that you want to use in your stream field.
+And add this models in STREAMBLOCKS_MODELS list.
 For example:
 
 ```python
@@ -177,6 +178,7 @@ class EmptyBlock(models.Model):
         verbose_name='Empty space'
 ```
 and use `streamblocks/templates/streamblocks/emptyblock.html` for your content.
+> Note: Don't forget to register a block in STREAMBLOCKS_MODELS
 
 ## Cache for reduce the number of database requests
 There is two ways of caching:
