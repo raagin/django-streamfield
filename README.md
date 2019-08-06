@@ -216,5 +216,7 @@ STREAMFIELD_BLOCK_OPTIONS = {
     }
 }
 ```
+In template use `{{ options.margins }}`
+
 > Note: Now only type "checkbox" is working, the other options in plan.
 
