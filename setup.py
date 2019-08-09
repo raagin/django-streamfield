@@ -5,15 +5,16 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="django-streamfield",
-    version="1.0.5",
+    version="1.0.6",
     author="Yury Lapshinov",
     author_email="y.raagin@gmail.com",
     description="StreamField for native Django Admin or with Grappelli",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/raagin/django-streamfield",
-    packages=setuptools.find_packages(exclude=['test_project']),
+    packages=setuptools.find_packages(),
     include_package_data=True,
+    zip_safe=False,
     classifiers=[
         "Programming Language :: Python :: 3",
         'License :: OSI Approved :: BSD License',
