@@ -1,2 +1,3 @@
 recursive-include streamfield/static *
 recursive-include streamfield/templates *
+recursive-include streamfield/locale *
