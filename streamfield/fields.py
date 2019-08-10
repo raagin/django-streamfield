@@ -52,7 +52,6 @@ class StreamField(models.TextField):
 
     def __init__(self, *args, **kwargs):
         self.model_list = kwargs.pop('model_list', [])
-        kwargs['null'] = True
         kwargs['blank'] = True
         kwargs['default'] = "[]"
         super().__init__(*args, **kwargs)
