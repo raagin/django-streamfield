@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ page.title }}</title>
+    <style type="text/css">
+        .columns {
+            padding: 0;
+            display: flex;
+            justify-content: space-around;
+        }
+        .columns li {
+            background-color: #faebd7;
+            width: 100%;
+            list-style: none;
+            margin: 5px;
+            padding: 15px;
+        }
+        .rich-text-block {
+            background-color: #dfeefb;
+            padding: 15px;
+        }
+    </style>
+</head>
+<body>
+<h1>{{ page.title }}</h1>
+<div class="content">
+    {{ page.stream.render }}
+</div>
+</body>
+</html>
