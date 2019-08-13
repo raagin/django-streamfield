@@ -23,7 +23,7 @@ Module also working with [Grappelli Interface](https://github.com/sehmaschine/dj
 - [How to use](#how-to-use)
 - [Admin](#admin)
   - [Custom Admin for block's models](#custom-admin-for-blocks-models)
-  - [Override list of blocks of your StreamField in admin site](#override-list-of-blocks-of-your-streamfield-in-admin-site)
+  - [Override list of blocks for your StreamField in admin.py](#override-list-of-blocks-for-your-streamfield-in-admin-py)
 - [Special cases](#special-cases)
   - [Complex Blocks](#complex-blocks)    
   - [Blocks without data in database. Only templates](#blocks-without-data-in-database-only-templates)
@@ -179,7 +179,7 @@ As context use "form":
 {{ form.text.value }}
 ```
 
-### Override list of blocks of your StreamField in admin site
+### Override list of blocks for your StreamField in admin.py
 Typicaly you set the blocks in your models as `model_list` attribute of StreamField field.
 But if you want to change blocks, for example depending on object, you can do it in admin site
 of your model. Suppose you want to use only `RichText` on page with id=1.
