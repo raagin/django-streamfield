@@ -23,7 +23,7 @@ Module also working with [Grappelli Interface](https://github.com/sehmaschine/dj
 - [How to use](#how-to-use)
 - [Admin](#admin)
   - [Custom Admin for block's models](#custom-admin-for-blocks-models)
-  - [Override list of blocks for your StreamField in admin.py](#override-list-of-blocks-for-your-streamfield-in-admin-py)
+  - [Override list of blocks for your StreamField in admin.py](#override-list-of-blocks-for-your-streamfield-in-adminpy)
 - [Special cases](#special-cases)
   - [Complex Blocks](#complex-blocks)    
   - [Blocks without data in database. Only templates](#blocks-without-data-in-database-only-templates)
