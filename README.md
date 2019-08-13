@@ -22,9 +22,13 @@ Module also working with [Grappelli Interface](https://github.com/sehmaschine/dj
 - [Installation](#installation)
 - [How to use](#how-to-use)
 - [Admin](#admin)
-  - [Custom Admin for block's models](#)
-  - [Override list of blocks of your StreamField in admin site](#)
+  - [Custom Admin for block's models](#custom-admin-for-blocks-models)
+  - [Override list of blocks of your StreamField in admin site](#override-list-of-blocks-of-your-streamfield-in-admin-site)
 - [Special cases](#special-cases)
+  - [Complex Blocks](#complex-blocks)    
+  - [Blocks without data in database. Only templates](#blocks-without-data-in-database-only-templates)
+  - [Cache for reduce the number of database requests](#cache-for-reduce-the-number-of-database-requests)
+- [Settings](#settings)
 
 ## Installation
 `pip install django-streamfield`
