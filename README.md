@@ -15,6 +15,20 @@ without any additional settings.
 
 Module also working with [Grappelli Interface](https://github.com/sehmaschine/django-grappelli) (Optional)
 
+![django-streamfield demo screenshot](https://raagin.ru/assets/uploads/django-streamfield.png)
+
+## Contents
+
+- [Installation](#installation)
+- [How to use](#how-to-use)
+- [Admin](#admin)
+  - [Custom Admin for block's models](#custom-admin-for-blocks-models)
+  - [Override list of blocks for your StreamField in admin.py](#override-list-of-blocks-for-your-streamfield-in-adminpy)
+- [Special cases](#special-cases)
+  - [Complex Blocks](#complex-blocks)    
+  - [Blocks without data in database. Only templates](#blocks-without-data-in-database-only-templates)
+  - [Cache for reduce the number of database requests](#cache-for-reduce-the-number-of-database-requests)
+- [Settings](#settings)
 
 ## Installation
 `pip install django-streamfield`
@@ -135,7 +149,8 @@ you can get content by field cached property page.stream.render
 ```
 
 
-## Admin: Custom Admin for block's models
+## Admin
+### Custom Admin for block's models
 Models will automaticaly register in admin.
 If you want provide custom admin class, 
 first unregister models and register again, using `StreamBlocksAdmin` class.
@@ -164,7 +179,7 @@ As context use "form":
 {{ form.text.value }}
 ```
 
-## Admin: Set list of blocks for your StreamField in admin site.
+### Override list of blocks for your StreamField in admin.py
 Typicaly you set the blocks in your models as `model_list` attribute of StreamField field.
 But if you want to change blocks, for example depending on object, you can do it in admin site
 of your model. Suppose you want to use only `RichText` on page with id=1.
@@ -187,11 +202,12 @@ class PageAdmin(models.Admin):
 ```
 Be careful with already existing blocks in db. If you remove them from admin, it produce error.
 
-## Complex Blocks
+## Special cases
+### Complex Blocks
 You may use StreamField as part of blocks and create with that way complex structure
 and use `{{ block_content.<field_name>.render }}`
 
-## Blocks without data in database. Only templates.
+### Blocks without data in database. Only templates.
 You may use it for widgets or separators or for whatever you want...
 Just make the block model `abstract`.
 ```python
@@ -203,7 +219,7 @@ class EmptyBlock(models.Model):
 and use `streamblocks/templates/streamblocks/emptyblock.html` for your content.
 > Note: Don't forget to register a block in STREAMBLOCKS_MODELS
 
-## Cache for reduce the number of database requests
+### Cache for reduce the number of database requests
 There is two ways of caching:
 - Simple cache view with django cache 
 - Create additional field, for example: 'stream_rendered'
@@ -220,14 +236,14 @@ def save(self, *args, **kwargs):
 ```python
 # settings.py
 ```
-**STREAMFIELD_STREAMBLOCKS_APP_PATH**
+### STREAMFIELD_STREAMBLOCKS_APP_PATH 
 
 If your app `streamblocks` located not in project root directory, you need to reflect it in settings.py
 ```python
 STREAMFIELD_STREAMBLOCKS_APP_PATH = 'yourapps.streamblocks'
 ```
 
-**STREAMFIELD_BLOCK_OPTIONS**
+### STREAMFIELD_BLOCK_OPTIONS
 
 You may use `STREAMFIELD_BLOCK_OPTIONS` in settings.py to add some options to block.
 
