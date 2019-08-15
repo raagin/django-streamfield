@@ -2,6 +2,7 @@ import json
 from django.contrib.admin import ModelAdmin, site
 from django.forms import ModelForm
 from django.utils.functional import cached_property
+from django.utils.html import format_html_join
 from django.template import loader
 from django.utils.safestring import mark_safe
 

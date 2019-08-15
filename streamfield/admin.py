@@ -1,8 +1,16 @@
 import json
+from importlib import import_module
 from django.contrib import admin
 from django.contrib.admin.options import TO_FIELD_VAR
 from django.template.response import TemplateResponse
-from .settings import STREAMBLOCKS_MODELS
+from django.conf import settings
+
+STREAMBLOCKS_APP_PATH = getattr(settings, "STREAMFIELD_STREAMBLOCKS_APP_PATH", "streamblocks")
+try:
+    streamblocks_app = import_module("%s.models" % STREAMBLOCKS_APP_PATH)
+    STREAMBLOCKS_MODELS = streamblocks_app.STREAMBLOCKS_MODELS
+except (AttributeError, ValueError) as e:
+    raise Exception("""Can't find STREAMBLOCKS_MODELS: wrong "STREAMFIELD_STREAMBLOCKS_APP_PATH" or STREAMBLOCKS_MODELS don't exist.""")
 
 class StreamBlocksAdmin(admin.ModelAdmin):
     change_form_template = 'streamfield/admin/change_form.html'

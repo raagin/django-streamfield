@@ -1,7 +1,15 @@
+from importlib import import_module
 from django.urls import include, path
+from django.conf import settings
 
 from . import views
-from .settings import STREAMBLOCKS_MODELS
+
+STREAMBLOCKS_APP_PATH = getattr(settings, "STREAMFIELD_STREAMBLOCKS_APP_PATH", "streamblocks")
+try:
+    streamblocks_app = import_module("%s.models" % STREAMBLOCKS_APP_PATH)
+    STREAMBLOCKS_MODELS = streamblocks_app.STREAMBLOCKS_MODELS
+except (AttributeError, ValueError) as e:
+    raise Exception("""Can't find STREAMBLOCKS_MODELS: wrong "STREAMFIELD_STREAMBLOCKS_APP_PATH" or STREAMBLOCKS_MODELS don't exist.""")
 
 admin_instance_urls = []
 

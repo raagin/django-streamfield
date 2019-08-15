@@ -107,6 +107,13 @@
     font-weight: bold;
 }
 
+.streamfield_app .block-fields svg,
+.streamfield_app .block-fields img
+{
+    max-width: 150px;
+    max-height: 150px;
+}
+
 .streamfield_app .stream-model-subblock {
     background: #e0e7eb;
     padding: 10px;
