@@ -1,11 +1,16 @@
 # -*- coding: utf-8 -*-
-
+from django.template import loader
 from django.views.generic import DetailView, TemplateView
 from .forms import get_form_class
 
 def admin_instance_class(model, base=DetailView):
-    tmpl = 'streamfield/admin/change_form_render_template.html'
 
+    tmpl = loader.select_template([
+        'streamblocks/admin/%s.html' % model.__name__.lower(),
+        'streamfield/admin/change_form_render_template.html'
+        ])
+
+    # will be removed in future. use above approach to override admin template.
     if hasattr(model, 'custom_admin_template'):
         tmpl = model.custom_admin_template
 
@@ -20,7 +25,7 @@ def admin_instance_class(model, base=DetailView):
 
     attrs = dict(
         model = model,
-        template_name = tmpl,
+        template_name = tmpl.template.name,
         get_context_data = get_context_data
         )
 

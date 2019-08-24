@@ -32,9 +32,10 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
 
+    'pages',
+
     'streamblocks',
     'streamfield',
-    'pages',
 
     'django.contrib.admin',
     'django.contrib.auth',

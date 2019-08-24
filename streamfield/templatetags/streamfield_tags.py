@@ -13,10 +13,11 @@ register = template.Library()
 def format_field(field):
     widget_name = get_widget_name(field)
 
-    try:
-        t = loader.get_template('streamfield/admin/fields/%s.html' % widget_name)
-    except loader.TemplateDoesNotExist:
-        t = loader.get_template('streamfield/admin/fields/default.html')
+    t = loader.select_template([
+            'streamblocks/admin/fields/%s.html' % widget_name,
+            'streamfield/admin/fields/%s.html' % widget_name,
+            'streamfield/admin/fields/default.html'
+        ])
 
     if widget_name == 'select':
         

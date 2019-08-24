@@ -3,3 +3,4 @@
 dist/*
 build/*
 django_streamfield.egg-info/*
+test_project/db.sqlite3

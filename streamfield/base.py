@@ -100,6 +100,7 @@ class StreamObject:
     def render(self):
         return self._render()
 
+    # only for complex blocks
     def render_admin(self):
         data = self._iterate_over_models(_get_render_admin_data)
         return mark_safe("".join(data))
@@ -124,9 +125,12 @@ def _get_render_data(model_class, model_str, content, ctx):
         t = loader.get_template('streamfield/default_block_tmpl.html')
     return t.render(ctx)
 
+# only for complex blocks
 def _get_render_admin_data(model_class, model_str, content, ctx):
-    tmpl = 'streamfield/admin/change_form_render_template.html'
-    t = loader.get_template(tmpl)
+    t = loader.select_template([
+        'streamblocks/admin/%s.html' % model_str.lower(),
+        'streamfield/admin/change_form_render_template.html'
+        ])
     objs = content if isinstance(content, list) else [content]
     return format_html_join(
             '\n', "{}",
