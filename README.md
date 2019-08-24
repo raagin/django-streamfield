@@ -150,7 +150,7 @@ you can get content by field cached property page.stream.render
 
 
 ## Admin
-### Custom Admin for block's models
+### Custom admin class for block's models
 Models will automaticaly register in admin.
 If you want provide custom admin class, 
 first unregister models and register again, using `StreamBlocksAdmin` class.
@@ -168,8 +168,11 @@ admin.site.unregister(RichText)
 class RichTextBlockAdmin(StreamBlocksAdmin, admin.ModelAdmin):
     pass
 ```
-If you need to customize admin templates of the fields wich you are using, you need to put templates named as 
+
+### Custom templates for render block models in admin
+If you need to customize admin templates for block models wich you are using, you need to put templates named as 
 described in section 3 (above). but put it inside "admin" folder.
+
 For example for RichText block it will be:
 
 streamblocks/templates/streamblocks/admin/richtext.html
@@ -177,6 +180,16 @@ streamblocks/templates/streamblocks/admin/richtext.html
 As context use "form":
 ```html
 {{ form.text.value }}
+```
+### Override fields rendering in admin
+Name custom templates for fields as lowercased field widget name, and put it inside ...admin/fiedls/ folder.
+
+For example for TextField widget (Textarea) of RichText block, it will be:
+streamblocks/templates/streamblocks/admin/fields/textarea.html
+
+As context use "field":
+```html
+{{ field.value|default:""|safe }}
 ```
 
 ### Override list of blocks for your StreamField in admin.py
