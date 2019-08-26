@@ -184,7 +184,7 @@ As context use "form":
 {{ form.text.value }}
 ```
 ### Override how to render block's fields in admin
-Name custom templates for fields as lowercased field widget name, and put it inside `.../streamblocks/admin/fields/` folder.
+Create custom template for field with name as lowercased field widget name, and put it inside `.../streamblocks/admin/fields/` folder.
 
 For example for TextField widget (Textarea) of RichText block, it will be:
 
