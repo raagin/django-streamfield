@@ -24,7 +24,7 @@ Module also working with [Grappelli Interface](https://github.com/sehmaschine/dj
 - [Admin](#admin)
   - [Custom admin class for block's models](#custom-admin-class-for-blocks-models)
   - [Custom templates for render block models in admin](#custom-templates-for-render-block-models-in-admin)
-  - [Override fields rendering in admin](#override-fields-rendering-in-admin)
+  - [Override how to render block's fields in admin](#override-how-to-render-blocks-fields-in-admin)
   - [Override list of blocks for your StreamField in admin.py](#override-list-of-blocks-for-your-streamfield-in-adminpy)
 - [Special cases](#special-cases)
   - [Complex Blocks](#complex-blocks)    
@@ -177,17 +177,18 @@ described in section 3 (above). but put it inside "admin" folder.
 
 For example for RichText block it will be:
 
-streamblocks/templates/streamblocks/admin/richtext.html
+`streamblocks/templates/streamblocks/admin/richtext.html`
 
 As context use "form":
 ```html
 {{ form.text.value }}
 ```
-### Override fields rendering in admin
-Name custom templates for fields as lowercased field widget name, and put it inside ...admin/fiedls/ folder.
+### Override how to render block's fields in admin
+Name custom templates for fields as lowercased field widget name, and put it inside `.../streamblocks/admin/fields/` folder.
 
 For example for TextField widget (Textarea) of RichText block, it will be:
-streamblocks/templates/streamblocks/admin/fields/textarea.html
+
+`streamblocks/templates/streamblocks/admin/fields/textarea.html`
 
 As context use "field":
 ```html
