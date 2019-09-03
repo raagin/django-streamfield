@@ -25,6 +25,7 @@ Module also working with [Grappelli Interface](https://github.com/sehmaschine/dj
   - [Custom templates for render block models in admin](#custom-templates-for-render-block-models-in-admin)
   - [Override how to render block's fields in admin](#override-how-to-render-blocks-fields-in-admin)
   - [Override list of blocks for your StreamField in admin.py](#override-list-of-blocks-for-your-streamfield-in-adminpy)
+- [Block options](#block-options)
 - [Special cases](#special-cases)
   - [Complex Blocks](#complex-blocks)    
   - [Blocks without data in database. Only templates](#blocks-without-data-in-database-only-templates)
@@ -247,7 +248,7 @@ class Slide(models.Model):
 ```
 In block template you can use this options as `options.wide_slider`
 
-You may apply options for all blocks with `STREAMFIELD_BLOCK_OPTIONS`
+You may apply options for all blocks with `STREAMFIELD_BLOCK_OPTIONS` (See [Settings](#settings))
 
 ## Special cases
 ### Complex Blocks
