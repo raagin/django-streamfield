@@ -217,6 +217,38 @@ class PageAdmin(models.Admin):
 ```
 Be careful with already existing blocks in db. If you remove them from admin, it produce error.
 
+## Block options
+You may use `options` property in your streamblocks models to add some additional options to your block.
+This is useful with `as_list` property when you need to add some options to whole block not separatly to each object of this list.
+
+For example:
+```python
+# streamblocks/models.py
+
+# list of objects as slider
+class Slide(models.Model):
+    image = models.ImageField(upload_to="folder/")
+    text = models.TextField(null=True, blank=True)
+    
+    # StreamField option for list of objects
+    as_list = True
+    
+    options = {
+        "wide_slider": {
+            "label": "Wide slider",
+            "type": "checkbox",
+            "default": False
+        }
+    }
+
+    class Meta:
+        verbose_name="Slide"
+        verbose_name_plural="Slider"
+```
+In block template you can use this options as `options.wide_slider`
+
+You may apply options for all blocks with `STREAMFIELD_BLOCK_OPTIONS`
+
 ## Special cases
 ### Complex Blocks
 You may use StreamField as part of blocks and create with that way complex structure
@@ -260,7 +292,7 @@ STREAMFIELD_STREAMBLOCKS_APP_PATH = 'yourapps.streamblocks'
 
 ### STREAMFIELD_BLOCK_OPTIONS
 
-You may use `STREAMFIELD_BLOCK_OPTIONS` in settings.py to add some options to block.
+You may use `STREAMFIELD_BLOCK_OPTIONS` in settings.py to add some options to all blocks.
 
 For example:
 ```python
@@ -272,7 +304,7 @@ STREAMFIELD_BLOCK_OPTIONS = {
     }
 }
 ```
-In template use `{{ options.margins }}`
+In block template use `{{ options.margins }}`
 
 > Note: Now only type "checkbox" is working, the other options in plan.
 
