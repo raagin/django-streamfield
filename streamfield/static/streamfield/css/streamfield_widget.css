@@ -35,9 +35,13 @@
 }
 
 .streamfield_app .stream-block__options {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
+    padding: 10px;
+    text-align: right;
+    background: #efefef;
+}
+.streamfield_app .stream-block__option {
+    display: inline-block;
+    margin-left: 10px;
 }
 
 /* Block content */
