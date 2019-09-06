@@ -235,8 +235,8 @@ class Slide(models.Model):
     as_list = True
     
     options = {
-        "wide_slider": {
-            "label": "Wide slider",
+        "autoplay": {
+            "label": "Autoplay slider",
             "type": "checkbox",
             "default": False
         }
@@ -247,7 +247,8 @@ class Slide(models.Model):
         verbose_name_plural="Slider"
 ```
 In block template you can use this options as `options.wide_slider`
-
+In page admin you will see it on the bottom of this block.
+> Note: Now only "checkbox" type is working.
 You may apply options for all blocks with `STREAMFIELD_BLOCK_OPTIONS` (See [Settings](#settings))
 
 ## Special cases
@@ -307,5 +308,5 @@ STREAMFIELD_BLOCK_OPTIONS = {
 ```
 In block template use `{{ options.margins }}`
 
-> Note: Now only type "checkbox" is working, the other options in plan.
+> Note: Now only "checkbox" type is working.
 

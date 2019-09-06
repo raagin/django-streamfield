@@ -3,6 +3,14 @@ from django.db import models
 class RichText(models.Model):
     text = models.TextField(blank=True, null=True)   
 
+    options = {
+        "gray_bgr": {
+            "label": "Block on gray background",
+            "type": "checkbox",
+            "default": False
+        }
+    }
+
     class Meta:
         # This will use as name of block in admin
         verbose_name="Text"
