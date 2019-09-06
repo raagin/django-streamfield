@@ -246,7 +246,7 @@ class Slide(models.Model):
         verbose_name="Slide"
         verbose_name_plural="Slider"
 ```
-In block template you can use this options as `options.wide_slider`
+In block template you can use this options as `options.autoplay`
 In page admin you will see it on the bottom of this block.
 > Note: Now only "checkbox" type is working.
 You may apply options for all blocks with `STREAMFIELD_BLOCK_OPTIONS` (See [Settings](#settings))
