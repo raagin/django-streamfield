@@ -4,8 +4,7 @@
 }
 
 .streamfield_app textarea {
-    position: absolute;
-    left: 10000px;
+    display: none;
 }
 
 .streamfield_app p {
