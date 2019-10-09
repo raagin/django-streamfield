@@ -60,7 +60,7 @@ class StreamObject:
     def __repr__(self):
         return "<%s: %s>" % (self.__class__.__name__, self or "None")
 
-    def _iterate_over_models(self, callback):
+    def _iterate_over_models(self, callback, tmpl_ctx=None):
         # iterate over models and apply callback function
         data = []
         for m in self.from_json():
@@ -87,13 +87,17 @@ class StreamObject:
                     as_list=as_list,
                     options=m['options']
                 )
+
+                # add tmpl_ctx if exists. tmpl_ctx: additional context from templates
+                if tmpl_ctx:
+                    ctx.update(tmpl_ctx)
                 res = callback(model_class, model_str, content, ctx)
                 data.append(res)
 
         return data
 
-    def _render(self):
-        data = self._iterate_over_models(_get_render_data)
+    def _render(self, tmpl_ctx=None):
+        data = self._iterate_over_models(_get_render_data, tmpl_ctx)
         return mark_safe("".join(data))
 
     @cached_property

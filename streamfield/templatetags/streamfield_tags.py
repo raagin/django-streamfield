@@ -38,8 +38,11 @@ def format_field(field):
         field=field
         )))
 
-
 def get_widget_name(field):
     return get_valid_filename(
                 camel_case_to_spaces(field.field.widget.__class__.__name__)
                 )
+
+@register.simple_tag
+def stream_render(stream_obj, **kwargs):
+    return stream_obj._render(kwargs)
