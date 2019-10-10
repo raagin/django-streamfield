@@ -35,7 +35,7 @@ Module also working with [Grappelli Interface](https://github.com/sehmaschine/dj
 
 ## Installation
 
-Requirements: `django>=3.*`
+Requirements: `django>=2.*`
 
 `pip install django-streamfield`
 
