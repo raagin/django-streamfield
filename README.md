@@ -29,10 +29,14 @@ Module also working with [Grappelli Interface](https://github.com/sehmaschine/dj
 - [Special cases](#special-cases)
   - [Complex Blocks](#complex-blocks)    
   - [Blocks without data in database. Only templates](#blocks-without-data-in-database-only-templates)
+  - [Add extra context to blocks](#add-extra-context-to-blocks)
   - [Cache for reduce the number of database requests](#cache-for-reduce-the-number-of-database-requests)
 - [Settings](#settings)
 
 ## Installation
+
+Requirements: `django>=3.*`
+
 `pip install django-streamfield`
 
 ## How to use
@@ -146,6 +150,16 @@ you can get content by field cached property page.stream.render
 ...
 <div class="content">
     {{ page.stream.render }}
+</div>
+...
+```
+
+Or, if you need extra context in blocks, you may use template tag:
+```html
+{% load streamfield_tags %}
+...
+<div class="content">
+  {% stream_render page.stream request=request %}
 </div>
 ...
 ```
@@ -267,6 +281,21 @@ class EmptyBlock(models.Model):
 ```
 and use `streamblocks/templates/streamblocks/emptyblock.html` for your content.
 > Note: Don't forget to register a block in STREAMBLOCKS_MODELS
+
+### Add extra context to blocks
+Supose, you need to add some data to blocks from global context.
+Instead of using render property in template `{{ page.stream.render }}`,
+you need to use template tag `stream_render` from `streamfield_tags` with keywords arguments.
+
+For example, if you have in page template `request` and `page` objects and want to use it in blocks:
+```html
+{% load streamfield_tags %}
+...
+<div class="content">
+  {% stream_render page.stream request=request page=page %}
+</div>
+...
+```
 
 ### Cache for reduce the number of database requests
 There is two ways of caching:
