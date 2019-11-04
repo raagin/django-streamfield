@@ -145,7 +145,7 @@ class Page(models.Model):
 ```
 
 Then if you have your 'page' in context, 
-you can get content by field cached property page.stream.render
+you can get content by field's cached property page.stream.render
 ```html
 ...
 <div class="content">
