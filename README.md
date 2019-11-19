@@ -42,11 +42,12 @@ Requirements: `django>=2.*`
 ## How to use
 
 **1. Create new app called `streamblocks`**
+Here will be your models that you will use as blocks
 
 **2. Put to `streamblocks/models.py` some models**
 
-...that you want to use in your stream field.
-And add this models in STREAMBLOCKS_MODELS list.
+...that you want to use as blocks in your stream field.
+Add this models in STREAMBLOCKS_MODELS list.
 For example:
 
 ```python
