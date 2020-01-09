@@ -322,6 +322,10 @@ If your app `streamblocks` located not in project root directory, you need to re
 STREAMFIELD_STREAMBLOCKS_APP_PATH = 'yourapps.streamblocks'
 ```
 
+### STREAMFIELD_SHOW_ADMIN_HELP_TEXT
+If you want to hide Help link in admin, above the "Add new block" link.
+Set `STREAMFIELD_SHOW_ADMIN_HELP_TEXT` to `False`
+
 ### STREAMFIELD_BLOCK_OPTIONS
 
 You may use `STREAMFIELD_BLOCK_OPTIONS` in settings.py to add some options to all blocks.
