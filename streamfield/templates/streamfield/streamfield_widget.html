@@ -71,7 +71,7 @@
                             ></span>
                         <a class="stream-btn" 
                         :id="'change_id_' + instance_unique_id(block, block.id)" 
-                        title="Изменить выбранный объект"
+                        title="{% trans "Change" %}"
                         :href="get_change_model_link(block, block.id)"
                         :data-block="block.unique_id"
                         :data-instance-id="block.id"
@@ -81,7 +81,7 @@
                     <template v-else>
                         <a class="stream-btn" 
                         :id="'add_id_' + block.unique_id"
-                        title="Добавить объект"
+                        title="{% trans "Add content" %}"
                         :href="get_add_model_link(block)"
                         @click.prevent="openPopup"
                         >+ {% trans "Add content" %}</a>
@@ -96,7 +96,15 @@
             </div>
             <div class="stream-block__options" v-if="model_info[block.model_name] && !_.isEmpty(model_info[block.model_name].options)">
                 <div class="stream-block__option" v-for="(option, key) in model_info[block.model_name].options">
-                    <span v-text="option.label"></span>: <input type="checkbox" v-model="block.options[key]">
+                    <template v-if="option.type == 'checkbox'">
+                        <span v-text="option.label"></span>: <input type="checkbox" v-model="block.options[key]">
+                    </template>
+                    <template v-else-if="option.type == 'select'">
+                        <span v-text="option.label"></span>: 
+                        <select :name="option.label" v-model="block.options[key]">
+                            <option v-for="opt in option.options" :value="opt.value" v-text="opt.name"></option>
+                        </select>
+                    </template>
                 </div>
             </div>
         </div>
