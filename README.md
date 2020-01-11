@@ -256,7 +256,7 @@ class Slide(models.Model):
             'default': False
         },
         'width': {
-            'label': 'Размер слайдера',
+            'label': 'Slider size',
             'type': 'select',
             'default': 'wide',
             'options': [
