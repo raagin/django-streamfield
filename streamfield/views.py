@@ -12,8 +12,10 @@ def admin_instance_class(model, base=DetailView):
 
     # will be removed in future. use above approach to override admin template.
     if hasattr(model, 'custom_admin_template'):
-        tmpl = model.custom_admin_template
-
+        tmpl_name = model.custom_admin_template
+    else:
+        tmpl_name = tmpl.template.name
+        
     def get_context_data(self, **kwargs):
         context = base.get_context_data(self, **kwargs)
         
@@ -25,7 +27,7 @@ def admin_instance_class(model, base=DetailView):
 
     attrs = dict(
         model = model,
-        template_name = tmpl.template.name,
+        template_name = tmpl_name,
         get_context_data = get_context_data
         )
 
