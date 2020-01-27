@@ -13,6 +13,11 @@ def admin_instance_class(model, base=DetailView):
     # will be removed in future. use above approach to override admin template.
     if hasattr(model, 'custom_admin_template'):
         tmpl_name = model.custom_admin_template
+        import warnings
+        warnings.warn(
+            "'custom_admin_template' will be removed in future. "
+            "Use override admin template approach instead", 
+            DeprecationWarning, stacklevel=2)
     else:
         tmpl_name = tmpl.template.name
         
