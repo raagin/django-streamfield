@@ -18,10 +18,10 @@ class StreamFieldWidget(Widget):
         for block in self.model_list:
             as_list = hasattr(block, "as_list") and block.as_list
 
-            options = BLOCK_OPTIONS
-            if hasattr(block, "options"):
+            options = block.options if hasattr(block, "options") else BLOCK_OPTIONS
+            if hasattr(block, "extra_options"):
                 options = deepcopy(options)
-                options.update(block.options)
+                options.update(block.extra_options)
 
             model_doc = block._meta.verbose_name_plural if as_list else block._meta.verbose_name
             model_list_info[block.__name__] = {

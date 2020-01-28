@@ -108,6 +108,15 @@ and will be a list of objects if there is.
 </ul>
 ```
 
+> Note: You may use also `block_template` option. For specify a block template file.
+
+```python
+class RichText(models.Model):
+    ...
+    block_template = "streamblocks/richtext.html"
+    ...
+```
+
 **4. Add apps to settings.py**
 
 Add to INSTALLED_APPS
@@ -198,6 +207,15 @@ As context use "form":
 ```html
 {{ form.text.value }}
 ```
+
+You may also specify custom template as option:
+```python
+class RichText(models.Model):
+    ...
+    custom_admin_template = "streamblocks/admin/richtext.html"
+    ...
+```
+
 ### Override how to render block's fields in admin
 Create custom template for field with name as lowercased field widget name, and put it inside `.../streamblocks/admin/fields/` folder.
 
@@ -274,6 +292,22 @@ In block template you can use this options as `options.autoplay`
 In page admin you will see it on the bottom of this block.
 > Note: Now only "checkbox" and "select" type is working.
 You may apply options for all blocks with `STREAMFIELD_BLOCK_OPTIONS` (See [Settings](#settings))
+
+If you want to add block options to options, which was set in django settings, you may use `extra_options`.
+```python
+class Slide(models.Model):
+    ...
+    extra_options = {
+        "autoplay": {
+            "label": "Autoplay",
+            "type": "checkbox",
+            "default": False
+        }
+    }
+    ...
+```
+
+If you want to switch off options, which set in django settings, for current block. Set `options={}`
 
 ## Special cases
 ### Complex Blocks

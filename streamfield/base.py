@@ -118,7 +118,11 @@ class StreamObject:
 
 
 def _get_render_data(model_class, model_str, content, ctx):
-    block_tmpl = 'streamblocks/%s.html' % model_str.lower()
+    if hasattr(model_class, 'block_template'):
+        block_tmpl = model_class.block_template
+    else:
+        block_tmpl = 'streamblocks/%s.html' % model_str.lower()
+    print(block_tmpl)
     try:
         t = loader.get_template(block_tmpl)
     except loader.TemplateDoesNotExist:
