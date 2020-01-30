@@ -43,6 +43,14 @@
     margin-left: 10px;
 }
 
+.streamfield_app .stream-block__option span {
+    margin: 0 0 0 5px
+}
+
+.streamfield_app .stream-block__option span + * {
+    margin: 0 0 0 3px;
+}
+
 /* Block content */
 .streamfield_app .stream-model-block .stream-model-block__content {
     padding: 20px;
@@ -147,6 +155,14 @@
 .streamfield_app .add-another {
     margin-left: 10px;
 }
+
+.streamfield_app .stream-model-block__content.abstract-block a img {
+    border: 3px solid #a6d1e0;
+}
+.streamfield_app .stream-model-block__content.abstract-block a:hover img {
+    border-color: #78adbf;   
+}
+
 
 /* add new block */
 .streamfield_app .stream-insert-new-block {

@@ -87,11 +87,11 @@
                         >+ {% trans "Add content" %}</a>
                     </template>
                 </div>
-            </div> <!-- /v-if="block.id" -->
+            </div> <!-- /v-if="isAbstract" -->
             <div v-else>
-                <div class="stream-model-block__content no-subblocks"
+                <div class="stream-model-block__content no-subblocks abstract-block"
                     :class="model_name_lower(block)">
-                    &nbsp;
+                    <span v-html="getAbstractBlockContent(block)"></span>
                 </div>
             </div>
             <div class="stream-block__options" v-if="model_info[block.model_name] && !_.isEmpty(model_info[block.model_name].options)">

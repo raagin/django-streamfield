@@ -15,11 +15,19 @@ admin_instance_urls = []
 
 for model in STREAMBLOCKS_MODELS:
     if not model._meta.abstract:
-        admin_instance_urls.append(path(
+        block_path = path(
                     'admin-instance/%s/<int:pk>' % model.__name__.lower(), 
                     views.admin_instance_class(model).as_view(),
                     name='admin-instance'
-                    ))
+                    )
+    else:
+        block_path = path(
+                    'abstract-block/%s/' % model.__name__.lower(), 
+                    views.abstract_block_class(model).as_view(),
+                    name='abstract-block'
+                    )
+        
+    admin_instance_urls.append(block_path)
 
 urlpatterns = [
     *admin_instance_urls

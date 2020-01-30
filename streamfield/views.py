@@ -30,3 +30,22 @@ def admin_instance_class(model, base=DetailView):
         )
 
     return type(str(model.__name__ + 'DetailView'), (base, ), attrs )
+
+
+def abstract_block_class(model, base=TemplateView):
+    
+    if hasattr(model, 'custom_admin_template'):
+        tmpl_name = model.custom_admin_template
+    else:
+        tmpl = loader.select_template([
+            'streamblocks/admin/%s.html' % model.__name__.lower(),
+            'streamfield/admin/abstract_block_template.html'
+        ])
+        tmpl_name = tmpl.template.name
+
+    attrs = dict(
+        model = model,
+        template_name = tmpl_name,
+        )
+
+    return type(str(model.__name__ + 'TemplateView'), (base, ), attrs )

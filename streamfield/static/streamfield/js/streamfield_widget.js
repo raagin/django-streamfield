@@ -80,6 +80,9 @@
                     instance_admin_render_url: function(block, instance_id) {
                         return '/streamfield/admin-instance/' + this.model_name_lower(block) + '/' + instance_id;
                     },
+                    abstract_block_render_url: function(block) {
+                        return '/streamfield/abstract-block/' + this.model_name_lower(block) + '/';
+                    },
                     get_change_model_link: function(block, instance_id){
                         return this.block_admin_url(block) + instance_id + 
                                 '/change/?_popup=1&block_id=' + block.unique_id + 
@@ -94,9 +97,18 @@
                     getBlockContent: function(block, item_id) {
                         return this.blocks[this.instance_unique_id(block, item_id)];
                     },
+                    getAbstractBlockContent: function(block) {
+                        return this.blocks[block.model_name];
+                    },
                     updateAbstractBlock(block_unique_id) {
                         var block = _.find(this.stream, ['unique_id', block_unique_id]);
-                        this.$set(this.blocks, block.model_name, "");
+
+                        // change block content
+                        ax.get(this.abstract_block_render_url(block)).then(function (response) {
+                            app.$set(app.blocks, block.model_name, response.data);
+                        });
+                        
+                        // this.$set(this.blocks, block.model_name, "");
                     },
                     updateBlock: function(block_unique_id, instance_id) {
                         var block = _.find(this.stream, ['unique_id', block_unique_id]);
