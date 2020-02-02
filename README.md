@@ -79,7 +79,26 @@ STREAMBLOCKS_MODELS = [
 ]
 ```
 
-**3. Create templates for each models above, named as lowercase names of the models:**
+**3. Add apps to settings.py**
+
+Add to INSTALLED_APPS
+
+```python
+INSTALLED_APPS = [
+    ...
+    'streamblocks',
+    'streamfield',
+    ...
+```
+
+**4. Add streamfield.urls to main urls.py**
+```python
+urlpatterns += [
+    path('streamfield/', include('streamfield.urls'))
+]
+```
+
+**5. Create templates for each models above, named as lowercase names of the models:**
 
 1. streamblocks/templates/streamblocks/richtext.html
 2. streamblocks/templates/streamblocks/imagewithtext.html
@@ -116,25 +135,14 @@ class RichText(models.Model):
     block_template = "streamblocks/richtext.html"
     ...
 ```
+> Note: If you need unique string in block template, use `block_model` and `block_unique_id`
 
-**4. Add apps to settings.py**
-
-Add to INSTALLED_APPS
-
-```python
-INSTALLED_APPS = [
-    ...
-    'streamblocks',
-    'streamfield',
-    ...
-```
-
-**5. Add streamfield.urls to main urls.py**
-```python
-urlpatterns += [
-    path('streamfield/', include('streamfield.urls'))
-]
-```
+**Full list of variables in template context:**
+- `block_model` (lowercase if modelname - "richtext")
+- `block_unique_id` (unique string)
+- `block_content` (block data from db
+- `as_list` 
+- `options` ([block options](#block-options))
 
 **6. Add StreamField to your model in your application**
 
