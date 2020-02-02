@@ -79,10 +79,11 @@ class StreamObject:
                         # set id as key and reorder queryset same as ids order
                         unordered_items_dict = {i.id: i for i in unordered_items}
                         content = [unordered_items_dict[i] for i in m['id']]
-                    else:
+                    elif m['id'] != -1:
                         content = model_class.objects.get(pk=m['id'])
                 
                 ctx = dict(
+                    block_unique_id="{model_name}-{unique_id}".format(**m),
                     block_content=content, 
                     as_list=as_list,
                     options=m['options']
