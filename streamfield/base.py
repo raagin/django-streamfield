@@ -83,7 +83,8 @@ class StreamObject:
                         content = model_class.objects.get(pk=m['id'])
                 
                 ctx = dict(
-                    block_unique_id="{model_name}-{unique_id}".format(**m),
+                    block_model=model_str.lower(),
+                    block_unique_id=m['unique_id'],
                     block_content=content, 
                     as_list=as_list,
                     options=m['options']
