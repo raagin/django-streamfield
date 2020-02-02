@@ -138,7 +138,7 @@ class RichText(models.Model):
 > Note: If you need unique string in block template, use `block_model` and `block_unique_id`
 
 **Full list of variables in template context:**
-- `block_model` (lowercase if modelname - "richtext")
+- `block_model` (lowercase of modelname - "richtext")
 - `block_unique_id` (unique string)
 - `block_content` (block data from db
 - `as_list` 
