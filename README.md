@@ -140,8 +140,8 @@ class RichText(models.Model):
 **Full list of variables in template context:**
 - `block_model` (lowercase of modelname - "richtext")
 - `block_unique_id` (unique string)
-- `block_content` (block data from db
-- `as_list` 
+- `block_content` (block data from db)
+- `as_list` (boolean)
 - `options` ([block options](#block-options))
 
 **6. Add StreamField to your model in your application**

@@ -1,2 +1,2 @@
 Django==2.2.9
-django-grappelli==2.13.1
+django-grappelli==2.13.3
