@@ -31,5 +31,10 @@ for model in STREAMBLOCKS_MODELS:
     admin_instance_urls.append(block_path)
 
 urlpatterns = [
+    path(
+        'admin-instance/<model_name>/<int:pk>/delete/', 
+        login_required(views.delete_instance), 
+        name='admin-instance-delete'
+    ),
     *admin_instance_urls
 ]

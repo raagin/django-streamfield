@@ -1,4 +1,4 @@
-(function(w){
+(function(w, $){
     function onReady() {
         var csrftoken = Cookies.get('csrftoken');
         var streamfield_app = document.querySelectorAll('.streamfield_app');
@@ -17,13 +17,15 @@
             var text_area = app_node.querySelector('textarea');
             var initial_data = text_area.innerHTML;
             var model_list_info = text_area.getAttribute('model_list_info');
+            var delete_blocks_from_db = Boolean(text_area.hasAttribute('delete_blocks_from_db'));
 
             var data = {
                 stream: JSON.parse(initial_data), // [{model_name: ..., id: ...}, ...]
                 model_info: JSON.parse(model_list_info), // {'model_name': model.__doc__}
                 blocks: {}, // save content of all instances
                 show_help: false,
-                show_add_block: false
+                show_add_block: false,
+                will_removed: [] // blocks that will be removed from db
             }
 
             var app = new Vue({
@@ -47,6 +49,39 @@
                         } else {
                             this.updateAbstractBlock(block.unique_id);
                         }
+                    }
+                    
+                    // delete removed instances from db when form submit
+                    if ( delete_blocks_from_db ) {
+                        $('input[type="submit"]', text_area.closest('form')).on('click', function(e){
+                            if ( !app.will_removed.length ) return;
+                            
+                            e.preventDefault();
+                            
+                            var all_requests = [];
+
+                            for (var i = app.will_removed.length - 1; i >= 0; i--) {
+                                if ( !app.will_removed[i].id != -1 ) {
+
+                                    // for array
+                                    if ( app.isArray(app.will_removed[i].id) ) {
+                                        var ids = app.will_removed[i].id;
+                                        for (var j = ids.length - 1; j >= 0; j--) {
+                                            all_requests.push(app.deleteAction(app.will_removed[i], ids[j], i));
+                                        }
+                                    // for one
+                                    } else {
+                                        all_requests.push(app.deleteAction(app.will_removed[i], app.will_removed[i].id, i));
+                                    }
+                                }
+                            }
+
+                            Promise.all(all_requests).then(function(){
+                                app.will_removed = [];
+                                $(e.target).trigger('click');
+                            });
+
+                        }); // EventListener
                     }
 
                 },
@@ -107,8 +142,7 @@
                         ax.get(this.abstract_block_render_url(block)).then(function (response) {
                             app.$set(app.blocks, block.model_name, response.data);
                         });
-                        
-                        // this.$set(this.blocks, block.model_name, "");
+        
                     },
                     updateBlock: function(block_unique_id, instance_id) {
                         var block = _.find(this.stream, ['unique_id', block_unique_id]);
@@ -136,6 +170,11 @@
                         if (confirm('"' + this.model_title(block) + '" - ' + stream_texts['deleteBlock'])) {
                             if (index != -1) {
                                 this.stream.splice(index, 1);
+
+                                // prepare to remove from db
+                                if ( !this.isAbstract(block)) {
+                                    this.will_removed.push(block);
+                                }
                             }    
                         }
                         
@@ -147,10 +186,20 @@
                             if (block_index != -1) {
                                 // remove from block id
                                 block.id.splice(block.id.indexOf(parseInt(instance_id)), 1);
-                                //remove from blocks
-                                delete this.blocks[app.instance_unique_id(block, instance_id)];
+
+                                // prepare to remove from db
+                                this.will_removed.push({
+                                    model_name: block.model_name,
+                                    id: instance_id
+                                });
+                                
                             }    
                         }
+                    },
+                    deleteAction: function(block, id, idx) {
+                        return ax.delete('/streamfield/admin-instance/' + 
+                                            app.model_name_lower(block) + 
+                                            '/' + id + '/delete/')
                     },
                     addNewBlock: function(block, model_name) {
                         var options = {};
@@ -209,4 +258,4 @@
         onReady();
     });
 
-})(window);
+})(window, django.jQuery);

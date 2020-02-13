@@ -5,7 +5,7 @@ from django.forms.widgets import Widget
 from django.contrib.admin.options import FORMFIELD_FOR_DBFIELD_DEFAULTS
 from django.conf import settings
 from .base import StreamObject
-from .settings import BLOCK_OPTIONS, SHOW_ADMIN_HELP_TEXT
+from .settings import BLOCK_OPTIONS, SHOW_ADMIN_HELP_TEXT, DELETE_BLOCKS_FROM_DB
 
 
 class StreamFieldWidget(Widget):
@@ -33,6 +33,7 @@ class StreamFieldWidget(Widget):
         
         attrs["model_list_info"] = json.dumps(model_list_info)
         attrs['show_admin_help_text'] = SHOW_ADMIN_HELP_TEXT
+        attrs['delete_blocks_from_db'] = DELETE_BLOCKS_FROM_DB
         super().__init__(attrs)
 
     def format_value(self, value):

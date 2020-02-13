@@ -374,8 +374,18 @@ STREAMFIELD_STREAMBLOCKS_APP_PATH = 'yourapps.streamblocks'
 ```
 
 ### STREAMFIELD_SHOW_ADMIN_HELP_TEXT
-If you want to hide Help link in admin, above the "Add new block" link.
-Set `STREAMFIELD_SHOW_ADMIN_HELP_TEXT` to `False`
+If you want to hide "Help" link in admin, above the "Add new block" link.
+Set: 
+```python
+STREAMFIELD_SHOW_ADMIN_HELP_TEXT = False
+```
+
+### STREAMFIELD_DELETE_BLOCKS_FROM_DB
+If you want to keep streamblock's instances in db, when you removing it from StreamField. Set: 
+```python
+STREAMFIELD_DELETE_BLOCKS_FROM_DB = False
+```
+It was default behavior in previous releases.
 
 ### STREAMFIELD_BLOCK_OPTIONS
 
