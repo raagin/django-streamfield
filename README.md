@@ -373,6 +373,12 @@ If your app `streamblocks` located not in project root directory, you need to re
 STREAMFIELD_STREAMBLOCKS_APP_PATH = 'yourapps.streamblocks'
 ```
 
+### STREAMFIELD_BASE_ADMIN_URL
+If you change default admin site url ('/admin/'), reflect that in settings:
+```python
+STREAMFIELD_BASE_ADMIN_URL = '/myadmin/'
+```
+
 ### STREAMFIELD_SHOW_ADMIN_HELP_TEXT
 If you want to hide "Help" link in admin, above the "Add new block" link.
 Set: 

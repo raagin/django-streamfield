@@ -18,6 +18,7 @@
             var initial_data = text_area.innerHTML;
             var model_list_info = text_area.getAttribute('model_list_info');
             var delete_blocks_from_db = Boolean(text_area.hasAttribute('delete_blocks_from_db'));
+            var base_admin_url = text_area.getAttribute('base_admin_url');
 
             var data = {
                 stream: JSON.parse(initial_data), // [{model_name: ..., id: ...}, ...]
@@ -110,7 +111,7 @@
                         return Math.random().toString(36).substring(7);
                     },
                     block_admin_url: function(block) {
-                        return '/admin/streamblocks/' + this.model_name_lower(block) + '/';
+                        return base_admin_url + 'streamblocks/' + this.model_name_lower(block) + '/';
                     },
                     instance_admin_render_url: function(block, instance_id) {
                         return '/streamfield/admin-instance/' + this.model_name_lower(block) + '/' + instance_id;
