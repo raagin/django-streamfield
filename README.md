@@ -391,7 +391,8 @@ If you want to keep streamblock's instances in db, when you removing it from Str
 ```python
 STREAMFIELD_DELETE_BLOCKS_FROM_DB = False
 ```
-It was default behavior in previous releases.
+It was default behavior in previous releases. 
+> Note: If you delete entire object which contain StreamField, streamblock's instances will not be deleted. You should care about it by yourself.
 
 ### STREAMFIELD_BLOCK_OPTIONS
 
