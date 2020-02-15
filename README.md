@@ -70,7 +70,8 @@ class ImageWithText(models.Model):
     as_list = True
 
     class Meta:
-        verbose_name="Images with text"
+        verbose_name="Image with text"
+        verbose_name_plural="Images with text"
 
 # Register blocks for StreamField as list of models
 STREAMBLOCKS_MODELS = [
