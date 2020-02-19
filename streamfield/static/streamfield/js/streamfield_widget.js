@@ -62,7 +62,7 @@
                             var all_requests = [];
 
                             for (var i = app.will_removed.length - 1; i >= 0; i--) {
-                                if ( !app.will_removed[i].id != -1 ) {
+                                if ( app.will_removed[i].id != -1 ) {
 
                                     // for array
                                     if ( app.isArray(app.will_removed[i].id) ) {
