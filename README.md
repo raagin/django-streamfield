@@ -6,7 +6,7 @@ This is a simple realisation of StreamField's idea of Wagtail CMS for plain Djan
 You can build your page with different kind of blocks. 
 Sort them and sort the lists inside the blocks.
 
-For editing content inside the blocks, it use native popup mechanism in Django admin interface.
+The blocks here are regular instances of Django models. For editing content inside the blocks, it use native popup mechanism in Django admin interface.
 This allow you to use other field's widgets inside the blocks as is.
 For example, if you want to use in your blocks FileBrowseField
 from django-filebrowser, it will perfectly working 
