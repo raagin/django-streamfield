@@ -1,2 +1,2 @@
-Django==2.2.10
+Django==3.0.3
 django-grappelli==2.13.3
