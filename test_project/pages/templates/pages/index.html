@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Index</title>
+    <style type="text/css">
+        
+    </style>
+</head>
+<body>
+<h1>Index</h1>
+<div class="content">
+    <ul>
+    {% for page in pages %}
+    <li><a href="{{ page.get_absolute_url }}">{{ page.title }}</a></li>
+    {% endfor %}
+    </ul>
+</div>
+</body>
+</html>

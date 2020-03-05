@@ -1,4 +1,5 @@
 <!--richtext.html-->
 <div class="rich-text-block">
-    {{ block_content.text|safe }}
+    <small>block_unique_id: {{ block_unique_id }}, block_model: {{ block_model }}</small>
+    <div>{{ block_content.text|safe }}</div>
 </div>

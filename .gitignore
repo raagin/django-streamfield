@@ -4,3 +4,5 @@ dist/*
 build/*
 django_streamfield.egg-info/*
 test_project/db.sqlite3
+package-lock.json
+node_modules/*

@@ -22,5 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('streamfield/', include('streamfield.urls')),
 
+    path('', views.index, name="index"),
     path('<int:pk>/', views.PageView.as_view(), name="page")
 ]

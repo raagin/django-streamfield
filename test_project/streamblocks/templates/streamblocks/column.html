@@ -1,7 +1,10 @@
-<ul class="columns">
-    {% for block in block_content %}
-    <li>
-        <p>{{ block.text }}</p>
-    </li>
-    {% endfor %}
-</ul>
+<div class="columns-block">
+    <small>block_unique_id: {{ block_unique_id }}, block_model: {{ block_model }}</small>
+    <ul class="columns">
+        {% for block in block_content %}
+        <li>
+            <p>{{ block.text }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
