@@ -3,7 +3,10 @@
     <ul class="columns">
         {% for block in block_content %}
         <li>
-            <p>{{ block.text }}</p>
+            <p>
+                <small>{{ block.id }}</small><br>
+                {{ block.text }}
+            </p>
         </li>
         {% endfor %}
     </ul>
