@@ -145,6 +145,8 @@ class RichText(models.Model):
 - `as_list` (boolean)
 - `options` ([block options](#block-options))
 
+> Note: For unique idetifier inside the lists you may use a combination of `block_unique_id` and `block.id` of subblock.
+
 **6. Add StreamField to your model in your application**
 
 And add the models that you want to use in this stream as model_list
