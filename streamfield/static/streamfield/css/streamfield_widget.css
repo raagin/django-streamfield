@@ -56,6 +56,13 @@
     padding: 20px;
     background: #f5f5f5;
 }
+.streamfield_app .stream-model-block__content .model-field-content:after {
+    content: "."; 
+    display: block; 
+    height: 0; 
+    clear: both; 
+    visibility: hidden;
+}
 
 .streamfield_app .block-fields__label {
     font-style: italic;
