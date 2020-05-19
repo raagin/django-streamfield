@@ -228,8 +228,7 @@
                     },
                     openPopup: function(e){
                         var triggeringLink = e.target;
-                        var name = triggeringLink.id.replace(/^(change|add|delete)_/, '');
-                        name = id_to_windowname(name);
+                        var name = id_to_windowname(triggeringLink.id.replace(/^(change|add|delete)_/, ''));
                         var href = triggeringLink.href;
                         var win = w.open(href, name, 'height=500,width=1000,resizable=yes,scrollbars=yes');
                         win.focus();
