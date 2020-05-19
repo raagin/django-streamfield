@@ -1,4 +1,10 @@
 (function(w, $){
+    function id_to_windowname(text) {
+        text = text.replace(/\./g, '__dot__');
+        text = text.replace(/\-/g, '__dash__');
+        return text;
+    }
+
     function onReady() {
         var csrftoken = Cookies.get('csrftoken');
         var streamfield_app = document.querySelectorAll('.streamfield_app');
@@ -221,17 +227,13 @@
                         this.show_add_block = false;
                     },
                     openPopup: function(e){
-                        
-                        function showAdminPopup(triggeringLink, name_regexp) {
-                            var name = triggeringLink.id.replace(name_regexp, '');
-                            name = id_to_windowname(name);
-                            var href = triggeringLink.href;
-                            var win = w.open(href, name, 'height=500,width=1000,resizable=yes,scrollbars=yes');
-                            win.focus();
-                            return false;
-                        }
-                        showAdminPopup(e.target, /^(change|add|delete)_/);
-
+                        var triggeringLink = e.target;
+                        var name = triggeringLink.id.replace(/^(change|add|delete)_/, '');
+                        name = id_to_windowname(name);
+                        var href = triggeringLink.href;
+                        var win = w.open(href, name, 'height=500,width=1000,resizable=yes,scrollbars=yes');
+                        win.focus();
+                        return false;
                     }
                 },
                 computed: {
