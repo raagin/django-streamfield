@@ -379,6 +379,7 @@ stream_list = page.stream.as_list()
 ```
 
 ```html
+<!-- template.html -->
 {{ page.stream.as_list }}
 ```
 
