@@ -30,6 +30,7 @@ Module also working with [Grappelli Interface](https://github.com/sehmaschine/dj
   - [Complex Blocks](#complex-blocks)    
   - [Blocks without data in database. Only templates](#blocks-without-data-in-database-only-templates)
   - [Add extra context to blocks](#add-extra-context-to-blocks)
+  - [Get field data as list](#get-field-data-as-list)
   - [Cache for reduce the number of database requests](#cache-for-reduce-the-number-of-database-requests)
 - [Settings](#settings)
 
@@ -354,6 +355,30 @@ For example, if you have in page template `request` and `page` objects and want 
 </div>
 ...
 ```
+
+### Get field data as list
+If you have special cases, you can get data as list. \
+For example if your `Page` model have `stream` field and in view you have `page`
+```python
+# views.py
+stream_list = page.stream.as_list()
+# You will get list of dictionaries 
+# print(stream_list)
+[{
+    'data': {
+        'block_model': '.....', 
+        'block_unique_id': '....', 
+        'block_content': [], 
+        'as_list': True, 
+        'options': {}
+    }, 
+    'template': '....'
+    },
+    #...
+]
+```
+
+
 
 ### Cache for reduce the number of database requests
 There is two ways of caching:
