@@ -358,7 +358,7 @@ For example, if you have in page template `request` and `page` objects and want 
 
 ### Get field data as list
 If you have special cases, you can get data as list. \
-For example if your `Page` model have `stream` field and in view you have `page`
+
 ```python
 # views.py
 stream_list = page.stream.as_list()
@@ -376,6 +376,10 @@ stream_list = page.stream.as_list()
     },
     #...
 ]
+```
+
+```html
+{{ page.stream.as_list }}
 ```
 
 
