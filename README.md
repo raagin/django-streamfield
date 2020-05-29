@@ -252,6 +252,7 @@ from streamfield.fields import StreamFieldWidget
 from streamblocks.models import RichText
 from .models import Page
 
+@admin.register(Page)
 class PageAdmin(models.Admin):
 
     def get_form(self, request, obj=None, **kwargs):

@@ -106,6 +106,9 @@ class StreamObject:
     def render(self):
         return self._render()
 
+    def as_list(self):
+        return self._iterate_over_models(_get_data_list)
+
     # only for complex blocks
     def render_admin(self):
         data = self._iterate_over_models(_get_render_admin_data)
@@ -118,12 +121,15 @@ class StreamObject:
     def to_json(self):
         return json.dumps(self.value)
 
+def _get_block_tmpl(model_class, model_str):
+    if hasattr(model_class, 'block_template'):
+        return model_class.block_template
+    else:
+        return 'streamblocks/%s.html' % model_str.lower()
+
 
 def _get_render_data(model_class, model_str, content, ctx):
-    if hasattr(model_class, 'block_template'):
-        block_tmpl = model_class.block_template
-    else:
-        block_tmpl = 'streamblocks/%s.html' % model_str.lower()
+    block_tmpl = _get_block_tmpl(model_class, model_str)
     try:
         t = loader.get_template(block_tmpl)
     except loader.TemplateDoesNotExist:
@@ -149,6 +155,13 @@ def _get_render_admin_data(model_class, model_str, content, ctx):
                     }),
             ) for obj in objs)
         )
+
+def _get_data_list(model_class, model_str, content, ctx):
+    return {
+        'data': ctx,
+        'template': _get_block_tmpl(model_class, model_str)
+        }
+
 
 
     
