@@ -357,7 +357,7 @@ For example, if you have in page template `request` and `page` objects and want 
 ```
 
 ### Get field data as list
-If you have special cases, you can get data as list. \
+If you have special case, you can get data as list.
 
 ```python
 # views.py
@@ -368,13 +368,13 @@ stream_list = page.stream.as_list()
     'data': {
         'block_model': '.....', 
         'block_unique_id': '....', 
-        'block_content': [], 
+        'block_content': [...], 
         'as_list': True, 
         'options': {}
     }, 
     'template': '....'
     },
-    #...
+    ...
 ]
 ```
 
