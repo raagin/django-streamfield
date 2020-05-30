@@ -380,7 +380,9 @@ stream_list = page.stream.as_list()
 
 ```html
 <!-- template.html -->
-{{ page.stream.as_list }}
+{% for b in page.stream.as_list %}
+    {% include b.template with block_content=b.data.block_content %}
+{% endfor %}
 ```
 
 
