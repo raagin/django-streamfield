@@ -185,6 +185,7 @@ Or, if you need extra context in blocks, you may use template tag:
 </div>
 ...
 ```
+Third way it's to use list. [See bellow](#get-field-data-as-list)
 
 
 ## Admin
@@ -215,10 +216,21 @@ For example for RichText block it will be:
 
 `streamblocks/templates/streamblocks/admin/richtext.html`
 
-As context use "form":
+As context use "form" and/or "object":
 ```html
 {{ form.text.value }}
+{{ object }}
 ```
+
+The default admin template is: `streamfield/admin/change_form_render_template.html`  
+You can extend it.
+{% extends "streamfield/admin/change_form_render_template.html" %}
+{% block streamblock_form %}
+{{ block.super }}
+Original object is: {{ object }}
+{% endblock streamblock_form %}
+
+
 
 You may also specify custom template as option:
 ```python

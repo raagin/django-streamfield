@@ -1,4 +1,5 @@
 {% load streamfield_tags %}
+{% block streamblock_form %}
 <div class="block-fields">
     {% for f in form %}
         {% if f.value %}
@@ -9,3 +10,4 @@
         {% endif %}
     {% endfor %}
 </div>
+{% endblock streamblock_form %}
