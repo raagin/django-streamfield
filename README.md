@@ -187,7 +187,7 @@ Or, if you need extra context in blocks, you may use template tag:
 ```
 Third way it's to use list. [See bellow](#get-field-data-as-list)
 
-** You can set size of popup window **  
+**You can set size of popup window**  
 Add `popup_size` attribute to StreamField
 ```python
     ...
