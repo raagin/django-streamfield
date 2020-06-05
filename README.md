@@ -234,13 +234,14 @@ As context use "form" and/or "object":
 ```
 
 The default admin template is: `streamfield/admin/change_form_render_template.html`  
-You can extend it.
+You can extend it
+```html
 {% extends "streamfield/admin/change_form_render_template.html" %}
 {% block streamblock_form %}
 {{ block.super }}
 Original object is: {{ object }}
 {% endblock streamblock_form %}
-
+```
 
 
 You may also specify custom template as option:
