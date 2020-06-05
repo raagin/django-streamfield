@@ -187,6 +187,17 @@ Or, if you need extra context in blocks, you may use template tag:
 ```
 Third way it's to use list. [See bellow](#get-field-data-as-list)
 
+** You can set size of popup window **  
+Add `popup_size` attribute to StreamField
+```python
+    ...
+    stream = StreamField(
+        model_list=[...],
+        popup_size=(1000, 500) # default value. Width: 1000px, Height: 500px
+        )
+    ...
+```
+
 
 ## Admin
 ### Custom admin class for block's models

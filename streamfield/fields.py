@@ -22,7 +22,7 @@ class StreamFieldWidget(Widget):
         model_list_info = {}
         for block in self.model_list:
             as_list = hasattr(block, "as_list") and block.as_list
-
+        
             options = block.options if hasattr(block, "options") else BLOCK_OPTIONS
             if hasattr(block, "extra_options"):
                 options = deepcopy(options)
@@ -66,6 +66,7 @@ class StreamField(models.TextField):
 
     def __init__(self, *args, **kwargs):
         self.model_list = kwargs.pop('model_list', [])
+        self.popup_size = kwargs.pop('popup_size', (1000, 500))
         kwargs['blank'] = True
         kwargs['default'] = "[]"
         super().__init__(*args, **kwargs)
@@ -86,6 +87,7 @@ class StreamField(models.TextField):
         widget_class = kwargs.get('widget', StreamFieldWidget)
         attrs = {}
         attrs["model_list"] = self.model_list
+        attrs["data-popup_size"] = list(self.popup_size)
         defaults = {
             'widget': widget_class(attrs=attrs),
         }

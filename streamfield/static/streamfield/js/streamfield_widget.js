@@ -25,6 +25,7 @@
             var model_list_info = text_area.getAttribute('model_list_info');
             var delete_blocks_from_db = Boolean(text_area.hasAttribute('delete_blocks_from_db'));
             var base_admin_url = text_area.getAttribute('base_admin_url');
+            var popup_size = JSON.parse(text_area.dataset.popup_size);
 
             var data = {
                 stream: JSON.parse(initial_data), // [{model_name: ..., id: ...}, ...]
@@ -39,7 +40,6 @@
                 el: app_node,
                 data: data,
                 beforeMount: function() {
-
                     // update stream objects list
                     // and store all blocks
                     for (var i = data.stream.length - 1; i >= 0; i--) {
@@ -230,7 +230,7 @@
                         var triggeringLink = e.target;
                         var name = id_to_windowname(triggeringLink.id.replace(/^(change|add|delete)_/, ''));
                         var href = triggeringLink.href;
-                        var win = w.open(href, name, 'height=500,width=1000,resizable=yes,scrollbars=yes');
+                        var win = w.open(href, name, 'height=' + popup_size[1] + ',width=' + popup_size[0] + ',resizable=yes,scrollbars=yes');
                         win.focus();
                         return false;
                     }
