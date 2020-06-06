@@ -81,6 +81,9 @@ STREAMBLOCKS_MODELS = [
 ]
 ```
 
+> Important!: Don't use 'as_list', 'options', 'extra_ptions' as models field names
+
+
 **3. Add apps to settings.py**
 
 Add to INSTALLED_APPS
