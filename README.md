@@ -47,8 +47,8 @@ Here will be your models that you will use as blocks
 
 **2. Put to `streamblocks/models.py` some models**
 
-...that you want to use as blocks in your stream field.
-Add this models in STREAMBLOCKS_MODELS list.
+...that you want to use as blocks in your stream field.  
+Add them to the list `STREAMBLOCKS_MODELS`.
 For example:
 
 ```python
@@ -81,7 +81,7 @@ STREAMBLOCKS_MODELS = [
 ]
 ```
 
-> Important!: Don't use 'as_list', 'options', 'extra_options' as models field names
+> Important!: Don't use 'as_list', 'options', 'extra_options' as models field names, because they are used by streamfield.
 
 
 **3. Add apps to settings.py**
