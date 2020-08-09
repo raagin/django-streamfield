@@ -41,13 +41,16 @@ Requirements: `django>=2.*`
 `pip install django-streamfield`
 
 ## How to use
+- Create streamblocks app with your models
+- Add streamfield and streamblocks to INSTALLED_APPS
+- Add streamfield.urls
+- Create templates for streamblocks
+- Add StreamField to your model
+- Use it in templates
 
-**1. Create new app called `streamblocks`**
-Here will be your models that you will use as blocks
+**1. Create new app called `streamblocks` and put there some models**
 
-**2. Put to `streamblocks/models.py` some models**
-
-...that you want to use as blocks in your stream field.  
+...that you want to use as blocks in your StreamField.  
 Add them to the list `STREAMBLOCKS_MODELS`.
 For example:
 
@@ -84,7 +87,7 @@ STREAMBLOCKS_MODELS = [
 > Important!: Don't use 'as_list', 'options', 'extra_options' as models field names, because they are used by streamfield.
 
 
-**3. Add apps to settings.py**
+**2. Add apps to settings.py**
 
 Add to INSTALLED_APPS
 
@@ -96,14 +99,14 @@ INSTALLED_APPS = [
     ...
 ```
 
-**4. Add streamfield.urls to main urls.py**
+**3. Add streamfield.urls to main urls.py**
 ```python
 urlpatterns += [
     path('streamfield/', include('streamfield.urls'))
 ]
 ```
 
-**5. Create templates for each models above, named as lowercase names of the models:**
+**4. Create templates for each models above, named as lowercase names of the models:**
 
 1. streamblocks/templates/streamblocks/richtext.html
 2. streamblocks/templates/streamblocks/imagewithtext.html
@@ -142,7 +145,7 @@ class RichText(models.Model):
 ```
 > Note: If you need unique string in block template, use `block_model` and `block_unique_id`
 
-**Full list of variables in template context:**
+*Full list of variables in template context:*  
 - `block_model` (lowercase of modelname - "richtext")
 - `block_unique_id` (unique string)
 - `block_content` (block data from db)
@@ -151,7 +154,7 @@ class RichText(models.Model):
 
 > Note: For unique idetifier inside the lists you may use a combination of `block_unique_id` and `block.id` of subblock.
 
-**6. Add StreamField to your model in your application**
+**5. Add StreamField to your model in your application**
 
 And add the models that you want to use in this stream as model_list
 ```python
@@ -169,7 +172,19 @@ class Page(models.Model):
         )
 ```
 
-Then if you have your 'page' in context, 
+*You can set size of popup window*  
+Add `popup_size` attribute to StreamField
+```python
+    ...
+    stream = StreamField(
+        model_list=[...],
+        popup_size=(1000, 500) # default value. Width: 1000px, Height: 500px
+        )
+    ...
+```
+
+**6. Use it in template**
+If you have your `page` in context, 
 you can get content by field's cached property page.stream.render
 ```html
 ...
@@ -189,17 +204,6 @@ Or, if you need extra context in blocks, you may use template tag:
 ...
 ```
 Third way it's to use list. [See bellow](#get-field-data-as-list)
-
-**You can set size of popup window**  
-Add `popup_size` attribute to StreamField
-```python
-    ...
-    stream = StreamField(
-        model_list=[...],
-        popup_size=(1000, 500) # default value. Width: 1000px, Height: 500px
-        )
-    ...
-```
 
 
 ## Admin
