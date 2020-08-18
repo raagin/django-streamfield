@@ -106,7 +106,7 @@ urlpatterns += [
 ]
 ```
 
-**4. Create templates for each models above, named as lowercase names of the models:**
+**4. Create templates for each block model, named as lowercase names of the models:**
 
 1. streamblocks/templates/streamblocks/richtext.html
 2. streamblocks/templates/streamblocks/imagewithtext.html
