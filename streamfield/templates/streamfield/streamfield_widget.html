@@ -56,7 +56,7 @@
                     </draggable>
                     <a class="stream-btn" 
                         :id="'add_id_' + block.unique_id"
-                        title="Добавить объект"
+                        title="{% trans "Add one more" %}"
                         :href="get_add_model_link(block)"
                         @click.prevent="openPopup"
                         >+ {% trans "Add one more" %}</a>
