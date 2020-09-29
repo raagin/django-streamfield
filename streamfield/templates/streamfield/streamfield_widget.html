@@ -96,8 +96,8 @@
             </div>
             <div class="stream-block__options" v-if="model_info[block.model_name] && !_.isEmpty(model_info[block.model_name].options)">
                 <div class="stream-block__option" v-for="(option, key) in model_info[block.model_name].options">
-                    <template v-if="option.type == 'checkbox'">
-                        <span v-text="option.label"></span>: <input type="checkbox" v-model="block.options[key]">
+                    <template v-if="option.type == 'checkbox' || option.type == 'text'">
+                        <span v-text="option.label"></span>: <input :type="option.type" v-model="block.options[key]">
                     </template>
                     <template v-else-if="option.type == 'select'">
                         <span v-text="option.label"></span>: 
