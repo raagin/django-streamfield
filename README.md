@@ -327,6 +327,11 @@ class Slide(models.Model):
                 {'value': 'wide', 'name': 'Wide slider'},
                 {'value': 'narrow', 'name': 'Narrow slider'},
             ]
+        },
+        'class_name': {
+          'label': 'Class Name',
+          'type': 'text',
+          'default': ''
         }
     }
 
@@ -336,7 +341,7 @@ class Slide(models.Model):
 ```
 In block template you can use this options as `options.autoplay`
 In page admin you will see it on the bottom of this block.
-> Note: Now only "checkbox" and "select" type is working.
+> Note: Now only "checkbox", "text" and "select" type is working.
 You may apply options for all blocks with `STREAMFIELD_BLOCK_OPTIONS` (See [Settings](#settings))
 
 If you want to add block options to options, which was set in django settings, you may use `extra_options`.
@@ -473,5 +478,5 @@ STREAMFIELD_BLOCK_OPTIONS = {
 ```
 In block template use `{{ options.margins }}`
 
-> Note: Now only "checkbox" and "select" type is working.
+> Note: Now only "checkbox", "text",  and "select" type is working.
 
