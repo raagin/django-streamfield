@@ -83,11 +83,9 @@ STREAMBLOCKS_MODELS = [
     ImageWithText
 ]
 ```
-
 > Important!: Don't use 'as_list', 'options', 'extra_options' as models field names, because they are used by streamfield.
 
-
-**2. Add apps to settings.py**
+**2. Add apps to settings.py and make migrations**
 
 Add to INSTALLED_APPS
 
@@ -98,6 +96,7 @@ INSTALLED_APPS = [
     'streamfield',
     ...
 ```
+Run `python manage.py makemigrations` and `python manage.py migrate`
 
 **3. Add streamfield.urls to main urls.py**
 ```python
