@@ -1,10 +1,10 @@
 import json
-from django.contrib.admin import ModelAdmin, site
-from django.forms import ModelForm
 from django.utils.functional import cached_property
 from django.utils.html import format_html_join
 from django.template import loader
 from django.utils.safestring import mark_safe
+from django.conf import settings
+from importlib import import_module
 
 from .forms import get_form_class
 
@@ -81,11 +81,11 @@ class StreamObject:
                         content = [unordered_items_dict[i] for i in m['id']]
                     elif m['id'] != -1:
                         content = model_class.objects.get(pk=m['id'])
-                
+
                 ctx = dict(
                     block_model=model_str.lower(),
                     block_unique_id=m['unique_id'],
-                    block_content=content, 
+                    block_content=content,
                     as_list=as_list,
                     options=m['options']
                 )
@@ -134,7 +134,7 @@ def _get_render_data(model_class, model_str, content, ctx):
         t = loader.get_template(block_tmpl)
     except loader.TemplateDoesNotExist:
         ctx.update(dict(
-            block_tmpl=block_tmpl, 
+            block_tmpl=block_tmpl,
             model_str=model_str
             ))
         t = loader.get_template('streamfield/default_block_tmpl.html')
@@ -162,6 +162,16 @@ def _get_data_list(model_class, model_str, content, ctx):
         'template': _get_block_tmpl(model_class, model_str)
         }
 
+def get_streamblocks_models():
+    streamblock_models = []
 
+    for app in settings.INSTALLED_APPS:
+        try:
+            module = import_module("%s.models" % app)
 
-    
+            if hasattr(module, 'STREAMBLOCKS_MODELS'):
+                streamblock_models.append(*module.STREAMBLOCKS_MODELS)
+        except ModuleNotFoundError as e:
+            pass
+
+    return streamblock_models
