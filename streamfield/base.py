@@ -170,7 +170,7 @@ def get_streamblocks_models():
             module = import_module("%s.models" % app)
 
             if hasattr(module, 'STREAMBLOCKS_MODELS'):
-                streamblock_models.append(*module.STREAMBLOCKS_MODELS)
+                streamblock_models.extend(module.STREAMBLOCKS_MODELS)
         except ModuleNotFoundError as e:
             pass
 
