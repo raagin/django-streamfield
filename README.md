@@ -439,12 +439,6 @@ def save(self, *args, **kwargs):
 ```python
 # settings.py
 ```
-### STREAMFIELD_STREAMBLOCKS_APP_PATH 
-
-If your app `streamblocks` located not in project root directory, you need to reflect it in settings.py
-```python
-STREAMFIELD_STREAMBLOCKS_APP_PATH = 'yourapps.streamblocks'
-```
 
 ### STREAMFIELD_SHOW_ADMIN_HELP_TEXT
 If you want to hide "Help" link in admin, above the "Add new block" link.

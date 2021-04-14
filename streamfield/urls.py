@@ -1,20 +1,12 @@
-from importlib import import_module
 from django.urls import include, path
-from django.conf import settings
 from django.contrib.auth.decorators import login_required
 
 from . import views
-
-STREAMBLOCKS_APP_PATH = getattr(settings, "STREAMFIELD_STREAMBLOCKS_APP_PATH", "streamblocks")
-try:
-    streamblocks_app = import_module("%s.models" % STREAMBLOCKS_APP_PATH)
-    STREAMBLOCKS_MODELS = streamblocks_app.STREAMBLOCKS_MODELS
-except (AttributeError, ValueError) as e:
-    raise Exception("""Can't find STREAMBLOCKS_MODELS: wrong "STREAMFIELD_STREAMBLOCKS_APP_PATH" or STREAMBLOCKS_MODELS don't exist.""")
+from .base import get_streamblocks_models
 
 admin_instance_urls = []
 
-for model in STREAMBLOCKS_MODELS:
+for model in get_streamblocks_models():
     if not model._meta.abstract:
         block_path = path(
                     'admin-instance/%s/<int:pk>' % model.__name__.lower(), 

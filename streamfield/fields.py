@@ -3,7 +3,6 @@ from copy import deepcopy
 from django.db import models
 from django.forms.widgets import Widget
 from django.contrib.admin.options import FORMFIELD_FOR_DBFIELD_DEFAULTS
-from django.conf import settings
 from .base import StreamObject
 from .settings import (
     BLOCK_OPTIONS, 
