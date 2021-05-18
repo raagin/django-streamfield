@@ -1,2 +1,2 @@
-Django==2.2.20
-django-grappelli==2.14.2
+Django==3.2.3
+django-grappelli==2.15.1

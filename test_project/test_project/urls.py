@@ -19,8 +19,9 @@ from django.urls import path, include
 from pages import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('streamfield/', include('streamfield.urls')),
+    path('grappelli/', include('grappelli.urls')),
+    path('admin/', admin.site.urls),
 
     path('', views.index, name="index"),
     path('<int:pk>/', views.PageView.as_view(), name="page")
