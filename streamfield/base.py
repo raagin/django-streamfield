@@ -55,7 +55,10 @@ class StreamObject:
         self.model_list_names = [m.__name__ for m in model_list]
 
     def __str__(self):
-        return self.value or "[]"
+        if isinstance(self.value, str):
+            return self.value or "[]"
+        else:
+            return json.dumps(self.value) or "[]"
 
     def __repr__(self):
         return "<%s: %s>" % (self.__class__.__name__, self or "None")
@@ -115,11 +118,14 @@ class StreamObject:
         return mark_safe("".join(data))
 
     def from_json(self):
-        return json.loads(self.value)
+        if isinstance(self.value, str):
+            return json.loads(self.value)
+        else:
+            return self.value
 
     @cached_property
     def to_json(self):
-        return json.dumps(self.value)
+        return self.value
 
 def _get_block_tmpl(model_class, model_str):
     if hasattr(model_class, 'block_template'):
