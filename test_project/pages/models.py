@@ -2,14 +2,15 @@ from django.db import models
 from django.urls import reverse
 
 from streamfield.fields import StreamField
-from streamblocks.models import RichText, Column
+from streamblocks.models import RichText, Column, Separator
 
 class Page(models.Model):
     title = models.CharField(max_length=255)
     stream = StreamField(
         model_list=[ 
             RichText,
-            Column
+            Column,
+            Separator
         ],
         verbose_name="Page blocks"
         )

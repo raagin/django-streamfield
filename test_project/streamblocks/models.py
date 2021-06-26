@@ -26,8 +26,16 @@ class Column(models.Model):
         verbose_name="Column"
         verbose_name_plural="Columns"
 
+
+class Separator(models.Model):
+
+    class Meta:
+        abstract = True
+        verbose_name="Separator"
+
 # Register blocks for StreamField as list of models
 STREAMBLOCKS_MODELS = [
     RichText,
-    Column
+    Column,
+    Separator
 ]
