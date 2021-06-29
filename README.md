@@ -440,8 +440,15 @@ def save(self, *args, **kwargs):
 # settings.py
 ```
 
+### STREAMFIELD_SHOW_ADMIN_COLLAPSE
+If you want to hide "Collapse" link in admin.  
+Set:
+```python
+STREAMFIELD_SHOW_ADMIN_COLLAPSE = False
+```
+
 ### STREAMFIELD_SHOW_ADMIN_HELP_TEXT
-If you want to hide "Help" link in admin, above the "Add new block" link.
+If you want to hide "Help" link in admin.  
 Set: 
 ```python
 STREAMFIELD_SHOW_ADMIN_HELP_TEXT = False

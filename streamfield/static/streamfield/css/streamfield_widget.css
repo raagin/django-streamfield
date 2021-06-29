@@ -19,6 +19,17 @@
     background-image: none;
 }
 
+.streamfield_app .streamfield-models.collapsed .stream-model-block__content {
+    display: none;
+}
+.streamfield_app .streamfield-models.collapsed .stream-model-block {
+    margin-bottom: 10px;
+}
+.collapse-handler {
+    display: inline-block;
+    margin: 5px 0;
+    font-weight: bold;
+}
 .streamfield_app .stream-model-block {
     position: relative;
     background: white;

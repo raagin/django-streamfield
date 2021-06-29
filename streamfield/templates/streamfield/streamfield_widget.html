@@ -15,7 +15,13 @@
     </div>
     {% endif %}
 
-    <div class="streamfield-models">
+    {% if widget.attrs.show_admin_collapse %}
+    <div style="text-align: right;" v-if="stream.length > 1">
+        <a href="javascript:;" @click="collapsed=!collapsed" v-html=" !collapsed ? '&minus; {% trans "Collapse all" %}' : '&plus; {% trans "Open all" %}'" class="collapse-handler"></a>
+    </div>
+    {% endif %}
+
+    <div class="streamfield-models" :class="{collapsed}">
         <draggable v-model="stream" group="stream" handle=".block-move">
         <div v-for="block in stream" 
             class="stream-model-block" 
@@ -26,7 +32,7 @@
                     <span class="block-delete" @click="deleteBlock(block.unique_id)"></span>
                 </span>
             </h3>
-            <div v-if="!isAbstract(block)">
+            <div v-if="!isAbstract(block)" >
                 <div v-if="isArray(block.id)" 
                     class="stream-model-block__content"
                     :class="model_name_lower(block)"
@@ -61,7 +67,7 @@
                         @click.prevent="openPopup"
                         >+ {% trans "Add one more" %}</a>
                 </div>
-                <div v-else 
+                <div v-else
                     class="stream-model-block__content no-subblocks"
                     :class="model_name_lower(block)">
                     <template v-if="block.id != -1">
@@ -88,7 +94,7 @@
                     </template>
                 </div>
             </div> <!-- /v-if="isAbstract" -->
-            <div v-else>
+            <div v-else >
                 <div class="stream-model-block__content no-subblocks abstract-block"
                     :class="model_name_lower(block)">
                     <span v-html="getAbstractBlockContent(block)"></span>

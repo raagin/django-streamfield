@@ -33,7 +33,8 @@
                 blocks: {}, // save content of all instances
                 show_help: false,
                 show_add_block: false,
-                will_removed: [] // blocks that will be removed from db
+                will_removed: [], // blocks that will be removed from db
+                collapsed: false
             }
 
             var app = new Vue({

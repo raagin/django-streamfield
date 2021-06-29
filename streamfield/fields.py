@@ -7,6 +7,7 @@ from .base import StreamObject
 from .settings import (
     BLOCK_OPTIONS, 
     SHOW_ADMIN_HELP_TEXT, 
+    SHOW_ADMIN_COLLAPSE,
     DELETE_BLOCKS_FROM_DB, 
     BASE_ADMIN_URL
     )
@@ -37,6 +38,7 @@ class StreamFieldWidget(Widget):
         
         attrs["model_list_info"] = json.dumps(model_list_info)
         attrs['show_admin_help_text'] = SHOW_ADMIN_HELP_TEXT
+        attrs['show_admin_collapse'] = SHOW_ADMIN_COLLAPSE
         attrs['delete_blocks_from_db'] = DELETE_BLOCKS_FROM_DB
         attrs['base_admin_url'] = BASE_ADMIN_URL
         super().__init__(attrs)

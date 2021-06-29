@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-01 23:26+0300\n"
+"POT-Creation-Date: 2021-06-29 11:06+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,6 +18,21 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: templates/streamfield/admin/change_form.html:19
+msgid "Please correct the error below."
+msgstr ""
+
+#: templates/streamfield/admin/change_form.html:19
+msgid "Please correct the errors below."
+msgstr ""
+
+#: templates/streamfield/admin/fields/file_browse_widget.html:24
+msgid "File not found"
+msgstr ""
+
+#: templates/streamfield/admin/streamfield_popup_response.html:3
+msgid "Popup closing..."
+msgstr ""
 
 #: templates/streamfield/streamfield_admin_help.html:2
 msgid ""
@@ -46,20 +61,31 @@ msgstr ""
 msgid "Help?"
 msgstr ""
 
-#: templates/streamfield/streamfield_widget.html:45
-#: templates/streamfield/streamfield_widget.html:50
-#: templates/streamfield/streamfield_widget.html:77
+#: templates/streamfield/streamfield_widget.html:20
+msgid "Collapse all"
+msgstr ""
+
+#: templates/streamfield/streamfield_widget.html:20
+msgid "Open all"
+msgstr ""
+
+#: templates/streamfield/streamfield_widget.html:53
+#: templates/streamfield/streamfield_widget.html:58
+#: templates/streamfield/streamfield_widget.html:80
+#: templates/streamfield/streamfield_widget.html:85
 msgid "Change"
 msgstr ""
 
-#: templates/streamfield/streamfield_widget.html:60
+#: templates/streamfield/streamfield_widget.html:65
+#: templates/streamfield/streamfield_widget.html:68
 msgid "Add one more"
 msgstr ""
 
-#: templates/streamfield/streamfield_widget.html:85
+#: templates/streamfield/streamfield_widget.html:90
+#: templates/streamfield/streamfield_widget.html:93
 msgid "Add content"
 msgstr ""
 
-#: templates/streamfield/streamfield_widget.html:103
+#: templates/streamfield/streamfield_widget.html:119
 msgid "Add new block"
 msgstr ""
