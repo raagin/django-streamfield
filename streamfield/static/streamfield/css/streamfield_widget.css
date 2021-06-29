@@ -19,7 +19,8 @@
     background-image: none;
 }
 
-.streamfield_app .streamfield-models.collapsed .stream-model-block__content {
+.streamfield_app .streamfield-models.collapsed .stream-model-block__content,
+.streamfield_app .streamfield-models.collapsed .stream-block__options {
     display: none;
 }
 .streamfield_app .streamfield-models.collapsed .stream-model-block {
