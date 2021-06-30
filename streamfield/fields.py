@@ -82,9 +82,7 @@ class StreamField(models.TextField):
         return StreamObject(value, self.model_list)
 
     def get_prep_value(self, value):
-        if not value or isinstance(value, str):
-            return value
-        return value.value
+        return json.dumps(str(value))
 
     def formfield(self, **kwargs):
         widget_class = kwargs.get('widget', StreamFieldWidget)
