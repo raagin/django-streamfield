@@ -54,7 +54,7 @@
 }
 .streamfield_app .stream-block__option {
     display: inline-block;
-    margin-left: 10px;
+    margin: 4px;
 }
 
 .streamfield_app .stream-block__option span {
