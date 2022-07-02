@@ -435,6 +435,18 @@ def save(self, *args, **kwargs):
 ```
 ...and use this field in your html
 
+### Create a copy
+StreamObject have a method 'copy', which create a copies of all the instances that used in this field.   
+For example, if you have object 'page' with the field 'stream', and you need a copy of this object. You can do this:
+
+```python
+page.pk = None
+page.stream = page.stream.copy()
+page.save()
+```
+> Note: If you will not use `page.stream.copy()` instances will be the same as in the original object
+
+
 ## Settings
 ```python
 # settings.py

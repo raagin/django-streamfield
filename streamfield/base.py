@@ -1,4 +1,5 @@
 import json
+from uuid import uuid4
 from django.utils.functional import cached_property
 from django.utils.html import format_html_join
 from django.template import loader
@@ -123,9 +124,16 @@ class StreamObject:
         else:
             return self.value
 
+    def copy(self):
+        return StreamObject(
+            value=json.dumps(self._iterate_over_models(_copy)),
+            model_list=self.model_list
+            )
+
     @cached_property
     def to_json(self):
         return self.value
+
 
 def _get_block_tmpl(model_class, model_str):
     if hasattr(model_class, 'block_template'):
@@ -167,6 +175,39 @@ def _get_data_list(model_class, model_str, content, ctx):
         'data': ctx,
         'template': _get_block_tmpl(model_class, model_str)
         }
+
+def _copy(model_class, model_str, content, ctx):
+    as_list = ctx['as_list']
+    if as_list:
+        id = []
+        for obj in content:
+            obj.pk = None
+            obj.save()
+            id.append(obj.pk)
+    else:
+        content.pk = None
+        content.save()
+        id = content.pk
+
+        # check if have subblocks
+        changed = False
+        for f in content._meta.fields:
+            # isinstance(f, StreamField)
+            if hasattr(f, 'model_list'): 
+                changed = True
+                value = getattr(content, f.name)
+                # value is StreamObject
+                new_value = value.copy()
+                setattr(content, f.name, new_value)
+        if changed:
+            content.save()
+
+    return dict(
+        unique_id=uuid4().hex[:6],
+        model_name=model_str,
+        id=id,
+        options=ctx['options']
+        ) 
 
 def get_streamblocks_models():
     streamblock_models = []
