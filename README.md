@@ -32,6 +32,7 @@ Module also working with [Grappelli Interface](https://github.com/sehmaschine/dj
   - [Add extra context to blocks](#add-extra-context-to-blocks)
   - [Get field data as list](#get-field-data-as-list)
   - [Cache for reduce the number of database requests](#cache-for-reduce-the-number-of-database-requests)
+  - [Create a copy](#create-a-copy)
 - [Settings](#settings)
 
 ## Installation
