@@ -12,7 +12,9 @@ from .forms import get_form_class
 from .settings import BLOCK_OPTIONS
 
 __all__ = (
-    'StreamObject'
+    'StreamObject',
+    'get_streamblocks_models',
+    'migrate_stream_options'
 )
 
 class StreamObject:
@@ -234,7 +236,8 @@ def get_model_by_string(model_str):
 def migrate_stream_options(stream_obj):
     """
     Receive StreamObject from StreamField in your model
-    Return updated StreamObject, with new default options
+    Return updated StreamObject, with new default options.  
+    At the moment this only works with unique streamblocks class names.  
     """
     stream_dict = stream_obj.from_json()
     for b in stream_dict:

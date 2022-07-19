@@ -497,6 +497,7 @@ In block template use `{{ options.margins }}`
 ## Migrations
 If you add new options to Block with already existed data, you need to migrate options for adding default values to stored json.  
 Create empty migration and use `migrate_stream_options` function from `streamfield.base`.  
+At the moment this only works with unique streamblocks class names.  
 
 Example:
 ```python
