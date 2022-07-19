@@ -33,6 +33,7 @@ Module also working with [Grappelli Interface](https://github.com/sehmaschine/dj
   - [Get field data as list](#get-field-data-as-list)
   - [Cache for reduce the number of database requests](#cache-for-reduce-the-number-of-database-requests)
 - [Settings](#settings)
+- [Migrations](#migrations)
 
 ## Installation
 
@@ -491,4 +492,32 @@ STREAMFIELD_BLOCK_OPTIONS = {
 In block template use `{{ options.margins }}`
 
 > Note: Now only "checkbox", "text",  and "select" type is working.
+
+## Migrations
+If you add new options to Block with already existed data, you need to migrate options for adding default values to stored json.  
+Create empty migration and use `migrate_stream_options` function from `streamfield.base`.  
+
+Example:
+```python
+# migration
+from django.db import migrations
+from streamfield.base import migrate_stream_options
+
+def migrate_options(apps, schema_editor):
+    Page = apps.get_model("main", "Page")
+    for page in Page.objects.all():
+        page.stream = migrate_stream_options(page.stream)
+        page.save()
+
+class Migration(migrations.Migration):
+
+    dependencies = [
+        '...'
+    ]
+
+    operations = [
+        migrations.RunPython(migrate_options),
+    ]
+```
+
 

@@ -1,5 +1,6 @@
 import json
 from uuid import uuid4
+from copy import deepcopy
 from django.utils.functional import cached_property
 from django.utils.html import format_html_join
 from django.template import loader
@@ -8,6 +9,7 @@ from django.conf import settings
 from importlib import import_module
 
 from .forms import get_form_class
+from .settings import BLOCK_OPTIONS
 
 __all__ = (
     'StreamObject'
@@ -211,14 +213,39 @@ def _copy(model_class, model_str, content, ctx):
 
 def get_streamblocks_models():
     streamblock_models = []
-
     for app in settings.INSTALLED_APPS:
         try:
             module = import_module("%s.models" % app)
 
             if hasattr(module, 'STREAMBLOCKS_MODELS'):
-                streamblock_models.extend(module.STREAMBLOCKS_MODELS)
+                for m in module.STREAMBLOCKS_MODELS:
+                    if m not in streamblock_models:
+                        streamblock_models.append(m)
         except ModuleNotFoundError as e:
             pass
-
     return streamblock_models
+
+def get_model_by_string(model_str):
+    try:
+        return [m for m in get_streamblocks_models() if m.__name__ == model_str][0]
+    except IndexError:
+        return None
+
+def migrate_stream_options(stream_obj):
+    """
+    Receive StreamObject from StreamField in your model
+    Return updated StreamObject, with new default options
+    """
+    stream_dict = stream_obj.from_json()
+    for b in stream_dict:
+        model_class = get_model_by_string(b['model_name'])
+        options = model_class.options if hasattr(model_class, "options") else BLOCK_OPTIONS
+        if hasattr(model_class, "extra_options"):
+            options = deepcopy(options)
+            options.update(model_class.extra_options)
+        options.update(b['options'])
+        b['options'] = options
+    return StreamObject(
+        str(json.dumps(stream_dict)), 
+        stream_obj.model_list
+        )
