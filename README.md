@@ -237,7 +237,7 @@ For example for RichText block it will be:
 
 `streamblocks/templates/streamblocks/admin/richtext.html`
 
-As context use "form" and/or "object":
+As context use "form" and/or "object" (Not working for abstract blocks):
 ```html
 {{ form.text.value }}
 {{ object }}
