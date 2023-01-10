@@ -2,6 +2,7 @@
     max-width: 758px;
     width: 98%;
     margin-top: 5px;
+    float: left;
 }
 
 .streamfield_app textarea {
