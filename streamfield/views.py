@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
+from django.apps import apps
 from django.template import loader
 from django.http import JsonResponse
-from django.contrib.contenttypes.models import ContentType
 from django.views.generic import DetailView, TemplateView
 from .forms import get_form_class
 
@@ -54,8 +54,8 @@ def abstract_block_class(model, base=TemplateView):
 
 
 def delete_instance(request, model_name, pk):
-    t = ContentType.objects.get(app_label='streamblocks', model=model_name)
-    obj = t.get_object_for_this_type(pk=pk)
+    model_class = apps.get_model(app_label='streamblocks', model_name=model_name)
+    obj = model_class.objects.get(pk=pk)
     if request.method == 'DELETE':
         obj.delete()
         resp = {'success': True}
