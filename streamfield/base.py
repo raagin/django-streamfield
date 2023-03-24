@@ -9,7 +9,7 @@ from django.conf import settings
 from importlib import import_module
 
 from .forms import get_form_class
-from .settings import BLOCK_OPTIONS
+from .settings import BLOCK_OPTIONS, ADMIN_HELP_TEXT
 
 __all__ = (
     'StreamObject',
@@ -137,6 +137,11 @@ class StreamObject:
     @cached_property
     def to_json(self):
         return self.value
+
+    @cached_property
+    def help_text(self):
+        return ADMIN_HELP_TEXT
+
 
 
 def _get_block_tmpl(model_class, model_str):

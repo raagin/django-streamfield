@@ -37,6 +37,7 @@
     background: white;
     margin-bottom: 20px;
     box-shadow: 0 0 5px 2px rgba(0,0,0,0.1);
+    color: #333;
 }
 .streamfield_app .stream-model-block .streamblock__block__title {
     position: relative;
@@ -219,6 +220,7 @@
     font-size: 15px;
     line-height: 1.2em;
     border-radius: 5px;
+    color: #333;
 }
 
 .stream-help-text .stream-help-text__content ul li {
@@ -263,6 +265,13 @@
 .streamblock__block-handle .block-move:hover,
 .stream-model-subblock .subblock-move:hover {
     background-position: 0 -141px;
+}
+
+.streamfield_app .flip-list-move {
+  transition: transform 0.5s;
+}
+.streamfield_app .no-move {
+  transition: transform 0s;
 }
 
 [v-cloak] {

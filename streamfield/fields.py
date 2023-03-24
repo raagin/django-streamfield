@@ -1,6 +1,6 @@
 import json
 from copy import deepcopy
-from django.db import models
+from django.db.models import JSONField, TextField
 from django.forms.widgets import Widget
 from django.contrib.admin.options import FORMFIELD_FOR_DBFIELD_DEFAULTS
 from .base import StreamObject
@@ -49,21 +49,12 @@ class StreamFieldWidget(Widget):
         return value
 
     class Media:
-        css = {
-            'all': ('streamfield/css/streamfield_widget.css',)
-        }
-        js = (
-            'streamfield/vendor/lodash.min.js',
-            'streamfield/vendor/js.cookie.js',
-            'streamfield/vendor/vue.min.js',
-            'streamfield/vendor/Sortable.min.js',
-            'streamfield/vendor/vuedraggable.umd.min.js',
-            'streamfield/vendor/axios.min.js',
-            'streamfield/js/streamfield_widget.js',
-            )
+        css = {'all': ('streamfield/dist/streamfield_widget.css',)}
+        js = ('streamfield/dist/streamfield_widget.js',)
 
-class StreamField(models.TextField):
-    description = "StreamField"
+
+class StreamFieldLegacy(TextField):
+    description = "StreamFieldLegacy"
 
     def __init__(self, *args, **kwargs):
         self.model_list = kwargs.pop('model_list', [])
@@ -83,6 +74,43 @@ class StreamField(models.TextField):
 
     def get_prep_value(self, value):
         return json.dumps(str(value))
+
+    def formfield(self, **kwargs):
+        widget_class = kwargs.get('widget', StreamFieldWidget)
+        attrs = {}
+        attrs["model_list"] = self.model_list
+        attrs["data-popup_size"] = list(self.popup_size)
+        defaults = {
+            'widget': widget_class(attrs=attrs),
+        }
+        return super().formfield(**defaults)
+
+
+class StreamField(JSONField):
+    description = "StreamField"
+
+    def __init__(self, *args, **kwargs):
+        self.model_list = kwargs.pop('model_list', [])
+        self.popup_size = kwargs.pop('popup_size', (1000, 500))
+        kwargs['blank'] = True
+        kwargs['default'] = list
+        super().__init__(*args, **kwargs)
+
+    def to_python(self, value):
+        if not value or isinstance(value, StreamObject):
+            return value
+        if isinstance(value, str):
+            value = json.loads(value)
+        return StreamObject(value, self.model_list)
+
+    def validate(self, value, model_instance):
+        # value now is StreamObject. we need json
+        super().validate(value.value, model_instance)
+
+    def get_prep_value(self, value):
+        if value is None:
+            return value
+        return json.dumps(value.value, cls=self.encoder)
 
     def formfield(self, **kwargs):
         widget_class = kwargs.get('widget', StreamFieldWidget)
