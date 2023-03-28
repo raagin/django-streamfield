@@ -1,7 +1,7 @@
 # Django StreamField
 
 This is a simple realisation of StreamField's idea of Wagtail CMS for plain Django admin or with Grappelli skin.
-Stable version: 1.4.5
+Stable version: 2.0.0
 
 ## Highlights
 You can build your page with different kind of blocks. 
@@ -39,7 +39,7 @@ Module also working with [Grappelli Interface](https://github.com/sehmaschine/dj
 
 ## Installation
 
-Requirements: `django>=2.*`
+Requirements: `django>=3.1`
 
 `pip install django-streamfield`
 
@@ -377,6 +377,7 @@ class EmptyBlock(models.Model):
         verbose_name='Empty space'
 ```
 and use `streamblocks/templates/streamblocks/emptyblock.html` for your content.
+For admin `streamblocks/templates/streamblocks/admin/emptyblock.html`
 > Note: Don't forget to register a block in STREAMBLOCKS_MODELS
 
 ### Add extra context to blocks
@@ -468,6 +469,9 @@ Set:
 ```python
 STREAMFIELD_SHOW_ADMIN_HELP_TEXT = False
 ```
+
+### STREAMFIELD_ADMIN_HELP_TEXT
+You can setup custom help text  
 
 ### STREAMFIELD_DELETE_BLOCKS_FROM_DB
 If you want to keep streamblock's instances in db, when you removing it from StreamField. Set: 

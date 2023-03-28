@@ -22,6 +22,8 @@
     "js-cookie": "^3.0.1",
     "lodash": "^4.17.21",
     "mini-css-extract-plugin": "^2.7.5",
+    "sass": "^1.60.0",
+    "sass-loader": "^13.2.1",
     "sortablejs": "^1.15.0",
     "style-loader": "^3.3.2",
     "vue-loader": "^17.0.1",

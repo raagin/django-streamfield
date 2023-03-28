@@ -2,7 +2,6 @@
 (function() {
     'use strict';
     var initData = JSON.parse(document.getElementById('django-admin-popup-response-constants').dataset.popupResponse);
-    
     switch(initData.action) {
     case 'change':
         opener.streamapps[initData.app_id].updateBlock(initData.block_id, initData.instance_id);

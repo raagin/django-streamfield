@@ -10,7 +10,7 @@ for model in get_streamblocks_models():
     if not model._meta.abstract:
         block_path = path(
                     'admin-instance/%s/<int:pk>' % model.__name__.lower(), 
-                    login_required(views.admin_instance_class(model).as_view()),
+                    login_required(views.admin_instance(model)),
                     name='admin-instance'
                     )
     else:

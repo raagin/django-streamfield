@@ -63,7 +63,7 @@ class StreamObject:
         if isinstance(self.value, str):
             return self.value or "[]"
         else:
-            return json.dumps(self.value) or "[]"
+            return json.dumps(self.value)
 
     def __repr__(self):
         return "<%s: %s>" % (self.__class__.__name__, self or "None")
@@ -130,7 +130,7 @@ class StreamObject:
 
     def copy(self):
         return StreamObject(
-            value=json.dumps(self._iterate_over_models(_copy)),
+            value=self._iterate_over_models(_copy),
             model_list=self.model_list
             )
 

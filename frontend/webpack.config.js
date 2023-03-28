@@ -7,7 +7,7 @@ const {CleanWebpackPlugin} = require("clean-webpack-plugin");
 
 
 const src = path.resolve(__dirname, 'src');
-const dist = path.resolve(__dirname, '../streamfield/static/streamfield/dist/');
+const dist = path.resolve(__dirname, '../streamfield/static/streamfield/');
 
 
 module.exports = (env, argv) => {
@@ -52,7 +52,26 @@ module.exports = (env, argv) => {
             loader: "css-loader"
           }
         ]
-      }, {
+      },
+      {
+        test: /\.sass$/,
+        exclude: /node_modules/,
+        use: [
+          IS_PRODUCTION ? MiniCssExtractPlugin.loader : "style-loader",
+          {
+            loader: "css-loader"
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sassOptions: {
+                indentedSyntax: true
+              }
+            }
+          }
+        ]
+      },
+      {
         test: /\.js$/,
         loader: "babel-loader",
         exclude: /node_modules/

@@ -1,4 +1,4 @@
-import "@/style.css"
+import "@/style.sass"
 import axios from 'axios'
 import Cookies from 'js-cookie'
 import { createApp } from 'vue'

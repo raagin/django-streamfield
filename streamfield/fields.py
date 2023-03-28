@@ -44,46 +44,17 @@ class StreamFieldWidget(Widget):
         super().__init__(attrs)
 
     def format_value(self, value):
-        if value != "" and not isinstance(value, StreamObject):
+        if value and not isinstance(value, StreamObject):
             value = StreamObject(value, self.model_list)            
         return value
 
+    def value_from_datadict(self, data, files, name):
+        raise Exception(data)
+        return super().value_from_datadict(data, files, name)
+
     class Media:
-        css = {'all': ('streamfield/dist/streamfield_widget.css',)}
-        js = ('streamfield/dist/streamfield_widget.js',)
-
-
-class StreamFieldLegacy(TextField):
-    description = "StreamFieldLegacy"
-
-    def __init__(self, *args, **kwargs):
-        self.model_list = kwargs.pop('model_list', [])
-        self.popup_size = kwargs.pop('popup_size', (1000, 500))
-        kwargs['blank'] = True
-        kwargs['default'] = "[]"
-        super().__init__(*args, **kwargs)
-
-
-    def from_db_value(self, value, expression, connection):
-        return self.to_python(json.loads(value))
-        
-    def to_python(self, value):
-        if not value or isinstance(value, StreamObject):
-            return value
-        return StreamObject(value, self.model_list)
-
-    def get_prep_value(self, value):
-        return json.dumps(str(value))
-
-    def formfield(self, **kwargs):
-        widget_class = kwargs.get('widget', StreamFieldWidget)
-        attrs = {}
-        attrs["model_list"] = self.model_list
-        attrs["data-popup_size"] = list(self.popup_size)
-        defaults = {
-            'widget': widget_class(attrs=attrs),
-        }
-        return super().formfield(**defaults)
+        css = {'all': ('streamfield/streamfield_widget.css',)}
+        js = ('streamfield/streamfield_widget.js',)
 
 
 class StreamField(JSONField):
@@ -96,6 +67,9 @@ class StreamField(JSONField):
         kwargs['default'] = list
         super().__init__(*args, **kwargs)
 
+    def from_db_value(self, value, expression, connection):
+        return self.to_python(value)
+
     def to_python(self, value):
         if not value or isinstance(value, StreamObject):
             return value
@@ -104,13 +78,13 @@ class StreamField(JSONField):
         return StreamObject(value, self.model_list)
 
     def validate(self, value, model_instance):
-        # value now is StreamObject. we need json
+        # value now is StreamObject. but we need list
         super().validate(value.value, model_instance)
 
     def get_prep_value(self, value):
-        if value is None:
-            return value
-        return json.dumps(value.value, cls=self.encoder)
+        if isinstance(value, StreamObject):
+            value = value.value
+        return json.dumps(value, cls=self.encoder)
 
     def formfield(self, **kwargs):
         widget_class = kwargs.get('widget', StreamFieldWidget)
