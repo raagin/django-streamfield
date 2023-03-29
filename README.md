@@ -15,7 +15,7 @@ without any additional settings.
 
 Module also working with [Grappelli Interface](https://github.com/sehmaschine/django-grappelli) (Optional)
 
-![django-streamfield demo screenshot](https://raagin.ru/media/uploads/django-streamfield-2.png)
+![django-streamfield demo screenshot](https://raagin.ru/media/uploads/django-streamfield-2.jpg)
 
 ## Contents
 
