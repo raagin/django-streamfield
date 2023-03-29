@@ -14,7 +14,7 @@
         methods: {
             show () {
                 st = setTimeout( () => {
-                    this.hover=true
+                    this.hover = true
                 }, 500)
             },
             hide () {
@@ -33,7 +33,7 @@
     }
 </script>
 <template>
-    <div class="add_here" :class="{'show': hover, show_add_block }" @mouseover="show" @mouseout="hide" @click="show_add_block=!show_add_block">
+    <div class="add_here" ref="button" :class="{'show': hover, show_add_block }" @mouseover="show" @mouseout="hide" @click="show_add_block=!show_add_block">
         <BlockList v-if="show_add_block" :idx="get_index()"  @hide_add_block="hideAddBlock"/>
     </div>
 </template>

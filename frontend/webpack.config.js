@@ -1,9 +1,9 @@
 const path = require('path');
-const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const {VueLoaderPlugin} = require("vue-loader");
 const {CleanWebpackPlugin} = require("clean-webpack-plugin");
+const TerserPlugin = require('terser-webpack-plugin');
 
 
 const src = path.resolve(__dirname, 'src');
@@ -35,7 +35,6 @@ module.exports = (env, argv) => {
       allowedHosts: 'all'
     },
     plugins: [
-      new HtmlWebpackPlugin(),
       new VueLoaderPlugin(),
       new CleanWebpackPlugin(),
     ],
@@ -44,14 +43,6 @@ module.exports = (env, argv) => {
         test: /\.vue$/,
         loader: "vue-loader",
         exclude: /node_modules/
-      }, {
-        test: /\.css$/,
-        use: [
-          IS_PRODUCTION ? MiniCssExtractPlugin.loader : "style-loader",
-          {
-            loader: "css-loader"
-          }
-        ]
       },
       {
         test: /\.sass$/,
@@ -80,7 +71,15 @@ module.exports = (env, argv) => {
     optimization: {
       minimizer: [
         // extend default plugins
-        `...`,
+        // `...`,
+        new TerserPlugin({
+          extractComments: false,
+          terserOptions: {
+            format: {
+              comments: false,
+            },
+          },
+        }),
         // HTML and JS are minified by default if config.mode === production.
         // But for CSS we need to add this:
         new CssMinimizerPlugin()
@@ -95,8 +94,6 @@ module.exports = (env, argv) => {
       filename: "streamfield_widget.css"
     }));
 
-  } else {
-    // config.devtool = "inline-source-map";
   }
 
   return config;

@@ -1,6 +1,7 @@
 import json
 from copy import deepcopy
-from django.db.models import JSONField, TextField
+from django.db.models import JSONField, Field
+from django.core.serializers.json import DjangoJSONEncoder
 from django.forms.widgets import Widget
 from django.contrib.admin.options import FORMFIELD_FOR_DBFIELD_DEFAULTS
 from .base import StreamObject
@@ -48,16 +49,12 @@ class StreamFieldWidget(Widget):
             value = StreamObject(value, self.model_list)            
         return value
 
-    def value_from_datadict(self, data, files, name):
-        raise Exception(data)
-        return super().value_from_datadict(data, files, name)
-
     class Media:
         css = {'all': ('streamfield/streamfield_widget.css',)}
         js = ('streamfield/streamfield_widget.js',)
 
 
-class StreamField(JSONField):
+class StreamField(Field):
     description = "StreamField"
 
     def __init__(self, *args, **kwargs):
@@ -70,6 +67,19 @@ class StreamField(JSONField):
     def from_db_value(self, value, expression, connection):
         return self.to_python(value)
 
+    def get_internal_type(self):
+        return "JSONField"
+
+    @property
+    def json_field(self):
+        return models.JSONField(encoder=DjangoJSONEncoder)
+
+    def get_lookup(self, lookup_name):
+        return self.json_field.get_lookup(lookup_name)
+
+    def get_transform(self, lookup_name):
+        return self.json_field.get_transform(lookup_name)
+
     def to_python(self, value):
         if not value or isinstance(value, StreamObject):
             return value
@@ -78,13 +88,17 @@ class StreamField(JSONField):
         return StreamObject(value, self.model_list)
 
     def validate(self, value, model_instance):
-        # value now is StreamObject. but we need list
+        # value now is StreamObject. but we need to validate json (array)
         super().validate(value.value, model_instance)
 
     def get_prep_value(self, value):
         if isinstance(value, StreamObject):
             value = value.value
-        return json.dumps(value, cls=self.encoder)
+        return json.dumps(value, cls=DjangoJSONEncoder)
+
+    def value_to_string(self, obj):
+        value = self.value_from_object(obj)
+        return self.get_prep_value(value)
 
     def formfield(self, **kwargs):
         widget_class = kwargs.get('widget', StreamFieldWidget)

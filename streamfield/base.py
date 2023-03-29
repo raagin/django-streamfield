@@ -134,9 +134,8 @@ class StreamObject:
             model_list=self.model_list
             )
 
-    @cached_property
     def to_json(self):
-        return self.value
+        return json.dumps(self.value)
 
     @cached_property
     def help_text(self):
