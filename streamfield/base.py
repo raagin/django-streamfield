@@ -250,9 +250,10 @@ def migrate_stream_options(stream_obj):
         if hasattr(model_class, "extra_options"):
             options = deepcopy(options)
             options.update(model_class.extra_options)
+        options = { k: v['default'] for k, v in options.items() if bool(v.get('default')) }
         options.update(b['options'])
         b['options'] = options
     return StreamObject(
-        str(json.dumps(stream_dict)), 
+        stream_dict, 
         stream_obj.model_list
         )

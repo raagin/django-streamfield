@@ -67,7 +67,8 @@ class RichText(models.Model):
     text = models.TextField(blank=True, null=True)   
     
     def __str__(self):
-        # This text will be added to block title name. For better navigation when block is collapsed.
+        # This text will be added to block title name. 
+        # For better navigation when block is collapsed.
         return self.text[:30]
 
     class Meta:
