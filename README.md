@@ -1,7 +1,9 @@
 # Django StreamField
 
 This is a simple realisation of StreamField's idea of Wagtail CMS for plain Django admin or with Grappelli skin.
-Stable version: 1.4.5
+Stable version: 2.0.0
+
+[Major changes (1.4.5 > 2.0.0)](changes2.0.md)
 
 ## Highlights
 You can build your page with different kind of blocks. 
@@ -15,7 +17,7 @@ without any additional settings.
 
 Module also working with [Grappelli Interface](https://github.com/sehmaschine/django-grappelli) (Optional)
 
-![django-streamfield demo screenshot](https://raagin.ru/media/uploads/django-streamfield.png)
+![django-streamfield demo screenshot](https://raagin.ru/media/uploads/django-streamfield-2.jpg)
 
 ## Contents
 
@@ -39,7 +41,7 @@ Module also working with [Grappelli Interface](https://github.com/sehmaschine/dj
 
 ## Installation
 
-Requirements: `django>=2.*`
+Requirements: `django>=3.1`
 
 `pip install django-streamfield`
 
@@ -63,6 +65,11 @@ For example:
 # one object
 class RichText(models.Model):
     text = models.TextField(blank=True, null=True)   
+    
+    def __str__(self):
+        # This text will be added to block title name. 
+        # For better navigation when block is collapsed.
+        return self.text[:30]
 
     class Meta:
         # This will use as name of block in admin
@@ -75,6 +82,10 @@ class ImageWithText(models.Model):
     
     # StreamField option for list of objects
     as_list = True
+    
+    def __str__(self):
+        # This text will be added to block title name. For better navigation when block is collapsed.
+        return self.text[:30]
 
     class Meta:
         verbose_name="Image with text"
@@ -377,6 +388,7 @@ class EmptyBlock(models.Model):
         verbose_name='Empty space'
 ```
 and use `streamblocks/templates/streamblocks/emptyblock.html` for your content.
+For admin `streamblocks/templates/streamblocks/admin/emptyblock.html`
 > Note: Don't forget to register a block in STREAMBLOCKS_MODELS
 
 ### Add extra context to blocks
@@ -455,18 +467,17 @@ page.save()
 # settings.py
 ```
 
-### STREAMFIELD_SHOW_ADMIN_COLLAPSE
-If you want to hide "Collapse" link in admin.  
-Set:
-```python
-STREAMFIELD_SHOW_ADMIN_COLLAPSE = False
-```
-
 ### STREAMFIELD_SHOW_ADMIN_HELP_TEXT
-If you want to hide "Help" link in admin.  
+If you want to show "Help" link in admin.  
 Set: 
 ```python
-STREAMFIELD_SHOW_ADMIN_HELP_TEXT = False
+STREAMFIELD_SHOW_ADMIN_HELP_TEXT = True
+```
+
+### STREAMFIELD_ADMIN_HELP_TEXT
+You can setup custom help text in settings
+```python
+STREAMFIELD_ADMIN_HELP_TEXT = '<p>Text</p>'
 ```
 
 ### STREAMFIELD_DELETE_BLOCKS_FROM_DB

@@ -1,0 +1,1 @@
+!function(){"use strict";var e=JSON.parse(document.getElementById("django-admin-popup-response-constants").dataset.popupResponse);switch(e.action){case"change":default:opener.streamapps[e.app_id].updateBlock(e.block_id,e.instance_id),window.close();case"delete":}}();

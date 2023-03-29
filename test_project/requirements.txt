@@ -1,2 +1,5 @@
-Django==3.2.12
-django-grappelli==2.15.1
+asgiref==3.6.0
+Django==4.1.7
+django-grappelli==3.0.5
+Pillow==9.4.0
+sqlparse==0.4.3

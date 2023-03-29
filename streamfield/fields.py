@@ -1,6 +1,7 @@
 import json
 from copy import deepcopy
-from django.db import models
+from django.db.models import JSONField, Field
+from django.core.serializers.json import DjangoJSONEncoder
 from django.forms.widgets import Widget
 from django.contrib.admin.options import FORMFIELD_FOR_DBFIELD_DEFAULTS
 from .base import StreamObject
@@ -44,45 +45,60 @@ class StreamFieldWidget(Widget):
         super().__init__(attrs)
 
     def format_value(self, value):
-        if value != "" and not isinstance(value, StreamObject):
+        if value and not isinstance(value, StreamObject):
             value = StreamObject(value, self.model_list)            
         return value
 
     class Media:
-        css = {
-            'all': ('streamfield/css/streamfield_widget.css',)
-        }
-        js = (
-            'streamfield/vendor/lodash.min.js',
-            'streamfield/vendor/js.cookie.js',
-            'streamfield/vendor/vue.min.js',
-            'streamfield/vendor/Sortable.min.js',
-            'streamfield/vendor/vuedraggable.umd.min.js',
-            'streamfield/vendor/axios.min.js',
-            'streamfield/js/streamfield_widget.js',
-            )
+        css = {'all': ('streamfield/streamfield_widget.css',)}
+        js = ('streamfield/streamfield_widget.js',)
 
-class StreamField(models.TextField):
+
+class StreamField(Field):
     description = "StreamField"
 
     def __init__(self, *args, **kwargs):
         self.model_list = kwargs.pop('model_list', [])
         self.popup_size = kwargs.pop('popup_size', (1000, 500))
         kwargs['blank'] = True
-        kwargs['default'] = "[]"
+        kwargs['default'] = list
         super().__init__(*args, **kwargs)
 
-
     def from_db_value(self, value, expression, connection):
-        return self.to_python(json.loads(value))
-        
+        return self.to_python(value)
+
+    def get_internal_type(self):
+        return "JSONField"
+
+    @property
+    def json_field(self):
+        return models.JSONField(encoder=DjangoJSONEncoder)
+
+    def get_lookup(self, lookup_name):
+        return self.json_field.get_lookup(lookup_name)
+
+    def get_transform(self, lookup_name):
+        return self.json_field.get_transform(lookup_name)
+
     def to_python(self, value):
         if not value or isinstance(value, StreamObject):
             return value
+        if isinstance(value, str):
+            value = json.loads(value)
         return StreamObject(value, self.model_list)
 
+    def validate(self, value, model_instance):
+        # value now is StreamObject. but we need to validate json (array)
+        super().validate(value.value, model_instance)
+
     def get_prep_value(self, value):
-        return json.dumps(str(value))
+        if isinstance(value, StreamObject):
+            value = value.value
+        return json.dumps(value, cls=DjangoJSONEncoder)
+
+    def value_to_string(self, obj):
+        value = self.value_from_object(obj)
+        return self.get_prep_value(value)
 
     def formfield(self, **kwargs):
         widget_class = kwargs.get('widget', StreamFieldWidget)

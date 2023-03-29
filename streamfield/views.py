@@ -3,35 +3,26 @@ from django.apps import apps
 from django.template import loader
 from django.http import JsonResponse
 from django.views.generic import DetailView, TemplateView
+from django.views.generic.detail import BaseDetailView
 from .forms import get_form_class
 
-def admin_instance_class(model, base=DetailView):
-    
-    if hasattr(model, 'custom_admin_template'):
-        tmpl_name = model.custom_admin_template
-    else:
-        tmpl = loader.select_template([
-            'streamblocks/admin/%s.html' % model.__name__.lower(),
-            'streamfield/admin/change_form_render_template.html'
-        ])
-        tmpl_name = tmpl.template.name
-        
-    def get_context_data(self, **kwargs):
-        context = base.get_context_data(self, **kwargs)
-        
-        # forms
-        obj = super(self.__class__, self).get_object()
-        context['form'] = get_form_class(model)(instance=obj)
-
-        return context
-
-    attrs = dict(
-        model = model,
-        template_name = tmpl_name,
-        get_context_data = get_context_data
-        )
-
-    return type(str(model.__name__ + 'DetailView'), (base, ), attrs )
+def admin_instance(model):
+    def instance_view(request, pk):
+        tmpls = [
+                'streamblocks/admin/%s.html' % model.__name__.lower(),
+                'streamfield/admin/change_form_render_template.html'
+            ]
+        tmpl = getattr(model, 'custom_admin_template', loader.select_template(tmpls))
+        obj = model.objects.get(pk=pk)
+        ctx = {
+            'form': get_form_class(model)(instance=obj),
+            'object': obj
+        }
+        return JsonResponse({
+                'content': tmpl.render(ctx),
+                'title': str(obj)
+                })
+    return instance_view
 
 
 def abstract_block_class(model, base=TemplateView):

@@ -5,7 +5,7 @@ from django.template.response import TemplateResponse
 from .base import get_streamblocks_models
 
 
-class StreamBlocksAdmin(admin.ModelAdmin):
+class StreamBlocksAdminMixin:
     change_form_template = 'streamfield/admin/change_form.html'
     popup_response_template = 'streamfield/admin/streamfield_popup_response.html'
 
@@ -60,8 +60,10 @@ class StreamBlocksAdmin(admin.ModelAdmin):
         return super().response_delete(request, obj_display, obj_id)
 
 
-# if user defined admin for his blocks, then do not autoregiser block models
+class StreamBlocksAdmin(StreamBlocksAdminMixin, admin.ModelAdmin):
+    pass
 
+# if user defined admin for his blocks, then do not autoregiser block models
 for model in get_streamblocks_models():
     if not model._meta.abstract and \
             not admin.site.is_registered(model):

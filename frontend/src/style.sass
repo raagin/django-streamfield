@@ -1,0 +1,382 @@
+.streamfield_app
+    max-width: 758px
+    width: 98%
+    margin-top: 5px
+    float: left
+
+    textarea
+        display: none
+
+    p
+        margin-bottom: 0.5em
+
+
+    a
+        &.grp-change-related,
+        &.grp-add-another
+            background-image: none
+
+    .collapse-handlers
+        text-align: right
+        margin-bottom: 5px
+
+        .collapse-handler
+            display: inline-block
+            margin: 5px 0
+            font-weight: bold
+            text-decoration: underline
+
+    .streamfield-models
+        clear: both
+        margin-bottom: 10px
+
+        .stream-model-block
+            position: relative
+            color: #333
+
+            &__inner
+                box-shadow: 0 0 5px 2px rgba(0,0,0,0.1)
+
+            &.collapsed
+                .stream-model-block__content,
+                .stream-block__options
+                    display: none
+
+                .add_here
+                    min-height: 12px
+
+                    &.show_add_block
+                        &:before,
+                        &:after
+                            top: 5px
+
+                .stream-blocks-list
+                    padding: 10px 0
+                    margin: 0 10px 5px
+
+            .stream-blocks-list
+                padding: 15px 0 10px
+                margin: 0 10px 10px
+                position: relative
+                z-index: 2
+
+            .streamblock__block__title
+                position: relative
+
+                .streamblock__block__model_title
+                    font-weight: bold
+                    margin-left: 0
+                    font-size: 1.15em
+                    user-select: none
+                    position: relative
+
+                .streamblock__block__subtitle
+                    font-weight: normal
+                    font-size: 1em
+                    opacity: 0.7
+                    position: relative
+                    margin: 0
+
+                &-click
+                    position: absolute
+                    display: block
+                    top: 0
+                    left: 0
+                    right: 0
+                    bottom: 0
+                    cursor: pointer
+                    z-index: 1
+
+                    &:hover
+                        background: rgba(255, 255, 255, 0.1)
+
+            .add_here
+                position: relative
+                min-height: 20px
+                width: 100%
+                cursor: pointer
+
+                &.show,
+                &.show_add_block
+                    z-index: 10
+
+                    &:before
+                        display: block
+                        z-index: 2
+
+                &.show_add_block
+                    &:before
+                        top: 10px
+                        transform: rotate(45deg)
+
+                    &:after
+                        content: ""
+                        position: absolute
+                        top: 10px
+                        bottom: 0
+                        left: 0
+                        right: 0
+                        border: 1px dashed #AAA
+                        border-radius: 5px
+                        background: rgba(255,255,255,0.1)
+
+
+                &:before
+                    content: "+"
+                    position: absolute
+                    width: 30px
+                    height: 30px
+                    border-radius: 15px
+                    top: 50%
+                    left: 50%
+                    margin-top: -15px
+                    margin-left: -15px
+                    background: #309bbf
+                    display: none
+                    font-size: 28px
+                    line-height: 30px
+                    color: white
+                    text-align: center
+                    transition: transform .2s ease-out
+
+            &:last-child .add_here
+                display: none
+
+            &__content
+                padding: 20px
+                background: #f5f5f5
+
+                .model-field-content:after
+                    content: "."
+                    display: block
+                    height: 0
+                    clear: both
+                    visibility: hidden
+
+                img
+                    border: 1px solid #b6b6b6
+
+
+                &.no-subblocks
+                    padding: 20px 28px
+
+                &.abstract-block 
+                    a 
+                        img
+                            border: 3px solid #a6d1e0
+
+                        &:hover 
+                            img
+                                border-color: #78adbf
+
+
+    .stream-block__options
+        padding: 7px
+        text-align: right
+        background: #efefef
+
+        .stream-block__option
+            display: inline-block
+            margin: 4px
+
+            span
+                margin: 0 0 0 5px
+
+                & + *
+                    margin: 0 0 0 3px
+
+
+    .block-fields
+        &__label
+            font-style: italic
+            color: #999
+            display: block
+
+        & > div
+            margin-bottom: 0.4em
+
+        h2
+            padding: 0
+            text-shadow: none
+            border: none
+            background-image: none
+            font-size: 1.3em
+
+        h3
+            padding: 0
+            text-shadow: none
+            border: none
+            background-image: none
+            font-size: 1.1em
+            margin-bottom: 0.5em
+
+        h4
+            font-weight: bold
+
+        blockquote
+            font-size: 1.1em
+            font-style: italic
+            font-weight: bold
+            margin-bottom: 0.4em 
+
+        table td,
+        table th 
+            border-bottom: 1px solid #CCC 
+
+        ul li 
+            margin-left: 20px
+            list-style: disc
+
+        ol li 
+            margin-left: 20px
+            list-style: decimal
+
+        b 
+            font-weight: bold
+
+        svg,
+        img
+            max-width: 150px
+            max-height: 150px
+
+
+    .stream-model-subblock
+        background: #e0e7eb
+        padding: 10px
+        display: block
+        border-radius: 5px
+        margin-bottom: 10px
+        position: relative
+
+
+    .stream-btn
+        background: #78adbf
+        color: white !important
+        padding: 3px 7px
+        display: inline-block
+        border-radius: 2px
+        margin-top: 5px
+        font-weight: bold
+        user-select: none
+
+        &:hover
+            background: #309bbf
+
+    .add-another
+        margin-left: 10px
+
+
+
+    /* add new block */
+    .stream-insert-new-block
+        text-align: right
+        font-size: 1.1em
+        margin-top: 10px
+
+        li
+            list-style: none
+
+    .stream-blocks-list
+        text-align: right
+
+    .add-new-block-button
+        padding: 5px
+        font-weight: bold
+        text-decoration: underline
+        cursor: pointer
+        color: #309bbf
+        user-select: none
+
+    /* Help text */
+    .stream-help-text
+        margin-bottom: 5px
+
+        &__title
+            padding: 5px
+            text-align: right
+            font-weight: bold
+            text-decoration: underline
+            cursor: pointer
+
+        &__content
+            padding: 10px
+            background: #d4e6d7
+            font-size: 15px
+            line-height: 1.2em
+            border-radius: 5px
+            color: #333
+
+            ul li
+                list-style: disc
+                margin: .5em 20px
+
+    .flip-list-move
+        transition: transform 0.5s
+
+    .no-move
+        transition: transform 0s
+
+/* Handle */
+.streamblock__block-handle,
+.stream-model-subblock-handle
+    position: absolute
+    right: 2px
+    top: 1px
+    z-index: 2
+
+.streamblock__block-handle .block-move,
+.stream-model-subblock .subblock-move,
+.streamblock__block-handle .block-delete,
+.stream-model-subblock .subblock-delete
+    position: relative
+    width: 24px
+    height: 24px
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='175'%3E%3Cdefs%3E%3CclipPath id='a'%3E%3Cpath d='M0 0h24v175H0z'/%3E%3C/clipPath%3E%3C/defs%3E%3Cg clip-path='url(%23a)' fill='none' stroke-linecap='round' stroke-width='1.5'%3E%3Cpath stroke='%23000' d='m7.5 16.5 9 9M6.5 109h11'/%3E%3Cpath stroke='%23309bbf' d='M6.5 153h11'/%3E%3Cpath stroke='%23bf3030' d='m7.5 60.5 9 9'/%3E%3Cpath stroke='%23000' d='m16.5 16.5-9 9'/%3E%3Cpath stroke='%23bf3030' d='m16.5 60.5-9 9'/%3E%3Cpath d='m9.03 106.546 3.113-3.113 3.1 3.1' stroke='%23000' stroke-linejoin='round'/%3E%3Cpath d='m9.03 150.546 3.113-3.113 3.1 3.1' stroke='%23309bbf' stroke-linejoin='round'/%3E%3Cpath d='m9.03 111.432 3.113 3.113 3.1-3.1' stroke='%23000' stroke-linejoin='round'/%3E%3Cpath d='m9.03 155.432 3.113 3.113 3.1-3.1' stroke='%23309bbf' stroke-linejoin='round'/%3E%3C/g%3E%3C/svg%3E")
+    background-repeat: no-repeat
+    display: block
+    margin-left: 0
+    float: left
+    cursor: pointer
+
+.streamblock__block-handle .block-delete,
+.stream-model-subblock .subblock-delete
+    background-position: 0 -9px
+
+.streamblock__block-handle .block-delete:hover,
+.stream-model-subblock .subblock-delete:hover
+    background-position: 0 -53px
+
+.streamblock__block-handle .block-move,
+.stream-model-subblock .subblock-move
+    background-position: 0 -97px
+
+.streamblock__block-handle .block-move:hover,
+.stream-model-subblock .subblock-move:hover
+    background-position: 0 -141px
+
+
+/* for django skin */
+#content-main 
+    .streamfield_app 
+        .stream-model-block 
+            .streamblock__block__title
+                background: #a9c8d5
+                color: black
+                margin: 0
+                padding: 0 10px
+                line-height: 32px
+                font-weight: normal
+
+        .stream-insert-new-block
+            font-size: 15px
+
+        .stream-btn
+            font-weight: normal
+
+        .stream-help-text ul
+            margin-left: 0
+
+    .streamblock__block-handle,
+    .stream-model-subblock-handle
+        top: 5px
+

@@ -1,9 +1,9 @@
 *.pyc
-.idea
 .DS_Store
-dist/*
 build/*
 django_streamfield.egg-info/*
 test_project/db.sqlite3
 package-lock.json
-node_modules/*
+frontend/node_modules/*
+streamfield/static/streamfield/index.html
+streamfield/static/streamfield/streamfield_widget.js.LICENSE.txt

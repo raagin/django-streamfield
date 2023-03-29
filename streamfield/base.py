@@ -9,7 +9,7 @@ from django.conf import settings
 from importlib import import_module
 
 from .forms import get_form_class
-from .settings import BLOCK_OPTIONS
+from .settings import BLOCK_OPTIONS, ADMIN_HELP_TEXT
 
 __all__ = (
     'StreamObject',
@@ -63,7 +63,7 @@ class StreamObject:
         if isinstance(self.value, str):
             return self.value or "[]"
         else:
-            return json.dumps(self.value) or "[]"
+            return json.dumps(self.value)
 
     def __repr__(self):
         return "<%s: %s>" % (self.__class__.__name__, self or "None")
@@ -130,13 +130,17 @@ class StreamObject:
 
     def copy(self):
         return StreamObject(
-            value=json.dumps(self._iterate_over_models(_copy)),
+            value=self._iterate_over_models(_copy),
             model_list=self.model_list
             )
 
-    @cached_property
     def to_json(self):
-        return self.value
+        return json.dumps(self.value)
+
+    @cached_property
+    def help_text(self):
+        return ADMIN_HELP_TEXT
+
 
 
 def _get_block_tmpl(model_class, model_str):
@@ -246,9 +250,10 @@ def migrate_stream_options(stream_obj):
         if hasattr(model_class, "extra_options"):
             options = deepcopy(options)
             options.update(model_class.extra_options)
+        options = { k: v['default'] for k, v in options.items() if bool(v.get('default')) }
         options.update(b['options'])
         b['options'] = options
     return StreamObject(
-        str(json.dumps(stream_dict)), 
+        stream_dict, 
         stream_obj.model_list
         )
