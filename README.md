@@ -3,6 +3,8 @@
 This is a simple realisation of StreamField's idea of Wagtail CMS for plain Django admin or with Grappelli skin.
 Stable version: 2.0.0
 
+[Major changes (1.4.5 > 2.0.0)](changes2.0.md)
+
 ## Highlights
 You can build your page with different kind of blocks. 
 Sort them and sort the lists inside the blocks.
@@ -456,22 +458,18 @@ page.save()
 # settings.py
 ```
 
-### STREAMFIELD_SHOW_ADMIN_COLLAPSE
-If you want to hide "Collapse" link in admin.  
-Set:
-```python
-STREAMFIELD_SHOW_ADMIN_COLLAPSE = False
-```
-
 ### STREAMFIELD_SHOW_ADMIN_HELP_TEXT
-If you want to hide "Help" link in admin.  
+If you want to show "Help" link in admin.  
 Set: 
 ```python
-STREAMFIELD_SHOW_ADMIN_HELP_TEXT = False
+STREAMFIELD_SHOW_ADMIN_HELP_TEXT = True
 ```
 
 ### STREAMFIELD_ADMIN_HELP_TEXT
-You can setup custom help text  
+You can setup custom help text in settings
+```python
+STREAMFIELD_ADMIN_HELP_TEXT = '<p>Text</p>'
+```
 
 ### STREAMFIELD_DELETE_BLOCKS_FROM_DB
 If you want to keep streamblock's instances in db, when you removing it from StreamField. Set: 
