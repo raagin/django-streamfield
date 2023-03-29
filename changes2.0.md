@@ -1,7 +1,7 @@
 # django-streamfield. Changes 2.0
 ## Major changes
 1. Removed string escaping in the database. Now StreamField is stored in the database as a native JSON, since version 3.1 Django supports JSON in all databases. When resaving the object, escaping in the new version will be automatically removed.
-2. Added new frontend features: You can open/collapse blocks by one or all together. You can add new block between the others blocks.
+2. Added new frontend features: You can open/collapse blocks by one (click on the block header) or all together. You can add new block between the others blocks (put cursor between the blocks and wait for plus button).
 3. For better blocks navigation you can add name of the block by using `__str__` method in block definition code.
 4. For development. Webpack 5 is used to build frontend part. JS scripts is divided into components. SASS is used for styling. 
 5. JS libraries are join to one bundle including streamfield.
