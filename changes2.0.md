@@ -4,4 +4,5 @@
 3. For better blocks navigation you can add name of the block by using __str__ method in block definition code.
 4. STREAMFIELD_SHOW_ADMIN_HELP_TEXT now is False by default. And you can add your own text by using STREAMFIELD_ADMIN_HELP_TEXT in settings.
 5. For development. Webpack 5 is used to build frontend part. JS scripts is divided into components. SASS is used for styling. 
-6. Vendor modules are join to one bundle including streamfield js.
+6. JS libraries are join to one bundle including streamfield.
+7. Removed STREAMFIELD_SHOW_ADMIN_COLLAPSE from settings.
