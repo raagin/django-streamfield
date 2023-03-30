@@ -18,9 +18,11 @@ def admin_instance(model):
             'form': get_form_class(model)(instance=obj),
             'object': obj
         }
+        block_title = getattr(obj, 'block_title', '')
+        block_title = block_title() if block_title and callable(block_title) else block_title
         return JsonResponse({
                 'content': tmpl.render(ctx),
-                'title': str(obj)
+                'title': block_title
                 })
     return instance_view
 

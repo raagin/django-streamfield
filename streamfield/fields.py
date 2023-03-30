@@ -1,5 +1,6 @@
 import json
 from copy import deepcopy
+from django import forms
 from django.db.models import JSONField, Field
 from django.core.serializers.json import DjangoJSONEncoder
 from django.forms.widgets import Widget
@@ -12,7 +13,6 @@ from .settings import (
     DELETE_BLOCKS_FROM_DB, 
     BASE_ADMIN_URL
     )
-
 
 class StreamFieldWidget(Widget):
     template_name = 'streamfield/streamfield_widget.html'
@@ -54,7 +54,12 @@ class StreamFieldWidget(Widget):
         js = ('streamfield/streamfield_widget.js',)
 
 
-class StreamField(Field):
+class StreamFormField(forms.JSONField):
+    def prepare_value(self, value):
+        return json.dumps(value.value, ensure_ascii=False, cls=self.encoder)
+
+
+class StreamField(JSONField):
     description = "StreamField"
 
     def __init__(self, *args, **kwargs):
@@ -66,19 +71,6 @@ class StreamField(Field):
 
     def from_db_value(self, value, expression, connection):
         return self.to_python(value)
-
-    def get_internal_type(self):
-        return "JSONField"
-
-    @property
-    def json_field(self):
-        return models.JSONField(encoder=DjangoJSONEncoder)
-
-    def get_lookup(self, lookup_name):
-        return self.json_field.get_lookup(lookup_name)
-
-    def get_transform(self, lookup_name):
-        return self.json_field.get_transform(lookup_name)
 
     def to_python(self, value):
         if not value or isinstance(value, StreamObject):
@@ -108,7 +100,11 @@ class StreamField(Field):
         defaults = {
             'widget': widget_class(attrs=attrs),
         }
-        return super().formfield(**defaults)
-
+        return super().formfield(**{
+            'form_class': StreamFormField,
+            'encoder': self.encoder,
+            'decoder': self.decoder,
+            **defaults,
+        })
 
 FORMFIELD_FOR_DBFIELD_DEFAULTS[StreamField] = {'widget': StreamFieldWidget}
