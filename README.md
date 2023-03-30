@@ -73,6 +73,7 @@ class RichText(models.Model):
 
     class Meta:
         # This will use as name of block in admin
+        # See also STREAMFIELD_BLOCK_TITLE in settings
         verbose_name="Text"
 
 # list of objects
@@ -487,6 +488,9 @@ STREAMFIELD_DELETE_BLOCKS_FROM_DB = False
 ```
 It was default behavior in previous releases. 
 > Note: If you delete entire object which contain StreamField, streamblock's instances will not be deleted. You should care about it by yourself.
+
+### STREAMFIELD_BLOCK_TITLE (v2.0.1)
+The default block name uses the verbose_name from the model. Plus the name for each object is taken from `__str__` method. For "as_list" blocks, from first block. You can use STREAMFIELD_BLOCK_TITLE to change it to another method or property. If want disable this, set to False. If some blocks will not have setuped method, they will be ignored.
 
 ### STREAMFIELD_BLOCK_OPTIONS
 

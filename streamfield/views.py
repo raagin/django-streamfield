@@ -4,6 +4,7 @@ from django.template import loader
 from django.http import JsonResponse
 from django.views.generic import DetailView, TemplateView
 from django.views.generic.detail import BaseDetailView
+from .settings import BLOCK_TITLE
 from .forms import get_form_class
 
 def admin_instance(model):
@@ -18,9 +19,11 @@ def admin_instance(model):
             'form': get_form_class(model)(instance=obj),
             'object': obj
         }
+        block_title = getattr(obj, BLOCK_TITLE, '') if BLOCK_TITLE else ''
+        block_title = block_title() if block_title and callable(block_title) else block_title
         return JsonResponse({
                 'content': tmpl.render(ctx),
-                'title': str(obj)
+                'title': block_title
                 })
     return instance_view
 
