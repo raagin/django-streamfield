@@ -122,6 +122,7 @@ class StreamObject:
         data = self._iterate_over_models(_get_render_admin_data)
         return mark_safe("".join(data))
 
+    # for backward compatibility
     def from_json(self):
         if isinstance(self.value, str):
             return json.loads(self.value)
