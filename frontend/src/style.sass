@@ -53,6 +53,9 @@
                     padding: 10px 0
                     margin: 0 10px 5px
 
+                    li
+                        list-style: none
+
             .stream-blocks-list
                 padding: 15px 0 10px
                 margin: 0 10px 10px
@@ -156,7 +159,7 @@
 
 
                 &.no-subblocks
-                    padding: 20px 28px
+                    padding: 20px
 
                 &.abstract-block 
                     a 
@@ -354,18 +357,35 @@
                 background: #a9c8d5
                 color: black
                 margin: 0
-                padding: 0 10px
-                line-height: 32px
+                line-height: 20px
                 font-weight: normal
+                padding: 7px 50px 7px 10px
+                display: flex
+                align-items: center
+
+                .streamblock__block__model_title
+                    font-size: 16px
+
+                .streamblock__block__subtitle
+                    font-size: 15px
 
         .stream-insert-new-block
             font-size: 15px
+            .add-new-block-button
+                font-weight: normal
 
         .stream-btn
             font-weight: normal
+            font-size: 14px
 
         .stream-help-text ul
             margin-left: 0
+
+        .collapse-handlers 
+            .collapse-handler
+                color: #309bbf
+                font-weight: normal
+                font-size: 14px
 
     .streamblock__block-handle,
     .stream-model-subblock-handle
