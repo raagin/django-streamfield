@@ -1,7 +1,7 @@
 # Django StreamField
 
 This is a simple realisation of StreamField's idea of Wagtail CMS for plain Django admin or with Grappelli skin.
-Stable version: 2.0.1
+Stable version: 2.0.2
 
 [Major changes (1.4.5 > 2)](changes2.0.md)
 
@@ -489,8 +489,8 @@ STREAMFIELD_DELETE_BLOCKS_FROM_DB = False
 It was default behavior in previous releases. 
 > Note: If you delete entire object which contain StreamField, streamblock's instances will not be deleted. You should care about it by yourself.
 
-### STREAMFIELD_BLOCK_TITLE (v2.0.1)
-The default block name uses the verbose_name from the model. Plus the name for each object is taken from `__str__` method. For "as_list" blocks, from first block. You can use STREAMFIELD_BLOCK_TITLE to change it to another method or property. If want disable this, set to False. If some blocks will not have setuped method, they will be ignored.
+### STREAMFIELD_BLOCK_TITLE (> 2.0.1)
+The default block name uses the verbose_name from the model. Plus the name for each object is taken from `__str__` method. For "as_list" blocks, from the first block. You can use STREAMFIELD_BLOCK_TITLE to change it to another method or property. If you want disable this, set to False. If some blocks will not have setuped method, they will be ignored.
 
 ### STREAMFIELD_BLOCK_OPTIONS
 
