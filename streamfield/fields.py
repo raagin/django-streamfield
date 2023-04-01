@@ -1,7 +1,7 @@
 import json
 from copy import deepcopy
+from django import forms
 from django.db.models import JSONField, Field
-from django.core.serializers.json import DjangoJSONEncoder
 from django.forms.widgets import Widget
 from django.contrib.admin.options import FORMFIELD_FOR_DBFIELD_DEFAULTS
 from .base import StreamObject
@@ -13,7 +13,7 @@ from .settings import (
     BASE_ADMIN_URL
     )
 
-
+# widget
 class StreamFieldWidget(Widget):
     template_name = 'streamfield/streamfield_widget.html'
 
@@ -54,6 +54,12 @@ class StreamFieldWidget(Widget):
         js = ('streamfield/streamfield_widget.js',)
 
 
+# form field
+class StreamFormField(forms.JSONField):
+    def prepare_value(self, value):
+        return super().prepare_value(value.value)
+
+# main field
 class StreamField(Field):
     description = "StreamField"
 
@@ -67,48 +73,33 @@ class StreamField(Field):
     def from_db_value(self, value, expression, connection):
         return self.to_python(value)
 
-    def get_internal_type(self):
-        return "JSONField"
-
-    @property
-    def json_field(self):
-        return models.JSONField(encoder=DjangoJSONEncoder)
-
-    def get_lookup(self, lookup_name):
-        return self.json_field.get_lookup(lookup_name)
-
-    def get_transform(self, lookup_name):
-        return self.json_field.get_transform(lookup_name)
-
     def to_python(self, value):
         if not value or isinstance(value, StreamObject):
             return value
-        if isinstance(value, str):
+        # for backward compatibility
+        while isinstance(value, str):
             value = json.loads(value)
         return StreamObject(value, self.model_list)
 
     def validate(self, value, model_instance):
-        # value now is StreamObject. but we need to validate json (array)
         super().validate(value.value, model_instance)
 
     def get_prep_value(self, value):
         if isinstance(value, StreamObject):
             value = value.value
-        return json.dumps(value, cls=DjangoJSONEncoder)
+        return json.dumps(value)
 
     def value_to_string(self, obj):
         value = self.value_from_object(obj)
-        return self.get_prep_value(value)
+        return value.value
 
     def formfield(self, **kwargs):
-        widget_class = kwargs.get('widget', StreamFieldWidget)
         attrs = {}
         attrs["model_list"] = self.model_list
         attrs["data-popup_size"] = list(self.popup_size)
-        defaults = {
-            'widget': widget_class(attrs=attrs),
-        }
-        return super().formfield(**defaults)
-
+        return super().formfield(**{
+            'widget': StreamFieldWidget(attrs=attrs),
+            'form_class': StreamFormField
+        })
 
 FORMFIELD_FOR_DBFIELD_DEFAULTS[StreamField] = {'widget': StreamFieldWidget}
