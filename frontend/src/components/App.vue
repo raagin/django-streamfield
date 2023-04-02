@@ -1,47 +1,49 @@
 <script type="text/javascript">
-	import {isEmpty, isArray} from 'lodash'
-	import draggable from 'vuedraggable'
+    import draggable from 'vuedraggable'
+    import {isArray, isEmpty} from '@/utils.js'
     import StreamBlock from '@/components/StreamBlock.vue'
     import AbstractBlock from '@/components/AbstractBlock.vue'
 
-	let 
-		text_area,
-		delete_blocks_from_db,
-		popup_size;
+    // const _ = require('lodash');
 
-	function id_to_windowname(text) {
+    let 
+        text_area,
+        delete_blocks_from_db,
+        popup_size;
+
+    function id_to_windowname(text) {
         text = text.replace(/\./g, '__dot__');
         text = text.replace(/\-/g, '__dash__');
         return text;
     }
 
-	export default {
-		props: ['app_node'],
-		components: {
+    export default {
+        props: ['app_node'],
+        components: {
             draggable,
             StreamBlock,
             AbstractBlock
         },
         data () {
           return {
-          	blocks: {}, // save content of all instances
-	        show_help: false,
-	        show_add_block: false,
-	        will_removed: [], // blocks that will be removed from db
-	        stream: [], // [{model_name: ..., id: ...}, ...]
-	        model_info: {}, // {'model_name': model.__doc__},
+            blocks: {}, // save content of all instances
+            show_help: false,
+            show_add_block: false,
+            will_removed: [], // blocks that will be removed from db
+            stream: [], // [{model_name: ..., id: ...}, ...]
+            model_info: {}, // {'model_name': model.__doc__},
             base_admin_url: "",
-	        stream_texts: window.stream_texts
+            stream_texts: window.stream_texts
           }
         },
         beforeMount: function() {
-        	text_area = this.app_node.querySelector('textarea')
-		    delete_blocks_from_db = Boolean(text_area.hasAttribute('delete_blocks_from_db'))
-		    popup_size = text_area.dataset.popup_size ? JSON.parse(text_area.dataset.popup_size) : [1000, 500]
+            text_area = this.app_node.querySelector('textarea')
+            delete_blocks_from_db = Boolean(text_area.hasAttribute('delete_blocks_from_db'))
+            popup_size = text_area.dataset.popup_size ? JSON.parse(text_area.dataset.popup_size) : [1000, 500]
 
             this.base_admin_url = text_area.getAttribute('base_admin_url')
-		    this.stream = JSON.parse(text_area.innerHTML)
-	        this.model_info = JSON.parse(text_area.getAttribute('model_list_info'))
+            this.stream = JSON.parse(text_area.innerHTML)
+            this.model_info = JSON.parse(text_area.getAttribute('model_list_info'))
 
             if (this.stream.length && !this.stream[0].hasOwnProperty('collapsed')) {
                 this.setAllCollapsed(false)
@@ -89,7 +91,7 @@
             isEmpty: isEmpty,
             isArray: isArray,
             setAllCollapsed: function(value) {
-                _.forEach(this.stream, (v, k) => {
+                this.stream.forEach((v, k) => {
                     v.collapsed = value
                 })
             },
@@ -102,7 +104,7 @@
                 
             },
             getBlockIndex: function(block_unique_id) {
-                const block = _.find(this.stream, ['unique_id', block_unique_id])
+                const block = this.stream.find(function(o) {return o.unique_id = block_unique_id})
                 const index = this.stream.indexOf(block)
                 return [index, block]
             },
@@ -124,7 +126,6 @@
                         }
                     }    
                 }
-                
             },
             deleteInstance: function(block_unique_id, instance_id) {
                 let [block_index, block]  = this.getBlockIndex(block_unique_id)
@@ -151,7 +152,7 @@
                 let options = {};
                 let new_block;
 
-                _.forEach(this.model_info[model_name].options, (option, key) => {
+                Object.entries(this.model_info[model_name].options).forEach(([key, option],index) => {
                     options[key] = option.default;
                 });
                 new_block = {
@@ -181,19 +182,19 @@
         },
         watch: {
             stream: {
-            	handler(nv) {
-	            	text_area.innerHTML = JSON.stringify(nv.map(function(i){
-	                    // return only fields that in initial data
-	                    return {
+                handler(nv) {
+                    text_area.innerHTML = JSON.stringify(nv.map(function(i){
+                        // return only fields that in initial data
+                        return {
                             unique_id: i.unique_id,
                             model_name: i.model_name, 
                             id: i.id,
                             options: i.options,
                             collapsed: i.collapsed
                         };
-	                }));	
-				},
-				deep: true	
+                    }));    
+                },
+                deep: true    
             }
         }
     }
@@ -212,10 +213,10 @@
 
         <div class="streamfield-models">
             <draggable v-model="stream" group="stream" handle=".block-move" item-key="unique_id">
-	            <template #item="{element: block}">
-	            	<StreamBlock v-if="!isAbstract(block)" :block="block" :ref="block.unique_id"/>
+                <template #item="{element: block}">
+                    <StreamBlock v-if="!isAbstract(block)" :block="block" :ref="block.unique_id"/>
                     <AbstractBlock v-else :block="block" />
-	            </template>
+                </template>
             </draggable>
             <div class="stream-insert-new-block">
                 <div class="add-new-block-button" @click="show_add_block=!show_add_block" v-text="stream_texts['AddNewBlock']"></div>

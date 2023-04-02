@@ -12,7 +12,7 @@
         },
         components: { draggable, BlockOptions, BlockHeader, AddBlockHere },
         beforeMount: function() {
-            if (_.isArray(this.block.id)) {
+            if (this.$root.isArray(this.block.id)) {
                 for (var j = this.block.id.length - 1; j >= 0; j--) {
                     this.updateBlock(this.block.id[j].toString());
                 }
@@ -37,7 +37,7 @@
                         '&app_id=' + this.$root.app_node.id;
             },
             getBlockTitle: function(block, item_id) {
-                if (!_.isNumber(item_id) && _.isNumber(item_id[0])) {
+                if (!Number.isInteger(item_id) && Number.isInteger(item_id[0])) {
                     item_id = item_id[0]
                 }
                 let block_data = this.$root.blocks[this.instance_unique_id(block, item_id)]
@@ -62,12 +62,12 @@
 
                 // if added new instance – add new instance id to block list
                 let instance_id_int = parseInt(instance_id)
-                if (_.isArray(this.block.id) &&  this.block.id.indexOf(instance_id_int) == -1) {
+                if (this.$root.isArray(this.block.id) &&  this.block.id.indexOf(instance_id_int) == -1) {
                     this.block.id.push(instance_id_int);
                 }
 
                 // if added new instance to block without list
-                if ( !_.isArray(this.block.id) && this.block.id == -1 ) {
+                if ( !this.$root.isArray(this.block.id) && this.block.id == -1 ) {
                     this.block.id = instance_id_int;
                 }
 
@@ -143,7 +143,7 @@
                     <template v-else>
                         <a class="stream-btn" 
                         :id="'add_id_' + block.unique_id"
-                        title="$root.stream_texts['AddContent']"
+                        :title="$root.stream_texts['AddContent']"
                         :href="get_add_model_link(block)"
                         @click.prevent="$root.openPopup"
                         v-text="'+' + $root.stream_texts['AddContent']"

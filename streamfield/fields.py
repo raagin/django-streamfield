@@ -57,7 +57,9 @@ class StreamFieldWidget(Widget):
 # form field
 class StreamFormField(forms.JSONField):
     def prepare_value(self, value):
-        return super().prepare_value(value.value)
+        if isinstance(value, StreamObject):
+            value = value.value
+        return super().prepare_value(value)
 
 # main field
 class StreamField(Field):
