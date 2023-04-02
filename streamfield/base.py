@@ -36,7 +36,6 @@ class StreamObject:
         
         as_list = True
 
-    
     # data in db
     value = [
         {
@@ -185,38 +184,41 @@ def _get_data_list(model_class, model_str, content, ctx):
         'template': _get_block_tmpl(model_class, model_str)
         }
 
+def _check_subblocks(obj):
+    # check if have subblocks
+    changed = False
+    for f in obj._meta.fields:
+        # isinstance(f, StreamField)
+        if hasattr(f, 'model_list'): 
+            changed = True
+            value = getattr(obj, f.name)
+            # value is StreamObject
+            setattr(obj, f.name, value.copy())
+    if changed:
+        obj.save()
+
 def _copy(model_class, model_str, content, ctx):
     as_list = ctx['as_list']
-    if as_list:
-        id = []
-        for obj in content:
-            obj.pk = None
-            obj.save()
-            id.append(obj.pk)
-    else:
-        content.pk = None
-        content.save()
-        id = content.pk
-
-        # check if have subblocks
-        changed = False
-        for f in content._meta.fields:
-            # isinstance(f, StreamField)
-            if hasattr(f, 'model_list'): 
-                changed = True
-                value = getattr(content, f.name)
-                # value is StreamObject
-                new_value = value.copy()
-                setattr(content, f.name, new_value)
-        if changed:
-            content.save()
-
-    return dict(
+    resp = dict(
         unique_id=uuid4().hex[:6],
         model_name=model_str,
-        id=id,
         options=ctx['options']
         ) 
+    if not model_class._meta.abstract:
+        if as_list:
+            id = []
+            for obj in content:
+                obj.pk = None
+                obj.save()
+                id.append(obj.pk)
+                _check_subblocks(obj)
+        else:
+            content.pk = None
+            content.save()
+            id = content.pk
+            _check_subblocks(content)
+        resp['id'] = id
+    return resp
 
 def get_streamblocks_models():
     streamblock_models = []

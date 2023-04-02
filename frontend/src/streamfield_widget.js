@@ -4,22 +4,20 @@ import Cookies from 'js-cookie'
 import { createApp } from 'vue'
 import App from '@/components/App.vue'
 
-(function(w, $){
+(function(){
     function onReady() {
         let streamfield_app = document.querySelectorAll('.streamfield_app');
-        w.ax = axios.create({
+        window.ax = axios.create({
           headers: {"X-CSRFToken": Cookies.get('csrftoken')}
         });
-        w.streamapps = {};
+        window.streamapps = {};
         for (let i = 0; i < streamfield_app.length; i++) {
             let app_node =streamfield_app[i];
             let app = createApp(App, {app_node}).mount(app_node.querySelector('.mount-node'));
-            w.streamapps[streamfield_app[i].id] = app;
+            window.streamapps[streamfield_app[i].id] = app;
         }
     };
-
-    w.addEventListener('DOMContentLoaded', function(event) {
+    window.addEventListener('DOMContentLoaded', function(event) {
         onReady();
     });
-
-})(window, django.jQuery);
+})();
