@@ -8,7 +8,6 @@
         },
         methods: {
             add (block, model_name) {
-                // this.$emit('hide_add_block')
                 this.$parent.show_add_block = false
                 this.$parent.hover = false
                 this.$root.addNewBlock(block, model_name, this.idx)
