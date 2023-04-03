@@ -1,4 +1,5 @@
 <script>
+    import {find} from '@/utils.js'
     import BlockHeader from '@/components/BlockHeader.vue'
     import BlockOptions from '@/components/BlockOptions.vue'
     import AddBlockHere from '@/components/AddBlockHere.vue'
@@ -19,10 +20,11 @@
                 return '/streamfield/abstract-block/' + this.model_name_lower + '/';
             },
             getContent() {
-                const block = this.$root.stream.find((o) => {return o.unique_id = this.block.unique_id})
-                window.ax.get(this.render_url(this.block)).then((response) => {
+                const block = find(this.$root.stream, {'unique_id': this.block.unique_id })
+                window.ax.get(this.render_url(block)).then((response) => {
                     this.$root.blocks[this.block.model_name] = response.data;
                 });
+
             }
         }
     }

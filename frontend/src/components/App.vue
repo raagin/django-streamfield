@@ -1,10 +1,8 @@
 <script type="text/javascript">
     import draggable from 'vuedraggable'
-    import {isArray, isEmpty} from '@/utils.js'
+    import {isArray, isEmpty, find} from '@/utils.js'
     import StreamBlock from '@/components/StreamBlock.vue'
     import AbstractBlock from '@/components/AbstractBlock.vue'
-
-    // const _ = require('lodash');
 
     let 
         text_area,
@@ -100,11 +98,11 @@
                 if (this.model_info[block.model_name]) {
                     title = this.model_info[block.model_name].model_doc
                 }
-                return title;
+                return title
                 
             },
             getBlockIndex: function(block_unique_id) {
-                const block = this.stream.find(function(o) {return o.unique_id = block_unique_id})
+                const block = find(this.stream, {"unique_id": block_unique_id})
                 const index = this.stream.indexOf(block)
                 return [index, block]
             },
@@ -215,7 +213,7 @@
             <draggable v-model="stream" group="stream" handle=".block-move" item-key="unique_id">
                 <template #item="{element: block}">
                     <StreamBlock v-if="!isAbstract(block)" :block="block" :ref="block.unique_id"/>
-                    <AbstractBlock v-else :block="block" />
+                    <AbstractBlock v-else :block="block" :ref="block.unique_id" />
                 </template>
             </draggable>
             <div class="stream-insert-new-block">
