@@ -4,11 +4,6 @@
     import StreamBlock from '@/components/StreamBlock.vue'
     import AbstractBlock from '@/components/AbstractBlock.vue'
 
-    let 
-        text_area,
-        delete_blocks_from_db,
-        popup_size;
-
     function id_to_windowname(text) {
         text = text.replace(/\./g, '__dot__');
         text = text.replace(/\-/g, '__dash__');
@@ -31,26 +26,29 @@
             stream: [], // [{model_name: ..., id: ...}, ...]
             model_info: {}, // {'model_name': model.__doc__},
             base_admin_url: "",
-            stream_texts: window.stream_texts
+            stream_texts: window.stream_texts,
+            text_area: null,
+            delete_blocks_from_db: null,
+            popup_size: null
           }
         },
         beforeMount: function() {
-            text_area = this.app_node.querySelector('textarea')
-            delete_blocks_from_db = Boolean(text_area.hasAttribute('delete_blocks_from_db'))
-            popup_size = text_area.dataset.popup_size ? JSON.parse(text_area.dataset.popup_size) : [1000, 500]
+            this.text_area = this.app_node.querySelector('textarea')
+            this.delete_blocks_from_db = Boolean(this.text_area.hasAttribute('delete_blocks_from_db'))
+            this.popup_size = this.text_area.dataset.popup_size ? JSON.parse(this.text_area.dataset.popup_size) : [1000, 500]
 
-            this.base_admin_url = text_area.getAttribute('base_admin_url')
-            this.stream = JSON.parse(text_area.innerHTML)
-            this.model_info = JSON.parse(text_area.getAttribute('model_list_info'))
+            this.base_admin_url = this.text_area.getAttribute('base_admin_url')
+            this.stream = JSON.parse(this.text_area.innerHTML)
+            this.model_info = JSON.parse(this.text_area.getAttribute('model_list_info'))
 
             if (this.stream.length && !this.stream[0].hasOwnProperty('collapsed')) {
                 this.setAllCollapsed(false)
             }
             
             // delete removed instances from db when form submit
-            if ( delete_blocks_from_db ) {
+            if ( this.delete_blocks_from_db ) {
                 let app = this
-                django.jQuery('input[type="submit"]', text_area.closest('form')).on('click', function(e){
+                django.jQuery('input[type="submit"]', this.text_area.closest('form')).on('click', function(e){
                     if ( !app.will_removed.length ) return;
                     
                     e.preventDefault();
@@ -80,7 +78,6 @@
 
                 }); // EventListener
             }
-
         },
         methods: {
             isAbstract: function(block) {
@@ -173,7 +170,7 @@
                 let triggeringLink = e.target;
                 let name = id_to_windowname(triggeringLink.id.replace(/^(change|add|delete)_/, ''));
                 let href = triggeringLink.href;
-                let win = window.open(href, name, 'height=' + popup_size[1] + ',width=' + popup_size[0] + ',resizable=yes,scrollbars=yes');
+                let win = window.open(href, name, 'height=' + this.popup_size[1] + ',width=' + this.popup_size[0] + ',resizable=yes,scrollbars=yes');
                 win.focus();
                 return false;
             }
@@ -181,7 +178,7 @@
         watch: {
             stream: {
                 handler(nv) {
-                    text_area.innerHTML = JSON.stringify(nv.map(function(i){
+                    this.text_area.innerHTML = JSON.stringify(nv.map(function(i){
                         // return only fields that in initial data
                         return {
                             unique_id: i.unique_id,
@@ -190,7 +187,7 @@
                             options: i.options,
                             collapsed: i.collapsed
                         };
-                    }));    
+                    }));
                 },
                 deep: true    
             }
@@ -210,7 +207,7 @@
         </div>
 
         <div class="streamfield-models">
-            <draggable v-model="stream" group="stream" handle=".block-move" item-key="unique_id">
+            <draggable v-model="stream" :group="app_node.id" handle=".block-move" item-key="unique_id">
                 <template #item="{element: block}">
                     <StreamBlock v-if="!isAbstract(block)" :block="block" :ref="block.unique_id"/>
                     <AbstractBlock v-else :block="block" :ref="block.unique_id" />
