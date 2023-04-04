@@ -1,7 +1,7 @@
 import json
 from copy import deepcopy
 from django import forms
-from django.db.models import Field
+from django.db.models import JSONField
 from django.forms.widgets import Widget
 from django.contrib.admin.options import FORMFIELD_FOR_DBFIELD_DEFAULTS
 from .base import StreamObject
@@ -62,7 +62,7 @@ class StreamFormField(forms.JSONField):
         return super().prepare_value(value)
 
 # main field
-class StreamField(Field):
+class StreamField(JSONField):
     description = "StreamField"
 
     def __init__(self, *args, **kwargs):
