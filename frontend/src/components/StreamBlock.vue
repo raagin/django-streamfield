@@ -98,7 +98,7 @@
                                     ></span>
                                 <span class="stream-model-subblock-handle">
                                     <span class="subblock-move"></span>
-                                    <span class="subblock-delete" @click="deleteInstance(block.unique_id, item_id)"></span>
+                                    <span class="subblock-delete" @click="$root.deleteInstance(block.unique_id, item_id)"></span>
                                 </span>
                                 <a class="stream-btn" 
                                     :id="'change_id_' + instance_unique_id(block, item_id)" 
