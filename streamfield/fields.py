@@ -89,6 +89,9 @@ class StreamField(JSONField):
             value = value.value
         return json.dumps(value)
 
+    def get_db_prep_value(self, value, connection, prepared=False):
+        return super().get_db_prep_value(value.value, connection, prepared)
+
     def value_to_string(self, obj):
         value = self.value_from_object(obj)
         return value.value
