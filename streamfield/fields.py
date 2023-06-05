@@ -90,7 +90,9 @@ class StreamField(JSONField):
         return json.dumps(value)
 
     def get_db_prep_value(self, value, connection, prepared=False):
-        return super().get_db_prep_value(value.value, connection, prepared)
+        if value and isinstance(value, StreamObject):
+            value = value.value
+        return super().get_db_prep_value(value, connection, prepared)
 
     def value_to_string(self, obj):
         value = self.value_from_object(obj)
