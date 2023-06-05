@@ -138,10 +138,24 @@ class StreamObject:
         return json.dumps(self.value)
 
     def add(self, block):
-        model_class = block.__class__
+        if isinstance(block, list):
+            model_class = block[0].__class__
+            if hasattr(model_class, 'as_list') and model_class.as_list:
+                id = []
+                for b in block:
+                    if b.__class__ != model_class:
+                        raise ValueError("not all list objects have the same model class")
+                    else:
+                        id.append(b.id)
+            else:
+                raise ValueError("block is list. but model hasn't as_list property")
+        else:
+            model_class = block.__class__
+            id = block.id
+            
         options = _get_default_options(model_class)
         self.value.append({
-            "id": block.id, 
+            "id": id,
             "options": options, 
             "unique_id": uuid4().hex[:6], 
             "model_name": model_class.__name__
