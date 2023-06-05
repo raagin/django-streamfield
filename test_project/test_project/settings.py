@@ -29,6 +29,21 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+STREAMFIELD_BLOCK_OPTIONS = {
+    'margin_bottom': {
+        'label': 'Bottom margin',
+        'default': '1',
+        'type': 'select',
+        'options': [
+            {'value': '', 'name': 'No'},
+            {'value': '1', 'name': 'x1'},
+            {'value': '2', 'name': 'x2'},
+            {'value': 'auto', 'name': 'Auto'},
+        ]       
+    }
+}
+
+
 # Application definition
 
 INSTALLED_APPS = [

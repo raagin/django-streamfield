@@ -137,6 +137,16 @@ class StreamObject:
     def to_json(self):
         return json.dumps(self.value)
 
+    def add(self, block):
+        model_class = block.__class__
+        options = _get_default_options(model_class)
+        self.value.append({
+            "id": block.id, 
+            "options": options, 
+            "unique_id": uuid4().hex[:6], 
+            "model_name": model_class.__name__
+        })
+
     @cached_property
     def help_text(self):
         return ADMIN_HELP_TEXT
@@ -197,6 +207,14 @@ def _check_subblocks(obj):
     if changed:
         obj.save()
 
+def _get_default_options(model_class):
+    options = model_class.options if hasattr(model_class, "options") else BLOCK_OPTIONS
+    if hasattr(model_class, "extra_options"):
+        options = deepcopy(options)
+        options.update(model_class.extra_options)
+    options = { k: v['default'] for k, v in options.items() if bool(v.get('default')) }
+    return options
+
 def _copy(model_class, model_str, content, ctx):
     as_list = ctx['as_list']
     resp = dict(
@@ -249,11 +267,7 @@ def migrate_stream_options(stream_obj):
     stream_dict = stream_obj.from_json()
     for b in stream_dict:
         model_class = get_model_by_string(b['model_name'])
-        options = model_class.options if hasattr(model_class, "options") else BLOCK_OPTIONS
-        if hasattr(model_class, "extra_options"):
-            options = deepcopy(options)
-            options.update(model_class.extra_options)
-        options = { k: v['default'] for k, v in options.items() if bool(v.get('default')) }
+        options = _get_default_options(model_class)
         options.update(b['options'])
         b['options'] = options
     return StreamObject(
