@@ -144,14 +144,17 @@ class StreamObject:
                 id = []
                 for b in block:
                     if b.__class__ != model_class:
-                        raise ValueError("not all list objects have the same model class")
+                        raise ValueError("Not all list objects have the same model class")
                     else:
                         id.append(b.id)
             else:
-                raise ValueError("block is list. but model hasn't as_list property")
+                raise ValueError("Block is list. but model hasn't as_list property")
         else:
             model_class = block.__class__
             id = block.id
+
+        if model_class not in self.model_list:
+            raise ValueError("Model class not in StreamField model_list")
             
         options = _get_default_options(model_class)
         self.value.append({
