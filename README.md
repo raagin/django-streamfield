@@ -37,6 +37,7 @@ Module also working with [Grappelli Interface](https://github.com/sehmaschine/dj
   - [Get field data as list](#get-field-data-as-list)
   - [Cache for reduce the number of database requests](#cache-for-reduce-the-number-of-database-requests)
   - [Create a copy](#create-a-copy)
+  - [Add block programarly](#add-block-programarly)
 - [Settings](#settings)
 - [Migrations](#migrations)
 
@@ -462,6 +463,16 @@ page.stream = page.stream.copy()
 page.save()
 ```
 > Note: If you will not use `page.stream.copy()` instances will be the same as in the original object
+
+### Add block programarly
+```python
+r = RichText(text='<p>Lorem ipsum</p>')
+im1 = ImageWithText.objects.create(image='...')
+im2 = ImageWithText.objects.create(image='...')
+page.stream.add(r)
+page.stream.add([im1, im2])
+page.save()
+```
 
 
 ## Settings
