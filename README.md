@@ -2,7 +2,7 @@
 
 This is a simple realisation of StreamField's idea of Wagtail CMS for plain Django admin or with Grappelli skin.
 Stable version: 2.1.2
-Django <= 4.2.1
+Django <= 4.2
 
 [Major changes (1.4.5 > 2)](changes2.0.md)
 
@@ -38,6 +38,7 @@ Module also working with [Grappelli Interface](https://github.com/sehmaschine/dj
   - [Cache for reduce the number of database requests](#cache-for-reduce-the-number-of-database-requests)
   - [Create a copy](#create-a-copy)
   - [Add block programarly](#add-block-programarly)
+  - [Set size of block's popup window](#set-size-of-blocks-popup-window)
 - [Settings](#settings)
 - [Migrations](#migrations)
 
@@ -87,7 +88,8 @@ class ImageWithText(models.Model):
     as_list = True
     
     def __str__(self):
-        # This text will be added to block title name. For better navigation when block is collapsed.
+        # This text will be added to block title name.
+        # For better navigation when block is collapsed.
         return self.text[:30]
 
     class Meta:
@@ -187,18 +189,6 @@ class Page(models.Model):
         verbose_name="Page blocks"
         )
 ```
-
-*You can set size of popup window*  
-Add `popup_size` attribute to StreamField
-```python
-    ...
-    stream = StreamField(
-        model_list=[...],
-        popup_size=(1000, 500) # default value. Width: 1000px, Height: 500px
-        )
-    ...
-```
-
 **6. Use it in template**
 If you have your `page` in context, 
 you can get content by field's cached property page.stream.render
@@ -472,6 +462,17 @@ im2 = ImageWithText.objects.create(image='...')
 page.stream.add(r)
 page.stream.add([im1, im2])
 page.save()
+```
+
+### Set size of block's popup window
+Add `popup_size` attribute to StreamField
+```python
+    ...
+    stream = StreamField(
+        model_list=[...],
+        popup_size=(1000, 500) # default value. Width: 1000px, Height: 500px
+        )
+    ...
 ```
 
 
