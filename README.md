@@ -234,7 +234,7 @@ class RichTextBlockAdmin(StreamBlocksAdmin, admin.ModelAdmin):
 
 ### Custom templates for render block models in admin
 If you need to customize admin templates for block models wich you are using, you need to put templates named as 
-described in section 3 (above). but put it inside "admin" folder.
+described in section 4 (above). but put it inside "admin" folder.
 
 For example for RichText block it will be:
 
