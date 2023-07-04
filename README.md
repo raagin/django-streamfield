@@ -281,7 +281,7 @@ As context use "field":
 
 ### Override list of blocks for your StreamField in admin.py
 Typicaly you set the blocks in your models as `model_list` attribute of StreamField field.
-But if you want to change blocks, for example depending on object, you can do it in admin site
+But if you want to change the blocks, for example depending on the object, you can do it in the admin site
 of your model. Suppose you want to use only `RichText` on page with id=1.
 
 ```python
