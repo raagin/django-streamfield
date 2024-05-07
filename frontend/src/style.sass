@@ -2,7 +2,7 @@
     max-width: 758px
     width: 98%
     margin-top: 5px
-    float: left
+    float: left 
 
     textarea
         display: none
@@ -31,7 +31,7 @@
 
         .stream-model-block
             position: relative
-            color: #333
+            color: var(--body-fg)
 
             &__inner
                 box-shadow: 0 0 5px 2px rgba(0,0,0,0.1)
@@ -75,7 +75,7 @@
                 .streamblock__block__subtitle
                     font-weight: normal
                     font-size: 1em
-                    opacity: 0.7
+                    opacity: 0.6
                     position: relative
                     margin: 0
 
@@ -118,12 +118,12 @@
                         bottom: 0
                         left: 0
                         right: 0
-                        border: 1px dashed #AAA
+                        border: 1px dashed var(--border-color)
                         border-radius: 5px
                         background: rgba(255,255,255,0.1)
 
                 &:before
-                    content: "+"
+                    content: ""
                     position: absolute
                     width: 30px
                     height: 30px
@@ -132,7 +132,11 @@
                     left: 50%
                     margin-top: -15px
                     margin-left: -15px
-                    background: #309bbf
+                    background: var(--secondary)
+                    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16.729' height='16.728'%3E%3Cg fill='none' stroke='%23fff' stroke-linecap='round' stroke-width='2'%3E%3Cpath d='M8.364 2v12.728M14.728 8.364H2'/%3E%3C/g%3E%3C/svg%3E")
+                    background-position: 50% 50%
+                    background-repeat: no-repeat
+                    background-size: 18px
                     display: none
                     font-size: 28px
                     line-height: 30px
@@ -145,7 +149,7 @@
 
             &__content
                 padding: 20px
-                background: #f5f5f5
+                background: var(--darkened-bg)
 
                 .model-field-content:after
                     content: "."
@@ -173,7 +177,7 @@
     .stream-block__options
         padding: 7px
         text-align: right
-        background: #efefef
+        background: var(--selected-bg)
 
         .stream-block__option
             display: inline-block
@@ -194,12 +198,16 @@
         & > div
             margin-bottom: 0.4em
 
+        h1
+            color: var(--body-fg)
+
         h2
             padding: 0
             text-shadow: none
             border: none
             background-image: none
             font-size: 1.3em
+            color: var(--body-fg)
 
         h3
             padding: 0
@@ -208,9 +216,11 @@
             background-image: none
             font-size: 1.1em
             margin-bottom: 0.5em
+            color: var(--body-fg)
 
         h4
             font-weight: bold
+            color: var(--body-fg)
 
         blockquote
             font-size: 1.1em
@@ -239,7 +249,7 @@
             max-height: 150px
 
     .stream-model-subblock
-        background: #e0e7eb
+        background: var(--selected-bg) // #e0e7eb
         padding: 10px
         display: block
         border-radius: 5px
@@ -247,7 +257,7 @@
         position: relative
 
     .stream-btn
-        background: #78adbf
+        background: var(--button-bg)
         color: white !important
         padding: 3px 7px
         display: inline-block
@@ -255,9 +265,10 @@
         margin-top: 5px
         font-weight: bold
         user-select: none
+        text-decoration: none
 
         &:hover
-            background: #309bbf
+            background: var(--button-hover-bg)
 
     .add-another
         margin-left: 10px
@@ -279,7 +290,7 @@
         font-weight: bold
         text-decoration: underline
         cursor: pointer
-        color: #309bbf
+        color: var(--link-fg)
         user-select: none
 
     /* Help text */
@@ -349,13 +360,26 @@
 .stream-model-subblock .subblock-move:hover
     background-position: 0 -141px
 
+// grp
+:root
+    --primary: #a9c8d5
+    --primary-fg: #000
+    --secondary: #309bbf
+    --button-bg: #78adbf
+    --button-hover-bg: #309bbf
+    --selected-bg: #ececec
+    --darkened-bg: #f5f5f5
+    --body-fg: #333
+    --link-fg: #309bbf
+    --border-color: #AAA
+
 /* for django skin */
 #content-main 
     .streamfield_app 
         .stream-model-block 
             .streamblock__block__title
-                background: #a9c8d5
-                color: black
+                background: var(--primary)
+                color: var(--primary-fg)
                 margin: 0
                 line-height: 20px
                 font-weight: normal
@@ -383,11 +407,14 @@
 
         .collapse-handlers 
             .collapse-handler
-                color: #309bbf
+                color: var(--link-fg)
                 font-weight: normal
                 font-size: 14px
 
     .streamblock__block-handle,
     .stream-model-subblock-handle
         top: 5px
+
+.grp-button
+    text-decoration: none
 

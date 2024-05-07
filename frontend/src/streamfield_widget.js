@@ -1,6 +1,5 @@
 import "@/style.sass"
 import axios from 'axios'
-import Cookies from 'js-cookie'
 import { createApp } from 'vue'
 import App from '@/components/App.vue'
 
@@ -8,7 +7,7 @@ import App from '@/components/App.vue'
     function onReady() {
         let streamfield_app = document.querySelectorAll('.streamfield_app');
         window.ax = axios.create({
-          headers: {"X-CSRFToken": Cookies.get('csrftoken')}
+          headers: {"X-CSRFToken": document.querySelector('[name=csrfmiddlewaretoken]').value}
         });
         window.streamapps = {};
         for (let i = 0; i < streamfield_app.length; i++) {
