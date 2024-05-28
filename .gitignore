@@ -1,6 +1,7 @@
 *.pyc
 .DS_Store
 build/*
+dist/*
 django_streamfield.egg-info/*
 test_project/db.sqlite3
 package-lock.json

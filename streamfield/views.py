@@ -49,8 +49,8 @@ def abstract_block_class(model, base=TemplateView):
 
 def delete_instance(request, model_name, pk):
     model_class = apps.get_model(app_label='streamblocks', model_name=model_name)
-    obj = model_class.objects.get(pk=pk)
-    if request.method == 'DELETE':
+    obj = model_class.objects.filter(pk=pk).first()
+    if request.method == 'DELETE' and obj:
         obj.delete()
         resp = {'success': True}
     else:
