@@ -4,19 +4,25 @@ import { createApp } from 'vue'
 import App from '@/components/App.vue'
 
 (function(){
+    function initApps(node) {
+        let app_nodes = node.querySelectorAll(".streamfield_app:not([id*='__prefix__'])");
+        for (let i = 0; i < app_nodes.length; i++) {
+            let app_node = app_nodes[i];
+            let app = createApp(App, {app_node}).mount(app_node.querySelector('.mount-node'));
+            window.streamapps[app_node.id] = app;
+        }
+    }
     function onReady() {
-        let streamfield_app = document.querySelectorAll('.streamfield_app');
         window.ax = axios.create({
           headers: {"X-CSRFToken": document.querySelector('[name=csrfmiddlewaretoken]').value}
         });
         window.streamapps = {};
-        for (let i = 0; i < streamfield_app.length; i++) {
-            let app_node =streamfield_app[i];
-            let app = createApp(App, {app_node}).mount(app_node.querySelector('.mount-node'));
-            window.streamapps[streamfield_app[i].id] = app;
-        }
+        initApps(document)
     };
     window.addEventListener('DOMContentLoaded', function(event) {
         onReady();
+    });
+    document.addEventListener("formset:added", function(event) {
+        initApps(event.target)
     });
 })();
