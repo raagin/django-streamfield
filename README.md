@@ -463,6 +463,12 @@ page.stream.add(r)
 page.stream.add([im1, im2])
 page.save()
 ```
+> Note: If you create a new instance of page in shell, before using `add` method, you need to call instance form db. Because field `stream` should be wrapped in StreamObject
+```python
+page = Page() 
+page.save()
+page.refresh_from_db()
+```
 
 ### Set size of block's popup window
 Add `popup_size` attribute to StreamField
