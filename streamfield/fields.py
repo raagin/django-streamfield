@@ -4,6 +4,8 @@ from django import forms
 from django.db.models import JSONField
 from django.forms.widgets import Widget
 from django.contrib.admin.options import FORMFIELD_FOR_DBFIELD_DEFAULTS
+from django.urls import reverse_lazy
+
 from .base import StreamObject
 from .settings import (
     BLOCK_OPTIONS, 
@@ -49,7 +51,7 @@ class StreamFieldWidget(Widget):
 
     class Media:
         css = {'all': ('streamfield/streamfield_widget.css',)}
-        js = ('streamfield/streamfield_widget.js',)
+        js = (reverse_lazy("streamfield-texts"), 'streamfield/streamfield_widget.js',)
 
 
 # form field

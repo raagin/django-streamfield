@@ -1,5 +1,7 @@
 from django.urls import include, path
 from django.contrib.auth.decorators import login_required
+from django.views.generic import TemplateView
+
 
 from . import views
 from .base import get_streamblocks_models
@@ -27,6 +29,11 @@ urlpatterns = [
         'admin-instance/<model_name>/<int:pk>/delete/', 
         login_required(views.delete_instance), 
         name='admin-instance-delete'
+    ),
+    path(
+        'streamfield_texts.js',
+        login_required(TemplateView.as_view(template_name="streamfield/streamfield_texts.js", content_type="text/javascript")), 
+        name='streamfield-texts',
     ),
     *admin_instance_urls
 ]

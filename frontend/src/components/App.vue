@@ -27,6 +27,7 @@
             model_info: {}, // {'model_name': model.__doc__},
             base_admin_url: "",
             stream_texts: window.stream_texts,
+            help_text: this.app_node.getAttribute("data-help-text"),
             text_area: null,
             delete_blocks_from_db: null,
             popup_size: null
@@ -196,9 +197,9 @@
 </script>
 <template>
     <div>
-        <div class="stream-help-text" v-if="stream_texts['help_text']">
+        <div class="stream-help-text" v-if="help_text">
             <div class="stream-help-text__title" @click="show_help=!show_help" v-text="stream_texts['Help?']"></div>
-            <div v-show="show_help" class="stream-help-text__content" v-html="stream_texts['help_text']"></div>
+            <div v-show="show_help" class="stream-help-text__content" v-html="help_text"></div>
         </div>
         
         <div class="collapse-handlers" v-if="stream.length > 1">
