@@ -1,12 +1,12 @@
 import json
-from uuid import uuid4
 from copy import deepcopy
+from uuid import uuid4
+
+from django.apps import apps
+from django.template import loader
 from django.utils.functional import cached_property
 from django.utils.html import format_html_join
-from django.template import loader
 from django.utils.safestring import mark_safe
-from django.conf import settings
-from importlib import import_module
 
 from .forms import get_form_class
 from .settings import BLOCK_OPTIONS, ADMIN_HELP_TEXT
@@ -257,16 +257,13 @@ def _copy(model_class, model_str, content, ctx):
 
 def get_streamblocks_models():
     streamblock_models = []
-    for app in settings.INSTALLED_APPS:
-        try:
-            module = import_module("%s.models" % app)
 
-            if hasattr(module, 'STREAMBLOCKS_MODELS'):
-                for m in module.STREAMBLOCKS_MODELS:
-                    if m not in streamblock_models:
-                        streamblock_models.append(m)
-        except ModuleNotFoundError as e:
-            pass
+    for app_config in apps.get_app_configs():
+        module = app_config.models_module
+        for m in getattr(module, "STREAMBLOCKS_MODELS", []):
+            if m not in streamblock_models:
+                streamblock_models.append(m)
+
     return streamblock_models
 
 def get_model_by_string(model_str):
