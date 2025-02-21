@@ -55,7 +55,7 @@ msgstr ""
 "    <li>Si vous avez effacé des blocs par accident, vous pouvez les "
 "récupérer en rechargeant la page; les blocs modifiés seront toujours "
 "présents, mais dans l’ordre de la version précédente. Les blocs ajoutés "
-"devront être recréés.</li>/\n"
+"devront être recréés.</li>\n"
 "</ul>\n"
 
 #: templates/streamfield/streamfield_texts.js
