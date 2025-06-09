@@ -2,7 +2,7 @@
 
 This is a simple realisation of StreamField's idea of Wagtail CMS for plain Django admin or with Grappelli skin.
 Stable version: 2.4.0
-Django <= 5.0
+Django <= 5.2
 
 [Major changes (1.4.5 > 2)](changes2.0.md)
 
