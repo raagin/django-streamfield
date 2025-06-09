@@ -76,8 +76,10 @@ class StreamField(JSONField):
         return self.to_python(value)
 
     def to_python(self, value):
-        if not value or isinstance(value, StreamObject):
+        if isinstance(value, StreamObject):
             return value
+        if not value:
+            return StreamObject([], self.model_list)
         # for backward compatibility
         while isinstance(value, str):
             value = json.loads(value)
@@ -89,7 +91,7 @@ class StreamField(JSONField):
     def get_prep_value(self, value):
         if isinstance(value, StreamObject):
             value = value.value
-        return json.dumps(value)
+        return value
 
     def get_db_prep_value(self, value, connection, prepared=False):
         if value and isinstance(value, StreamObject):

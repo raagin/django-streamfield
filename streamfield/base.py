@@ -67,6 +67,9 @@ class StreamObject:
     def __repr__(self):
         return "<%s: %s>" % (self.__class__.__name__, self or "None")
 
+    def __bool__(self):
+        return bool(self.value)
+
     def _iterate_over_models(self, callback, tmpl_ctx=None):
         # iterate over models and apply callback function
         data = []

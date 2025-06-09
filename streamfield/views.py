@@ -9,11 +9,13 @@ from .forms import get_form_class
 
 def admin_instance(model):
     def instance_view(request, pk):
-        tmpls = [
+        if hasattr(model, 'custom_admin_template'):
+            tmpl = loader.get_template(model.custom_admin_template)
+        else:
+            tmpl = loader.select_template([
                 'streamblocks/admin/%s.html' % model.__name__.lower(),
                 'streamfield/admin/change_form_render_template.html'
-            ]
-        tmpl = getattr(model, 'custom_admin_template', loader.select_template(tmpls))
+            ])
         obj = model.objects.get(pk=pk)
         ctx = {
             'form': get_form_class(model)(instance=obj),
